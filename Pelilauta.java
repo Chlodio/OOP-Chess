@@ -1,0 +1,361 @@
+   /*
+   * Huom1: Luokka Pelilauta ei sisällä suunnitelmasta poiketen metodia shakkimatti. Ehdotan, että tämä testataan Peli-
+   * luokassa. Shakkimatti syntyy, jos mikään nappula ei palauta sallittuja siirtoja. Shakkimatti syntyy myös
+   * jos kaikki sallitut siirrot johtavat itsemurhaan. Mielestäni nämä testit on yksinkertaisempi toteuttaa Peli-
+   * luokassa.
+   * 
+   * Huom2: Olen aika epävarma tuon itsemurha-metodin toimivuudesta, mutta en oikein keksinyt helppoa tapaa testata
+   * sitä
+   * 
+   * Huom3: Koodissa on varmasti vielä paljon virheitä...
+   */
+
+class Pelilauta{
+  
+   /*
+   * Pelilaudan attribuutit alla
+   */
+  
+  protected Nappula[][] lauta;
+  protected boolean shakki;
+  protected boolean shakkimatti;
+  
+    /*
+   * Konstruktori
+   */
+  
+  public Pelilauta(){
+    this.lauta = new Nappula[8][8];
+    this.shakki = false;
+    this.shakkimatti = false;
+  }
+  
+    /*
+   * Konstruktori, joka luo pelistä kopion. Käytetään mahdollisten siirtojen simulointiin ja itsemurhan testaukseen
+   */
+  
+  public Pelilauta(Pelilauta kopio){
+    this.lauta = kopio.lauta;
+    this.shakki = kopio.shakki;
+    this.shakkimatti = kopio.shakkimatti;
+  }
+  
+      /*
+   * asetus ja tarkastus-metodit
+   */
+  
+  public void asetaShakki(boolean shakki){
+    this.shakki = shakki;
+  }
+  
+  public void asetaShakkimatti(){
+    this.shakkimatti = true;
+  }
+  
+  public boolean annaShakki(){
+    return this.shakki;
+  }
+  
+  public boolean annaShakkimatti(){
+    return this.shakkimatti;
+  }
+  
+   /*
+   * Liiku-metodi. Parametreina siirtyvä Nappula, uusi sijaintirivi, uusi sijaintisarake
+   * Jos uudessa ruudussa on toinen nappula, se poistetaan.
+   * Metodi ei tarkasta, onko ruudussa samanvärinen nappula. Tämä tarkastus tehdään testaaSiirrot-metodissa.
+   * Liiku-metodi olettaa, että sitä kutsutaan vain sallituilla siirroilla
+   */
+  
+  public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc){
+    
+    if(lauta[sijaintiNo][sijaintiAbc] != null){
+      lauta[sijaintiNo][sijaintiAbc].asetaElossa(false); /* Testaa onko paikalla nappula ja poistaa jos on */
+    }
+    lauta[sijaintiNo][sijaintiAbc] = nappula; /* asettaa nappulan uudelle paikalleen*/
+  }
+  
+     /*
+   * testaaSiirrot-metodi. Parametreina nappulan mahdolliset siirrot sekä siirtyvä nappula. 
+   * muodollisessa parametrissa saadussa arrayssa 1 merkkaa mahdollista siirtoa.
+   * Metodi testaa voidaanko siirrot suorittaa. 
+   * Testi 1 == onko ruudussa oma nappula. Testi 2 == onko matkalla esteitä. Metodi ei testaa
+   * aiheuttaako siirto itsemurhatilanteen. Tätä varten Peli-luokan tulee kutsua erikseen
+   * Metodi palauttaa matriisin, jossa ykkönen merkkaa mahdollista siirtoa
+   */
+  
+  public int[][] testaaSiirrot(int[][] siirrot, Nappula nappula){
+    boolean onkoRatsu = nappula instanceof Ratsu; /* Ratsule tarvitaan vain testi 1 */
+    int sijaintiNo = annaSijaintiNo(nappula); /* kutsutaan apumetodia (alla) */
+    int sijaintiAbc = annaSijaintiAbc(nappula); /* kutsutaan apumetodia (alla) */
+    boolean valkoinen = nappula.annaVari(); /* testataan minkä värinen nappula on siirtymässä */
+    int[][] sallitutSiirrot = new int[8][8]; /* luodaan uusi matriisi sallituista siirroista */
+    
+      /*
+   * Testataan onko mahdollisissa siirtoruuduissa oma tai vastustajan nappula vai onko ruutu tyhjä
+   * 0 == ei sallittu, 1 == sallittu, 2 == sallittu - syö vastustajan
+   */
+    
+    for(int i = 0; i < 8; i++){
+      for(int a = 0; a < 8; a++){
+        if(siirrot[i][a] != 1){
+          sallitutSiirrot[i][a] = 0; /* siirto ei mahdollinen nappulalle */
+        } else if(lauta[i][a] == null) {
+          sallitutSiirrot[i][a] = 1; /* siirto on mahdollinen nappulalle eikä ruudussa ole toista nappulaa */
+        } else if(lauta[i][a].annaVari != valkoinen) {
+          sallitutSiirrot[i][a] = 2; /* siirto on mahdollinen, ruudussa on vastustajan nappula */
+        } else {
+          sallitutSiirrot[i][a] = 0; /* siirto ei mahdollinen koska ruudussa on oma nappula*/
+        }
+      }
+    }
+          /*
+   * Testataan onko reitillä muita nappuloita. Ratsulle testiä ei tarvita. Kuljetaan kaikki kahdeksan mahdollista
+   * suuntaa. Jos reitillä on matkalla ruutu, johon ei voi siirtyä, kulkeminen päättyy. Jos reitillä on syötävä
+   * nappula, kulku päättyy. Kuljetut ruudut merkataan numerolla 3.
+   */
+    
+   int b = sijaintiNo; /* aloitetaan nappulan nykyisestä paikasta */
+   int c = sijaintiAbc;   
+  
+   if(onkoRatsu == false){
+     while (b>0 && b<7 && c>0 && c<7){ /* jatketaan kulkemista kunnes tullaan laudan reunalle */
+       b++; /* ensimmäinen kahdeksasta suunnasta */
+       if (sallitutSiirrot[b][c] == 0){
+         break; /* suuntaan ei voinut kulkea */
+       } else if (sallitutSiirrot[b][c] == 2){
+         sallitutSiirrot[b][c] = 3;
+         break; /* suunnassa oli syötävä nappula, pidemmälle ei voi mennä, merkataan ruutu 3:lla */
+       } else {
+         sallitutSiirrot[b][c] = 3; /* suuntaan voi kulkea, merkataan ruutu ja jatketaan */
+       }
+     }
+     
+     /* aloitetaan uudestaan ja kuljetaan kaikki kahdeksan suuntaa */
+     b = sijaintiNo;
+     c = sijaintiAbc;
+     
+     while (b>0 && b<7 && c>0 && c<7){
+       c++;
+       if (sallitutSiirrot[b][c] == 0){
+         break;
+       } else if (sallitutSiirrot[b][c] == 2){
+         sallitutSiirrot[b][c] = 3;
+         break;
+       } else {
+         sallitutSiirrot[b][c] = 3;
+       }
+     }     
+     
+     b = sijaintiNo;
+     c = sijaintiAbc;
+     
+     while (b>0 && b<7 && c>0 && c<7){
+       b--;
+       if (sallitutSiirrot[b][c] == 0){
+         break;
+       } else if (sallitutSiirrot[b][c] == 2){
+         sallitutSiirrot[b][c] = 3;
+         break;
+       } else {
+         sallitutSiirrot[b][c] = 3;
+       }
+     } 
+       b = sijaintiNo;
+       c = sijaintiAbc;
+     
+       while (b>0 && b<7 && c>0 && c<7){
+       c--;
+       if (sallitutSiirrot[b][c] == 0){
+         break;
+       } else if (sallitutSiirrot[b][c] == 2){
+         sallitutSiirrot[b][c] = 3;
+         break;
+       } else {
+         sallitutSiirrot[b][c] = 3;
+       }
+     }  
+       
+       b = sijaintiNo;
+       c = sijaintiAbc;
+     
+       while (b>0 && b<7 && c>0 && c<7){
+       b--;
+       c--;
+       if (sallitutSiirrot[b][c] == 0){
+         break;
+       } else if (sallitutSiirrot[b][c] == 2){
+         sallitutSiirrot[b][c] = 3;
+         break;
+       } else {
+         sallitutSiirrot[b][c] = 3;
+       }
+     }  
+
+       b = sijaintiNo;
+       c = sijaintiAbc;
+     
+       while (b>0 && b<7 && c>0 && c<7){
+       b++;
+       c++;
+       if (sallitutSiirrot[b][c] == 0){
+         break;
+       } else if (sallitutSiirrot[b][c] == 2){
+         sallitutSiirrot[b][c] = 3;
+         break;
+       } else {
+         sallitutSiirrot[b][c] = 3;
+       }
+     }  
+    
+       b = sijaintiNo;
+       c = sijaintiAbc;
+     
+       while (b>0 && b<7 && c>0 && c<7){
+       b++;
+       c--;
+       if (sallitutSiirrot[b][c] == 0){
+         break;
+       } else if (sallitutSiirrot[b][c] == 2){
+         sallitutSiirrot[b][c] = 3;
+         break;
+       } else {
+         sallitutSiirrot[b][c] = 3;
+       }
+     }  
+       
+       b = sijaintiNo;
+       c = sijaintiAbc;
+     
+       while (b>0 && b<7 && c>0 && c<7){
+       b--;
+       c++;
+       if (sallitutSiirrot[b][c] == 0){
+         break;
+       } else if (sallitutSiirrot[b][c] == 2){
+         sallitutSiirrot[b][c] = 3;
+         break;
+       } else {
+         sallitutSiirrot[b][c] = 3;
+       }
+     }
+   } else {                        /* merkataan hevosen kaikki siirrot 3:lla sillä se voi ylittää nappuloita */
+      for(int i = 0; i < 8; i++){ 
+       for(int a = 0; a < 8; a++){
+         if (sallitutSiirrot[i][a] >0){
+           sallitutSiirrot[i][a] = 3;
+         }
+       }
+      }
+   }
+   
+             /*
+   * Siivotaan matriisi niin, että sallitut siirrot ovat ykkösiä ja muut nollia kaikille nappuloille
+   */
+   
+   for(int i = 0; i < 8; i++){ 
+       for(int a = 0; a < 8; a++){
+         if (sallitutSiirrot[i][a] <3){
+           sallitutSiirrot[i][a] = 0;
+         } else {
+           sallitutSiirrot[i][a] = 1;
+         }
+       }
+   }
+         
+   
+   return sallitutSiirrot;
+  }
+  
+            /*
+   * itsemurha-metodi. Parametrina siirtyvä nappula ja sen uusi paikka koordinaatteina.
+   * Metodi luo pelilaudan tilanteesta kopion ja testaa syntyykö vastustajalle shakki (false == ei synny)
+   */
+  
+  public boolean itsemurha(Nappula nappula, int uusiNo, int uusiAbc){
+    boolean onkoItsari;
+    boolean vari = nappula.annaVari();
+    Pelilauta kopioPeli = new Pelilauta(this);  /* kopio pelin */
+    kopioPeli.liiku(nappula, uusiNo, uusiAbc); /* suorittaa siirron kopiopelissä */
+    kopioPeli.testaaShakki(vari); /* testaa tuliko vastustajalle shakki */
+    onkoItsari = kopioPeli.annaShakki();
+    return onkoItsari;
+  }
+    
+                /*
+   * testaaShakki-metodi. Parametrina testattava vari (kuninkaan vari jota mahdollisesti uhataan).
+   * palauttaa
+   */
+      
+    
+  public void testaaShakki(boolean vari){
+ /* hakee kuninkaan paikan laudalta */
+    int sNoK;
+    int sAbcK;
+    for (int i = 0; i < 8; i++){
+      for (int a = 0; i < 8; a++){
+        if(lauta[i][a] instanceof Kuningas && lauta[i][a].annaVari() == vari){
+          sNoK = i;
+          sAbcK = a;
+        }
+      }
+     }
+     /* luo attribuutit testaamista varten */
+    int[][] testiSiirrot = new int[8][8];
+    int[][] sallitutTestiSiirrot = new int[8][8];
+    
+    /* käy läpi koko laudan ja kaikki sillä olevat vastustajan nappulat */
+    for (int i = 0; i < 8; i++){
+      for (int a = 0; i < 8; a++){
+        if (lauta[i][a] != null){ /* laudalla on nappula*/
+          if (vari != lauta[i][a].annaVari()){ /* nappula on vastustajan */
+            testiSiirrot = lauta[i][a].annaSiirrot(); /* kutsutaan nappulan metodia joka palauttaa mahd. siirrot */
+            /* kutsutaan pelilaudan metodia joka testaa voisiko siirrot toteuttaa */
+            sallitutTestiSiirrot = testaaSiirrot(testiSiirrot, lauta[i][a]);
+            /* testataan voiko joku nappuloista siirtyä kuninkaan ruutuun */
+            if (sallitutTestiSiirrot[sNoK][sAbcK] == 3){
+            asetaShakki(true);
+            return;
+          }
+        }
+      }
+    }
+    }
+    asetaShakki(false);
+    return;
+  }
+ 
+                /*
+   * apumetodi, joka antaa parametrinaan saaman nappulan rivin pelilaudalla
+   * Jos nappulaa ei löydy, metodi palauttaa 9
+   */
+
+  public int annaSijaintiNo(Nappula nappula){
+     for (int i = 0; i < 8; i++){
+      for (int a = 0; i < 8; a++){
+        if(lauta[i][a] == nappula){
+          return i;
+        }
+      }
+     }
+     return 9;
+  }
+  
+                 /*
+   * apumetodi, joka antaa parametrinaan saaman nappulan sarakkeen pelilaudalla
+   * Jos nappulaa ei löydy, metodi palauttaa 9
+   */
+  
+    public int annaSijaintiAbc(Nappula nappula){
+     for (int i = 0; i < 8; i++){
+      for (int a = 0; i < 8; a++){
+        if(nappula[i][a] == nappula){
+          return a;
+        }
+      }
+     }
+     return 9;
+  }  
+  
+}
+  
