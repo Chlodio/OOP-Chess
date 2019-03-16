@@ -30,7 +30,8 @@ jonkun verran    * sitä
 class Pelilauta{
    /*Näkymötön kerros nappuloita joiden avulla siirrot toimivat*/
    public static Map<Integer, JButton> ruutuValikko = new HashMap<>();
-   
+   /*Mrkki labellit sivuille*/
+   public static Map<Integer, JLabel> ruutuMerkki = new HashMap<>();
    /*
    * Pelilaudan attribuutit alla
    */
@@ -376,7 +377,7 @@ class Pelilauta{
      return 9;
   }  
 
-	/*aloittaaan GUIN:n rakentamisen*/
+	/*aloittaaa GUIN:n rakentamisen*/
 	public static void createGUI(){
 		JFrame frame = new JFrame();
 		frame.setSize(1600, 900);
@@ -385,14 +386,14 @@ class Pelilauta{
 		MainPanel mainPanel = new MainPanel();
 		frame.add(mainPanel);
 		frame.pack();
-		JLabel label = new JLabel("♜");                                //väliaikainen label
+		JLabel label = new JLabel("♜");                                		//väliaikainen label
 		mainPanel.add(label);
 		mainPanel.setLayout(null);
 		label.setFont(new Font(label.getFont().getName(), 1, 100));
 		Dimension size = label.getPreferredSize();
 		label.setBounds(100, 100, size.width, size.height);
 		label.setLocation(105, 45);
-		JButton exitButton=new JButton("X");
+		JButton exitButton=new JButton("X");															//sulkemis nappi
 
 		ActionListener acLiX = new ActionListener() {
 		    @Override
@@ -400,12 +401,14 @@ class Pelilauta{
 				label.setLocation(105, label.getLocation().y+100);
 		    }
 		};
+		
 		ActionListener acLi = new ActionListener() {
 		    @Override
 			public void actionPerformed(ActionEvent e) {
 		        System.exit(0);
 		    }
 		};
+		
 		exitButton.addActionListener(acLi);
 	    exitButton.setBounds(25,25,45,40);
     	mainPanel.add(exitButton);
@@ -434,6 +437,25 @@ class Pelilauta{
 		}
 	}
 
+	/*Rakentaa sivu merkit*/
+	public static void buildSideLabels(MainPanel mp){
+		char[] ruutuK = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};																		//ruudun kirjain
+		Dimension sizexc;
+		for (int x = 1; x <= 8; x++){
+			ruutuMerkki.put(x, new JLabel(Character.toString(ruutuK[x-1])));
+			mp.add(ruutuMerkki.get(x));
+			ruutuMerkki.get(x).setFont(new Font(ruutuMerkki.get(x).getFont().getName(), 1,25));
+			sizexc = ruutuMerkki.get(x).getPreferredSize();
+			ruutuMerkki.get(x).setBounds(100, 100, sizexc.width, sizexc.height);
+			ruutuMerkki.get(x).setLocation(38+(100*x), 850);
+			ruutuMerkki.put(x+8, new JLabel(Integer.toString(9-x)));
+			mp.add(ruutuMerkki.get(x+8));
+			ruutuMerkki.get(x+8).setFont(new Font(ruutuMerkki.get(x+8).getFont().getName(), 1,25));
+			sizexc = ruutuMerkki.get(x+8).getPreferredSize();
+			ruutuMerkki.get(x+8).setBounds(100, 100, sizexc.width, sizexc.height);
+			ruutuMerkki.get(x+8).setLocation(75, 91+(100*(x-1)));
+		}
+	}
 
 }
   
