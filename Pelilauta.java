@@ -1,3 +1,20 @@
+import javax.swing.SwingUtilities;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.BorderFactory;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.Container;
+import java.awt.Font;
+import java.util.HashMap;
+import java.util.Map;
+ 
    /*
    * Huom1: Luokka Pelilauta ei sisällä suunnitelmasta poiketen metodia shakkimatti. Ehdotan, että tämä testataan Peli-
    * luokassa. Shakkimatti syntyy, jos mikään nappula ei palauta sallittuja siirtoja. Shakkimatti syntyy myös
@@ -5,13 +22,15 @@
    * luokassa.
    * 
    * Huom2: Olen aika epävarma tuon itsemurha-metodin toimivuudesta, mutta en oikein keksinyt helppoa tapaa testata
-   * sitä
+jonkun verran    * sitä
    * 
    * Huom3: Koodissa on varmasti vielä paljon virheitä...
    */
 
 class Pelilauta{
-  
+   /*Näkymötön kerros nappuloita joiden avulla siirrot toimivat*/
+   public static Map<Integer, JButton> ruutuValikko = new HashMap<>();
+   
    /*
    * Pelilaudan attribuutit alla
    */
@@ -356,6 +375,65 @@ class Pelilauta{
      }
      return 9;
   }  
-  
+
+	/*aloittaaan GUIN:n rakentamisen*/
+	public static void createGUI(){
+		JFrame frame = new JFrame();
+		frame.setSize(1600, 900);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container panel = frame.getContentPane();
+		MainPanel mainPanel = new MainPanel();
+		frame.add(mainPanel);
+		frame.pack();
+		JLabel label = new JLabel("♜");                                //väliaikainen label
+		mainPanel.add(label);
+		mainPanel.setLayout(null);
+		label.setFont(new Font(label.getFont().getName(), 1, 100));
+		Dimension size = label.getPreferredSize();
+		label.setBounds(100, 100, size.width, size.height);
+		label.setLocation(105, 45);
+		JButton exitButton=new JButton("X");
+
+		ActionListener acLiX = new ActionListener() {
+		    @Override
+			public void actionPerformed(ActionEvent e) {
+				label.setLocation(105, label.getLocation().y+100);
+		    }
+		};
+		ActionListener acLi = new ActionListener() {
+		    @Override
+			public void actionPerformed(ActionEvent e) {
+		        System.exit(0);
+		    }
+		};
+		exitButton.addActionListener(acLi);
+	    exitButton.setBounds(25,25,45,40);
+    	mainPanel.add(exitButton);
+		buildSelectors(mainPanel, acLiX);
+		frame.setVisible(true);
+	}
+
+	/*rakentaa 64 näkymätöntä nappia ruutujen päälle jotkat hallisevat siirtoja*/
+	public static void buildSelectors(MainPanel mp, ActionListener al){
+		int xc; int yc;
+		int id = 0;
+		for(int x = 0; x < 8; x++){
+			xc = 100; yc = 50+(x*100);
+			for(int z = 0; z < 4; z++){
+				for(int y = 0; y < 2; y++){
+					id++;
+					ruutuValikko.put(id, new JButton());
+					ruutuValikko.get(id).addActionListener(al);
+					ruutuValikko.get(id).setBounds(xc,yc,100,100);
+					ruutuValikko.get(id).setContentAreaFilled(false);
+			    	mp.add(ruutuValikko.get(id));
+					System.out.println(xc+" "+yc);
+					xc += 100;
+				}
+			}
+		}
+	}
+
+
 }
   
