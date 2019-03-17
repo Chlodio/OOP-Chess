@@ -1,0 +1,7 @@
+class Pelaaja {
+	
+	public Pelaaja(){}
+	
+
+	
+}
