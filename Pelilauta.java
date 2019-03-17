@@ -12,27 +12,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.Container;
 import java.awt.Font;
-import java.util.HashMap;
-import java.util.Map;
- 
-   /*
+import java.util.HashMap; 
+import java.util.Map;  
+
+/*
    * Huom1: Luokka Pelilauta ei sisällä suunnitelmasta poiketen metodia shakkimatti. Ehdotan, että tämä testataan Peli-
    * luokassa. Shakkimatti syntyy, jos mikään nappula ei palauta sallittuja siirtoja. Shakkimatti syntyy myös
    * jos kaikki sallitut siirrot johtavat itsemurhaan. Mielestäni nämä testit on yksinkertaisempi toteuttaa Peli-
    * luokassa.
    * 
    * Huom2: Olen aika epävarma tuon itsemurha-metodin toimivuudesta, mutta en oikein keksinyt helppoa tapaa testata
-jonkun verran    * sitä
+   * sitä
    * 
    * Huom3: Koodissa on varmasti vielä paljon virheitä...
    */
 
 class Pelilauta{
-   /*Näkymötön kerros nappuloita joiden avulla siirrot toimivat*/
-   public static Map<Integer, JButton> ruutuValikko = new HashMap<>();
-   /*Mrkki labellit sivuille*/
-   public static Map<Integer, JLabel> ruutuMerkki = new HashMap<>();
-   /*
+  
+  /*Näkymötön kerros nappuloita joiden avulla siirrot toimivat*/
+  public static Map<Integer, JButton> ruutuValikko = new HashMap<>();
+  /*Mrkki labellit sivuille*/
+  public static Map<Integer, JLabel> ruutuMerkki = new HashMap<>();
+  
+  /*
    * Pelilaudan attribuutit alla
    */
   
@@ -80,6 +82,70 @@ class Pelilauta{
     return this.shakkimatti;
   }
   
+  public Nappula annaNappula(int sNo, int sAbc){
+    return lauta[sNo][sAbc];
+  }
+  
+  public void asetaNappula(Nappula nappula, int sNo, int sAbc){
+    lauta[sNo][sAbc] = nappula;
+  }
+  
+        /*
+   * metodi tarkastaa onko linnoittautuminen mahdollista
+   */
+  
+  public boolean linnoitusMahdollista(Kuningas kuningas, Torni torni){
+          /*
+   * tarkastetaan liikkuminen ja shakki-tilanne
+   */
+    boolean t1 = kuningas.annaLiikkunut();
+    boolean t2 = torni.annaLiikkunut();
+    boolean t3 = this.annaShakki();
+    if (t1 || t2 || t3){
+      return false;
+    }
+ 
+    int torniAbc = this.annaSijaintiAbc(torni);
+    int torniNo = this.annaSijaintiNo(torni);    
+    
+              /*
+   * Pitkä linnoitus. Tarkastetaan onko kuninkaan ja tornin välissä nappuloita
+   * Tarkastetaan siirtyykö Kuningas uhatun ruudun yli
+   * tarkastetaan johtaako linnoitus itsemurhaan
+   */
+    
+
+    if (torniAbc == 0){
+      for (int i =1; i>4; i++){
+        if (annaNappula(torniNo,i) != null){
+          return false;
+        }
+      }
+      boolean k1 = this.itsemurha(kuningas, 3, torniNo);
+      boolean k2 = this.itsemurha(kuningas, 2, torniNo);
+      if (k1 || k2){
+        return false;
+      }
+    }
+                  /*
+   * Lyhyt linnoitus. samat tarkastukset
+   */
+    
+    if (torniAbc == 7){
+      for (int i = 6; i>4; i--){
+        if (annaNappula(torniNo,i) != null){
+          return false;
+        }
+      }
+      boolean k3 = this.itsemurha(kuningas, 5, torniNo);
+      boolean k4 = this.itsemurha(kuningas, 6, torniNo);
+      if (k3 || k4){
+        return false;
+      }
+    }
+    return true;
+  }
+   
    /*
    * Liiku-metodi. Parametreina siirtyvä Nappula, uusi sijaintirivi, uusi sijaintisarake
    * Jos uudessa ruudussa on toinen nappula, se poistetaan.
@@ -89,12 +155,21 @@ class Pelilauta{
   
   public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc){
     
+    int vanhaNo = annaSijaintiNo(nappula);
+    int vanhaAbc = annaSijaintiAbc(nappula);
     if(lauta[sijaintiNo][sijaintiAbc] != null){
       lauta[sijaintiNo][sijaintiAbc].asetaElossa(false); /* Testaa onko paikalla nappula ja poistaa jos on */
     }
-    lauta[sijaintiNo][sijaintiAbc] = nappula; /* asettaa nappulan uudelle paikalleen*/
+    asetaNappula(nappula, sijaintiNo, sijaintiAbc); ; /* asettaa nappulan uudelle paikalleen*/
+    nappula.asetaLiikkunut(); /* päivittää nappulan liikkunut -parametrin*/
+    lauta[vanhaNo][vanhaAbc]= null; /* poistaa nappulan alkuperäiseltä paikaltaan*/
+    boolean onkoSotilas = nappula instanceof Sotilas;
+    if (onkoSotilas && (sijaintiNo == 0 || sijaintiNo == 7)){
+      nappula.muutu(this); 
+    }
+    
   }
-  
+    
      /*
    * testaaSiirrot-metodi. Parametreina nappulan mahdolliset siirrot sekä siirtyvä nappula. 
    * muodollisessa parametrissa saadussa arrayssa 1 merkkaa mahdollista siirtoa.
@@ -122,7 +197,7 @@ class Pelilauta{
           sallitutSiirrot[i][a] = 0; /* siirto ei mahdollinen nappulalle */
         } else if(lauta[i][a] == null) {
           sallitutSiirrot[i][a] = 1; /* siirto on mahdollinen nappulalle eikä ruudussa ole toista nappulaa */
-        } else if(lauta[i][a].annaVari != valkoinen) {
+        } else if(lauta[i][a].annaVari() != valkoinen) {
           sallitutSiirrot[i][a] = 2; /* siirto on mahdollinen, ruudussa on vastustajan nappula */
         } else {
           sallitutSiirrot[i][a] = 0; /* siirto ei mahdollinen koska ruudussa on oma nappula*/
@@ -310,8 +385,8 @@ class Pelilauta{
     
   public void testaaShakki(boolean vari){
  /* hakee kuninkaan paikan laudalta */
-    int sNoK;
-    int sAbcK;
+    int sNoK =0;
+    int sAbcK =0;
     for (int i = 0; i < 8; i++){
       for (int a = 0; i < 8; a++){
         if(lauta[i][a] instanceof Kuningas && lauta[i][a].annaVari() == vari){
@@ -329,7 +404,7 @@ class Pelilauta{
       for (int a = 0; i < 8; a++){
         if (lauta[i][a] != null){ /* laudalla on nappula*/
           if (vari != lauta[i][a].annaVari()){ /* nappula on vastustajan */
-            testiSiirrot = lauta[i][a].annaSiirrot(); /* kutsutaan nappulan metodia joka palauttaa mahd. siirrot */
+            testiSiirrot = lauta[i][a].siirrot(this); /* kutsutaan nappulan metodia joka palauttaa mahd. siirrot */
             /* kutsutaan pelilaudan metodia joka testaa voisiko siirrot toteuttaa */
             sallitutTestiSiirrot = testaaSiirrot(testiSiirrot, lauta[i][a]);
             /* testataan voiko joku nappuloista siirtyä kuninkaan ruutuun */
@@ -369,7 +444,7 @@ class Pelilauta{
     public int annaSijaintiAbc(Nappula nappula){
      for (int i = 0; i < 8; i++){
       for (int a = 0; i < 8; a++){
-        if(nappula[i][a] == nappula){
+        if(lauta[i][a] == nappula){
           return a;
         }
       }
