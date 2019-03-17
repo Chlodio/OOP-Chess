@@ -2,14 +2,21 @@
    * Huom1: Suunnitelman vastaisesti linnoitustesti löytyy Pelilauta-luokasta
    * Huom2: Suunnitelman vastaisesti Nappula-luokassa ei ole sijaintietoja. Ne löytyvät Pelilauta-luokasta
    */
-
+import javax.swing.JLabel;
 
 abstract class Nappula{
   protected boolean vari;
   protected boolean elossa;
   protected int arvo;
   protected boolean liikkunut;
-  
+  protected char[] symbooli;                          //index 0 = valkoinen, index 1 = musta
+  protected JLabel ikoni;
+   
+  /*Linkitetään nappula sen graafiseen esitykseen*/
+  public void asetaGUI(JLabel label){
+      this.ikoni = label;
+  }
+     
   abstract boolean annaVari();
   abstract void asetaElossa(boolean elossa);
   abstract boolean annaElossa();
@@ -27,6 +34,7 @@ class Sotilas extends Nappula{
     this.arvo = 1;
     this.liikkunut = false;
     this.elossa = true;
+    this.symbooli = {'♙', '♟'};
   }
   
   public boolean annaVari(){
@@ -101,6 +109,7 @@ class Ratsu extends Nappula{
     this.arvo = 3;
     this.liikkunut = false;
     this.elossa = true;
+    this.symbooli = {'♘', '♞'};
   }
   
   public boolean annaVari(){
@@ -169,6 +178,7 @@ class Lahetti extends Nappula{
     this.arvo = 3;
     this.liikkunut = false;
     this.elossa = true;
+    this.symbooli = {'♗', '♝'};  
   }
   
   public boolean annaVari(){
@@ -242,6 +252,7 @@ class Torni extends Nappula{
     this.arvo = 5;
     this.liikkunut = false;
     this.elossa = true;
+    this.symbooli = {'♖', '♜'};  
   }
   
   public boolean annaVari(){
@@ -307,6 +318,7 @@ class Kuningatar extends Nappula{
     this.arvo = 9;
     this.liikkunut = false;
     this.elossa = true;
+    this.symbooli = {'♕', '♛'};  
   }
   
   public boolean annaVari(){
@@ -399,6 +411,7 @@ class Kuningas extends Nappula{
     this.arvo = 10;
     this.liikkunut = false;
     this.elossa = true;
+    this.symbooli = {'♔', '♚'};
   }
   
   public boolean annaVari(){
