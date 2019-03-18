@@ -1,9 +1,9 @@
 public class Kuningas extends Nappula{
   
-  public Kuningas(boolean vari){
+  public Kuningas(boolean vari, boolean liikkunut){
     this.vari = vari;
     this.arvo = 10;
-    this.liikkunut = false;
+    this.liikkunut = liikkunut;
     this.elossa = true;
     if (!vari){ 
        this.symbooli = "♔";
