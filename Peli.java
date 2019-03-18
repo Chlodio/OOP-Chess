@@ -1,4 +1,7 @@
 class Peli {
+	
+	private static Pelilauta SLauta; ///En tiedä mistä saisin pelilaudan, niin tallennnan sen tähän ainakin väliaikasesti
+	
 	private boolean pelaajanVuoro; // true = pelaaja1
 	private Pelilauta pelilauta;
 	private Pelaaja pelaaja1;
@@ -6,7 +9,13 @@ class Peli {
 	
 	public Peli(){}
 	
-
+	public static void setSLauta(Pelilauta p){
+		rSLauta = p;
+	}
+	
+	public static Pelilauta getSLauta(){
+		return SLauta;
+	}
 	
 	public boolean tallennettuToimivaPeli(String tiedostonNimi) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(tiedostonNimi));
@@ -73,6 +82,7 @@ class Peli {
 	
 	public void asetaPeliAsetuksilla(){
 		Pelilauta pelilauta = new Pelilauta();
+		setSLauta(pelilauta);
 		this.pelilauta = pelilauta;
 		
 		pelilauta.asetaNappula(new Sotilas(true, false), 1, 0);
