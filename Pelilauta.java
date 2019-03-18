@@ -14,6 +14,7 @@ import java.awt.Container;
 import java.awt.Font;
 import java.util.HashMap; 
 import java.util.Map;  
+import java.util.ArrayList;
 
 /*
    * Huom1: Luokka Pelilauta ei sisällä suunnitelmasta poiketen metodia shakkimatti. Ehdotan, että tämä testataan Peli-
@@ -36,6 +37,7 @@ class Pelilauta{
 	/*Tulevan JFramen päälle*/
   public static MainPanel mainPanel = new MainPanel();
 	
+	public static ArrayList<JButton> valitutRuudut = new ArrayList();
 	
   /*
    * Pelilaudan attribuutit alla
@@ -470,7 +472,7 @@ class Pelilauta{
 		frame.setSize(1600, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container panel = frame.getContentPane();
-
+		frame.setResizable(false);
 		frame.add(mainPanel);
 		frame.pack();
 		mainPanel.add(label);
@@ -513,6 +515,32 @@ class Pelilauta{
 		}
 	}
 
+	public static void varitaRuudut(int[][] ruudut){
+		for (int x = 0; x < ruudut.length; x++){
+			for (int y = 0; y < x[y].length; y++){
+				if (ruudut[x][y] == 1){
+					colorizeRuutu(ruutuValikko.get(x+(y*7)));
+					valitutRuudut.add(ruutuValikko.get(x+(y*7)));
+				}
+			}
+		}
+	}
+	
+	public static void normaalisoiRuudut(){
+		for(JButton x: valitutRuudut){
+			x.normalizeRuutu();
+		}
+		normalizeRuutu.clear();
+	}
+	
+	public static void colorizeRuutu(JButton b){
+		b.setContentAreaFilled(true);
+	}
+	
+	public static void normalizeRuutu(JButton b){
+		b.setContentAreaFilled(false);
+	}
+	
 	/*Rakentaa sivu merkit*/
 	public static void buildSideLabels(MainPanel mp){
 		char[] ruutuK = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};																		//ruudun kirjain
@@ -532,6 +560,6 @@ class Pelilauta{
 			ruutuMerkki.get(x+8).setLocation(75, 91+(100*(x-1)));
 		}
 	}
-
+	
 }
   
