@@ -1,17 +1,20 @@
 import javax.swing.JLabel;
 
 abstract class Nappula{
+  private static int id = -1;                                     //kuinka monta nappulaa on luotu
+  protected static Nappula[] lista = new Nappula[17];             //Array nappuloista
+  
   protected boolean vari;
   protected boolean elossa;
   protected int arvo;
   protected boolean liikkunut;
-  protected String symbooli;                          //index 0 = valkoinen, index 1 = musta
+  protected String symbooli;                                      //index 0 = valkoinen, index 1 = musta
   protected JLabel ikoni;
   
   /*konstrukti*/
   public Nappula(){
-    //pitää saada koordinaatit tänne, superin kautta olis kiva
-    //Pelilauta.luoEsite(this, /*ruutu*/);
+      id++;
+      lista[id] = this;
   }
   
   /*Linkitetään nappula sen graafiseen esitykseen*/
