@@ -31,9 +31,12 @@ class Pelilauta{
   
   /*Näkymötön kerros nappuloita joiden avulla siirrot toimivat*/
   public static Map<Integer, JButton> ruutuValikko = new HashMap<>();
-  /*Mrkki labellit sivuille*/
+  /*Merkki labellit sivuille*/
   public static Map<Integer, JLabel> ruutuMerkki = new HashMap<>();
-  
+	/*Tulevan JFramen päälle*/
+  public static MainPanel mainPanel = new MainPanel();
+	
+	
   /*
    * Pelilaudan attribuutit alla
    */
@@ -66,6 +69,10 @@ class Pelilauta{
    * asetus ja tarkastus-metodit
    */
   
+	public MainPanel getMainPanel(){
+		return mainPanel;
+	}
+	
   public void asetaShakki(boolean shakki){
     this.shakki = shakki;
   }
@@ -455,31 +462,22 @@ class Pelilauta{
      return 9;
   }  
 
+	public static 
+	
 	/*aloittaaa GUIN:n rakentamisen*/
 	public static void createGUI(){
 		JFrame frame = new JFrame();
 		frame.setSize(1600, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container panel = frame.getContentPane();
-		MainPanel mainPanel = new MainPanel();
+
 		frame.add(mainPanel);
 		frame.pack();
-		JLabel label = new JLabel("♜");                                		//väliaikainen label
 		mainPanel.add(label);
 		mainPanel.setLayout(null);
-		label.setFont(new Font(label.getFont().getName(), 1, 100));
 		Dimension size = label.getPreferredSize();
-		label.setBounds(100, 100, size.width, size.height);
-		label.setLocation(105, 45);
-		JButton exitButton=new JButton("X");															//sulkemis nappi
+		JButton exitButton = new JButton("X");															//sulkemis nappi
 
-		ActionListener acLiX = new ActionListener() {
-		    @Override
-			public void actionPerformed(ActionEvent e) {
-				label.setLocation(105, label.getLocation().y+100);
-		    }
-		};
-		
 		ActionListener acLi = new ActionListener() {
 		    @Override
 			public void actionPerformed(ActionEvent e) {
@@ -488,8 +486,8 @@ class Pelilauta{
 		};
 		
 		exitButton.addActionListener(acLi);
-	    exitButton.setBounds(25,25,45,40);
-    	mainPanel.add(exitButton);
+	  exitButton.setBounds(25,25,45,40);
+    mainPanel.add(exitButton);
 		buildSelectors(mainPanel, acLiX);
 		frame.setVisible(true);
 	}
