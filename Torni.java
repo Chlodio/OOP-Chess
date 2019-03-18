@@ -1,6 +1,6 @@
 public class Torni extends Nappula{
     
-  public Torni(boolean vari){
+  public Torni(boolean vari, boolean liikkunut){
     this.vari = vari;
     this.arvo = 5;
     this.liikkunut = false;
