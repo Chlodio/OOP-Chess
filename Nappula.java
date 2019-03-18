@@ -1,4 +1,6 @@
 import javax.swing.JLabel;
+import java.awt.Dimension;
+import java.awt.Font;
 
 abstract class Nappula{
   private static int id = -1;                                     //kuinka monta nappulaa on luotu
@@ -21,7 +23,26 @@ abstract class Nappula{
   public void asetaGUI(JLabel label){
       this.ikoni = label;
   }
+  
+  public JLabel getIkoni(){
+    return this.ikoni;
+  }
      
+  public String getSymbooli(){
+    return this.symbooli;
+  }
+  
+  public static void luoNappulaGui(){
+    Dimension koko;
+    for(Nappula x: lista){
+        x.asetaGui(new JLabel(x.getSymbooli()));
+        x.getIkoni().setFont(new Font(label.getFont().getName(), 1, 100));
+        koko = x.getIkoni().getPreferredSize();
+        x.getIkoni().setBounds(100, 100, koko.width, koko.height);
+        pelilauta.getMainPanel().add(x.getIkoni());
+    }
+  }
+  
   abstract boolean annaVari();
   abstract void asetaElossa(boolean elossa);
   abstract boolean annaElossa();
