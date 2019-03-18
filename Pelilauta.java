@@ -502,7 +502,8 @@ class Pelilauta{
 			 @Override
 			 public void actionPerformed(ActionEvent e) {
 				 Ruutu r = (Ruutu) e.getSource());
-				 Nappula.setValittu(Peli.getSLauta().annaNappula(r.getX(), r.getY()));
+				 Nappula.setValittu(Peli.getOmanVarNap().annaNappula(r.getX(), r.getY()));
+				 //getSLauta
 			 }
 		};
 		for(int x = 0; x < 8; x++){
