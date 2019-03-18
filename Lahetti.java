@@ -1,9 +1,9 @@
 public class Lahetti extends Nappula{
     
-  public Lahetti(boolean vari){
+  public Lahetti(boolean vari, boolean liikkunut){
     this.vari = vari;
     this.arvo = 3;
-    this.liikkunut = false;
+    this.liikkunut = liikkunut;
     this.elossa = true;
     if (!vari){ 
        this.symbooli = "♗";
