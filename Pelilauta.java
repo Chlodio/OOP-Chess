@@ -408,7 +408,7 @@ class Pelilauta{
             /* kutsutaan pelilaudan metodia joka testaa voisiko siirrot toteuttaa */
             sallitutTestiSiirrot = testaaSiirrot(testiSiirrot, lauta[i][a]);
             /* testataan voiko joku nappuloista siirtyä kuninkaan ruutuun */
-            if (sallitutTestiSiirrot[sNoK][sAbcK] == 3){
+            if (sallitutTestiSiirrot[sNoK][sAbcK] == 1){
             asetaShakki(true);
             return;
           }
