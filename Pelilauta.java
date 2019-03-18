@@ -88,6 +88,7 @@ class Pelilauta{
   
   public void asetaNappula(Nappula nappula, int sNo, int sAbc){
     lauta[sNo][sAbc] = nappula;
+	  nappula.getIkoni().setLocation(105+(sNo*100), 45+(sAbc*100));
   }
   
         /*
