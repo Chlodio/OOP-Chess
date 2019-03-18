@@ -38,4 +38,7 @@ public class MainPanel extends JPanel{
 		}
 	}
 
+	public void add(JLabel l){
+		this.add(l);
+	}
 }
