@@ -3,7 +3,7 @@ public class Torni extends Nappula{
   public Torni(boolean vari, boolean liikkunut){
     this.vari = vari;
     this.arvo = 5;
-    this.liikkunut = false;
+    this.liikkunut = liikkunut;
     this.elossa = true;
     if (!vari){ 
        this.symbooli = "♖";
