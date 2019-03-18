@@ -5,6 +5,7 @@ import java.awt.Font;
 abstract class Nappula{
   private static int id = -1;                                     //kuinka monta nappulaa on luotu
   protected static Nappula[] lista = new Nappula[17];             //Array nappuloista
+  protected static Nappula valittu;
   
   protected boolean vari;
   protected boolean elossa;
@@ -30,6 +31,14 @@ abstract class Nappula{
      
   public String getSymbooli(){
     return this.symbooli;
+  }
+  
+  public static Nappula getValittu(){
+    return valittu;
+  }
+  
+  public static void setValittu(Nappula n){
+    valittu = n;
   }
   
   public static void luoNappulaGui(){
