@@ -107,7 +107,7 @@ class Peli {
 		pelilauta.asetaNappula(new Kuningas(false, false), 7, 3);
 		pelilauta.asetaNappula(new Kuningatar(true, false), 0, 4);
 		pelilauta.asetaNappula(new Kuningatar(false, false), 7, 4);
-		
+		Nappula.luoNappulaGui();
 		this.pelaajanVuoro = 1;
 	}
 	
