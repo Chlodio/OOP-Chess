@@ -162,7 +162,9 @@ class Pelilauta{
     }
     asetaNappula(nappula, sijaintiNo, sijaintiAbc); ; /* asettaa nappulan uudelle paikalleen*/
     nappula.asetaLiikkunut(); /* päivittää nappulan liikkunut -parametrin*/
-    lauta[vanhaNo][vanhaAbc]= null; /* poistaa nappulan alkuperäiseltä paikaltaan*/
+    if (vanhaNo < 8 && vanhaAbc < 8){
+    	lauta[vanhaNo][vanhaAbc]= null; /* poistaa nappulan alkuperäiseltä paikaltaan*/
+    }
     boolean onkoSotilas = nappula instanceof Sotilas;
     if (onkoSotilas && (sijaintiNo == 0 || sijaintiNo == 7)){
       nappula.muutu(this); 
