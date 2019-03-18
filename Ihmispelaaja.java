@@ -13,7 +13,7 @@ class Ihmispelaaja extends Pelaaja {
 		}
 		
 		/*TÄHÄN ALLE TARVITAAN TOMIN KOODIA*/
-		Nappula nappula = /*pelaajan valitsema nappula omanVarinNappuloista*/;
+		Nappula nappula = Nappula.getValittu(); /*pelaajan valitsema nappula omanVarinNappuloista*/;
 		int[][] siirrot = nappula.siirrot(); /*JUHA: parametriksi tarvitaan Pelilauta*/
 		int[][] sallitutSiirrot = pelilauta.testaaSiirrot(siirrot, nappula);
 		Pelilauta.varitaRuudut(sallitutSiirrot);
