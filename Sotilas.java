@@ -1,9 +1,9 @@
 class Sotilas extends Nappula{
   
-  public Sotilas(boolean vari){
+  public Sotilas(boolean vari, boolean liikkunut){
     this.vari = vari;
     this.arvo = 1;
-    this.liikkunut = false;
+    this.liikkunut = liikkunut;
     this.elossa = true;
     if (!vari){ 
        this.symbooli = "♙";
