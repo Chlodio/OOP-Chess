@@ -1,9 +1,9 @@
 public class Kuningatar extends Nappula{
     
-  public Kuningatar(boolean vari){
+  public Kuningatar(boolean vari, boolean liikkunut){
     this.vari = vari;
     this.arvo = 9;
-    this.liikkunut = false;
+    this.liikkunut = liikkunut;
     this.elossa = true;
     if (!vari){ 
        this.symbooli = "♕";
