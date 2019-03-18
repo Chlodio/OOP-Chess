@@ -68,50 +68,81 @@ class Peli {
 	
 	
 	/*Nappulat tarvitsevat konstruktorin, joka asettaa ne laudalle, saaden parametrit seuraavassa järjesteyksessä: x-koordinaatti, y-koordinaatti, onValkoinen, pelilauta jonka laudalle se asetetaan, onLiikkunut*/
+	/*JUHA: konstuktori tarvitsi vain boolean varin, lisasin konstruktoriin myos boolean onLiikkunut.*/
+	/*JUHA: Nappulat asetatetaan laudalle Pelilaudan metodilla asetaNappula(Nappula, int, int).*/
 	
 	public void asetaPeliAsetuksilla(){
 		Pelilauta pelilauta = new Pelilauta();
 		
-		Sotilas sotilas1 = new Sotilas(1, 0, true, pelilauta, false);
-		Sotilas sotilas2 = new Sotilas(1, 1, true, pelilauta, false);
-		Sotilas sotilas3 = new Sotilas(1, 2, true, pelilauta, false);
-		Sotilas sotilas4 = new Sotilas(1, 3, true, pelilauta, false);
-		Sotilas sotilas5 = new Sotilas(1, 4, true, pelilauta, false);
-		Sotilas sotilas6 = new Sotilas(1, 5, true, pelilauta, false);
-		Sotilas sotilas7 = new Sotilas(1, 6, true, pelilauta, false);
-		Sotilas sotilas8 = new Sotilas(1, 7, true, pelilauta, false);
-		Sotilas sotilas9 = new Sotilas(6, 0,false, pelilauta, false);
-		Sotilas sotilas10 = new Sotilas(6, 1,false, pelilauta, false);
-		Sotilas sotilas11 = new Sotilas(6, 2,false, pelilauta, false);
-		Sotilas sotilas12 = new Sotilas(6, 3,false, pelilauta, false);
-		Sotilas sotilas13 = new Sotilas(6, 4,false, pelilauta, false);
-		Sotilas sotilas14 = new Sotilas(6, 5,false, pelilauta, false);
-		Sotilas sotilas15 = new Sotilas(6, 6,false, pelilauta, false);
-		Sotilas sotilas16 = new Sotilas(6, 7,false, pelilauta, false);
-		Torni torni1 = new Torni(0, 0, true, pelilauta, false);
-		Torni torni2 = new Torni(0, 7, true, pelilauta, false);
-		Torni torni3 = new Torni(7, 0,false, pelilauta, false);
-		Torni torni4 = new Torni(7, 7,false, pelilauta, false);
-		Lahetti lahetti1 = new Lahetti(0, 1, true, pelilauta, false);
-		Lahetti lahetti2 = new Lahetti(0, 6, true, pelilauta, false);
-		Lahetti lahetti3 = new Lahetti(7, 1,false, pelilauta, false);
-		Lahetti lahetti4 = new Lahetti(7, 6,false, pelilauta, false);
-		Hevonen hevonen1 = new Hevonen(0, 2, true, pelilauta, false);
-		Hevonen hevonen2 = new Hevonen(0, 5, true, pelilauta, false);
-		Hevonen hevonen3 = new Hevonen(7, 2,false, pelilauta, false);
-		Hevonen hevonen4 = new Hevonen(7, 5,false, pelilauta, false);
-		Kuningas kuningas1 = new Kuningas(0, 3, true, pelilauta, false);
-		Kuningas kuningas 2 = new Kuningas(7, 3,false, pelilauta, false);
-		Kuningatar kuningatar1 = new Kuningatar(0, 4, true, pelilauta, false);
-		Kuningatar kuningatar2 = new Kuningatar(7, 4,false, pelilauta, false);
+		Sotilas sotilas1 = new Sotilas(true, false);
+		Sotilas sotilas2 = new Sotilas(true, false);
+		Sotilas sotilas3 = new Sotilas(true, false);
+		Sotilas sotilas4 = new Sotilas(true, false);
+		Sotilas sotilas5 = new Sotilas(true, false);
+		Sotilas sotilas6 = new Sotilas(true, false);
+		Sotilas sotilas7 = new Sotilas(true, false);
+		Sotilas sotilas8 = new Sotilas(true, false);
+		Sotilas sotilas9 = new Sotilas(false, false);
+		Sotilas sotilas10 = new Sotilas(false, false);
+		Sotilas sotilas11 = new Sotilas(false, false);
+		Sotilas sotilas12 = new Sotilas(false, false);
+		Sotilas sotilas13 = new Sotilas(false, false);
+		Sotilas sotilas14 = new Sotilas(false, false);
+		Sotilas sotilas15 = new Sotilas(false, false);
+		Sotilas sotilas16 = new Sotilas(false, false);
+		Torni torni1 = new Torni(true, false);
+		Torni torni2 = new Torni(true, false);
+		Torni torni3 = new Torni(true, false);
+		Torni torni4 = new Torni(true, false);
+		Lahetti lahetti1 = new Lahetti(true, false);
+		Lahetti lahetti2 = new Lahetti(true, false);
+		Lahetti lahetti3 = new Lahetti(true, false);
+		Lahetti lahetti4 = new Lahetti(true, false);
+		Hevonen hevonen1 = new Ratsu(true, false);
+		Hevonen hevonen2 = new Ratsu(true, false);
+		Hevonen hevonen3 = new Ratsu(false, false);
+		Hevonen hevonen4 = new Ratsu(false, false);
+		Kuningas kuningas1 = new Kuningas(false, false);
+		Kuningas kuningas2 = new Kuningas(false, false);
+		Kuningatar kuningatar1 = new Kuningatar(true, false);
+		Kuningatar kuningatar2 = new Kuningatar(false, false);		
+		
+		pelilauta.asetaNappula(sotilas1, 1, 0);
+		pelilauta.asetaNappula(sotilas2, 1, 1);
+		pelilauta.asetaNappula(sotilas3, 1, 2);
+		pelilauta.asetaNappula(sotilas4, 1, 3);
+		pelilauta.asetaNappula(sotilas5, 1, 4);
+		pelilauta.asetaNappula(sotilas6, 1, 5);
+		pelilauta.asetaNappula(sotilas7, 1, 6);
+		pelilauta.asetaNappula(sotilas8, 1, 7);
+		pelilauta.asetaNappula(sotilas9, 6, 0);
+		pelilauta.asetaNappula(sotilas10, 6, 1);
+		pelilauta.asetaNappula(sotilas11, 6, 2);
+		pelilauta.asetaNappula(sotilas12, 6, 3);
+		pelilauta.asetaNappula(sotilas13, 6, 4);
+		pelilauta.asetaNappula(sotilas14, 6, 5);
+		pelilauta.asetaNappula(sotilas15, 6, 6);
+		pelilauta.asetaNappula(sotilas16, 6, 7);
+		pelilauta.asetaNappula(torni1, 0, 0);
+		pelilauta.asetaNappula(torni2, 0, 7);
+		pelilauta.asetaNappula(torni3, 7, 0);
+		pelilauta.asetaNappula(torni4, 7, 7);
+		pelilauta.asetaNappula(lahetti1, 0, 1);
+		pelilauta.asetaNappula(lahetti2, 0, 6);
+		pelilauta.asetaNappula(lahetti3, 7, 1);
+		pelilauta.asetaNappula(lahetti4, 7, 6);
+		pelilauta.asetaNappula(hevonen1, 0, 2);
+		pelilauta.asetaNappula(hevonen2, 0, 5);
+		pelilauta.asetaNappula(hevonen3, 7, 2);
+		pelilauta.asetaNappula(hevonen4, 7, 5);
+		pelilauta.asetaNappula(kuningas1, 0, 3);
+		pelilauta.asetaNappula(kuningas2, 7, 3);
+		pelilauta.asetaNappula(kuningatar1, 0, 4);
+		pelilauta.asetaNappula(kuningatar2, 7, 4);
 		
 		this.pelaajanVuoro = 1;
 		this.pelilauta = pelilauta;
 	}
-	
-	
-	
-	
 	
 	
 	public void lataaPeliAsetuksilla(){
@@ -176,7 +207,8 @@ class Peli {
 			for (int j = 0; j < 7; j++){
 				Nappula nappula = this.pelilauta.annaNappula(i, j);
 				if (nappula != null){
-					out.println(i, ",", j, ",", nappula.annaNimi(), ",", nappula.annaVari(), ",", nappula.onLiikkunut())
+					/*JUHA: muokkasin nappula.annaLiikkunut.*/
+					out.println(i, ",", j, ",", nappula.annaNimi(), ",", nappula.annaVari(), ",", nappula.annaLiikkunut())
 				}
 			}
 		}
