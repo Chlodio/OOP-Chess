@@ -497,7 +497,14 @@ class Pelilauta{
 	/*rakentaa 64 näkymätöntä nappia ruutujen päälle jotkat hallisevat siirtoja*/
 	public static void buildSelectors(MainPanel mp, ActionListener al){
 		int xc; int yc;
-		int id = 0;
+		int id = -1;
+		ActionListener valitseR = new ActionListener() {
+			 @Override
+			 public void actionPerformed(ActionEvent e) {
+				 Ruutu r = (Ruutu) e.getSource());
+				 Nappula.setValittu(Peli.getSLauta().annaNappula(r.getX(), r.getY()));
+			 }
+		};
 		for(int x = 0; x < 8; x++){
 			xc = 100; yc = 50+(x*100);
 			for(int z = 0; z < 4; z++){
@@ -507,7 +514,8 @@ class Pelilauta{
 					ruutuValikko.get(id).addActionListener(al);
 					ruutuValikko.get(id).setBounds(xc,yc,100,100);
 					ruutuValikko.get(id).setContentAreaFilled(false);
-			    	mp.add(ruutuValikko.get(id));
+			    mp.add(ruutuValikko.get(id));
+					ruutuValikko.get(id).addActionListener(valitseR);
 					System.out.println(xc+" "+yc);
 					xc += 100;
 				}
