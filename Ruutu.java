@@ -11,4 +11,14 @@ public class Ruutu extends JButton{
 	public int getId(){
 		return this.id;
 	}
+	
+
+	public int getX(){
+		return this.id%8;
+	}
+	
+	public int getY(){
+		return this.id/8;
+	}
+	
 }
