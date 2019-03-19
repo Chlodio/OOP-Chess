@@ -2,8 +2,10 @@
 
 public class Tuomari{
 	private static int vaihe = 0;
-	//0 == nappulan valinta
-	//1 == ruudun valinta
+	//-1 	= nappuloihin ei saa koskea
+	//0 	= mahdollisuus valita nappula
+	//1 	= ruudun valinta
+	//2 	= ruutu johon uusi nappula siirrettän
 
 	public static void nostaVaihe(){
 		vaihe = 1;
@@ -17,8 +19,8 @@ public class Tuomari{
 		vaihe = v;
 	}
 
-	public static boolean onkoValinta(){
-		return vaihe == 0;
+	public static boolean onkoVaihe(int v){
+		return vaihe == v;
 	}
 
 }

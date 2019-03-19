@@ -4,6 +4,8 @@ import javax.swing.JButton;
 
 public class Ruutu extends JButton{
 	private int id;
+	public static Ruutu valittu;
+
 	public Ruutu(int id){
 		this.id = id;
 	}
@@ -11,14 +13,18 @@ public class Ruutu extends JButton{
 	public int getId(){
 		return this.id;
 	}
-	
+
 
 	public int getX(){
 		return this.id%8;
 	}
-	
+
 	public int getY(){
 		return this.id/8;
 	}
-	
+
+	public void select(){
+		valittu = this;
+	}
+
 }

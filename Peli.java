@@ -225,6 +225,7 @@ class Peli {
 			for (int i = 0; i < 7; i++){
 				for (int j = 0; j < 7; j++){
 					if (this.pelilauta.annaNappula(i, j)){
+						Tuomari.asetaVaihe(0);				//Nyt saa valikoida nappulan
 						if (this.pelaajanVuoro){
 							pelaaja1.liikuttaa(pelilauta);
 							this.pelaajanVuoro = false;

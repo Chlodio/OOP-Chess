@@ -500,10 +500,18 @@ class Pelilauta{
 			 @Override
 			 public void actionPerformed(ActionEvent e) {
 				 Ruutu r = ((Ruutu) e.getSource());
-				 Nappula.setValittu(
-				 	Peli.getSLauta().annaNappula(r.getX(), r.getY())
-				);
-				 //getSLauta
+				 if (Tuomari.onkoVaihe(0)){
+					Nappula.setValittu(
+					 	Peli.getSLauta().annaNappula(r.getX(), r.getY())
+					);
+					Tuomari.asetaVaihe(1);
+					Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
+				}
+				else if (Tuomari.onkoVaihe(1)){
+					r.select();
+					Tuomari.asetaVaihe(2);
+					Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
+				}
 			 }
 		};
 		for(int x = 0; x < 8; x++){
