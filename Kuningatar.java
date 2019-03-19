@@ -16,6 +16,11 @@ public class Kuningatar extends Nappula{
     return this.vari;
   }
   
+  public String annaNimi(){
+		return "kuningatar";
+	}
+	
+  
   public void asetaElossa(boolean elossa){
     this.elossa = elossa;
   }
