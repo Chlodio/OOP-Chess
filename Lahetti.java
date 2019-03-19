@@ -15,7 +15,6 @@ public class Lahetti extends Nappula{
   public boolean annaVari(){
     return this.vari;
   }
-    //
   public String annaNimi(){
 		return "lahetti";
 	}
