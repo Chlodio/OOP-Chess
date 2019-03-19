@@ -12,8 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.Container;
 import java.awt.Font;
-import java.util.HashMap; 
-import java.util.Map;  
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 
 /*
@@ -21,89 +21,89 @@ import java.util.ArrayList;
    * luokassa. Shakkimatti syntyy, jos mikään nappula ei palauta sallittuja siirtoja. Shakkimatti syntyy myös
    * jos kaikki sallitut siirrot johtavat itsemurhaan. Mielestäni nämä testit on yksinkertaisempi toteuttaa Peli-
    * luokassa.
-   * 
+   *
    * Huom2: Olen aika epävarma tuon itsemurha-metodin toimivuudesta, mutta en oikein keksinyt helppoa tapaa testata
    * sitä
-   * 
+   *
    * Huom3: Koodissa on varmasti vielä paljon virheitä...
    */
 
 class Pelilauta{
-  
+
   /*Näkymötön kerros nappuloita joiden avulla siirrot toimivat*/
   public static Map<Integer, JButton> ruutuValikko = new HashMap<>();
   /*Merkki labellit sivuille*/
   public static Map<Integer, JLabel> ruutuMerkki = new HashMap<>();
 	/*Tulevan JFramen päälle*/
   public static MainPanel mainPanel = new MainPanel();
-	
+
 	public static ArrayList<JButton> valitutRuudut = new ArrayList();
-	
+
   /*
    * Pelilaudan attribuutit alla
    */
-  
+
   protected Nappula[][] lauta;
   protected boolean shakki;
   protected boolean shakkimatti;
-  
+
     /*
    * Konstruktori
    */
-  
+
   public Pelilauta(){
     this.lauta = new Nappula[8][8];
     this.shakki = false;
     this.shakkimatti = false;
   }
-  
+
     /*
    * Konstruktori, joka luo pelistä kopion. Käytetään mahdollisten siirtojen simulointiin ja itsemurhan testaukseen
    */
-  
+
   public Pelilauta(Pelilauta kopio){
     this.lauta = kopio.lauta;
     this.shakki = kopio.shakki;
     this.shakkimatti = kopio.shakkimatti;
   }
-  
+
       /*
    * asetus ja tarkastus-metodit
    */
-  
+
 	public MainPanel getMainPanel(){
 		return mainPanel;
 	}
-	
+
   public void asetaShakki(boolean shakki){
     this.shakki = shakki;
   }
-  
+
   public void asetaShakkimatti(){
     this.shakkimatti = true;
   }
-  
+
   public boolean annaShakki(){
     return this.shakki;
   }
-  
+
   public boolean annaShakkimatti(){
     return this.shakkimatti;
   }
-  
+
   public Nappula annaNappula(int sNo, int sAbc){
     return lauta[sNo][sAbc];
   }
-  
+
   public void asetaNappula(Nappula nappula, int sNo, int sAbc){
     lauta[sNo][sAbc] = nappula;
 	  nappula.getIkoni().setLocation(105+(sNo*100), 45+(sAbc*100));
   }
-  
+
         /*
    * metodi tarkastaa onko linnoittautuminen mahdollista
    */
-  
+
   public boolean linnoitusMahdollista(Kuningas kuningas, Torni torni){
           /*
    * tarkastetaan liikkuminen ja shakki-tilanne
@@ -114,16 +114,16 @@ class Pelilauta{
     if (t1 || t2 || t3){
       return false;
     }
- 
+
     int torniAbc = this.annaSijaintiAbc(torni);
-    int torniNo = this.annaSijaintiNo(torni);    
-    
+    int torniNo = this.annaSijaintiNo(torni);
+
               /*
    * Pitkä linnoitus. Tarkastetaan onko kuninkaan ja tornin välissä nappuloita
    * Tarkastetaan siirtyykö Kuningas uhatun ruudun yli
    * tarkastetaan johtaako linnoitus itsemurhaan
    */
-    
+
 
     if (torniAbc == 0){
       for (int i =1; i>4; i++){
@@ -140,7 +140,7 @@ class Pelilauta{
                   /*
    * Lyhyt linnoitus. samat tarkastukset
    */
-    
+
     if (torniAbc == 7){
       for (int i = 6; i>4; i--){
         if (annaNappula(torniNo,i) != null){
@@ -155,16 +155,16 @@ class Pelilauta{
     }
     return true;
   }
-   
+
    /*
    * Liiku-metodi. Parametreina siirtyvä Nappula, uusi sijaintirivi, uusi sijaintisarake
    * Jos uudessa ruudussa on toinen nappula, se poistetaan.
    * Metodi ei tarkasta, onko ruudussa samanvärinen nappula. Tämä tarkastus tehdään testaaSiirrot-metodissa.
    * Liiku-metodi olettaa, että sitä kutsutaan vain sallituilla siirroilla
    */
-  
+
   public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc){
-    
+
     int vanhaNo = annaSijaintiNo(nappula);
     int vanhaAbc = annaSijaintiAbc(nappula);
     if(lauta[sijaintiNo][sijaintiAbc] != null){
@@ -177,32 +177,32 @@ class Pelilauta{
     }
     boolean onkoSotilas = nappula instanceof Sotilas;
     if (onkoSotilas && (sijaintiNo == 0 || sijaintiNo == 7)){
-      nappula.muutu(this); 
+      nappula.muutu(this);
     }
-    
+
   }
-    
+
      /*
-   * testaaSiirrot-metodi. Parametreina nappulan mahdolliset siirrot sekä siirtyvä nappula. 
+   * testaaSiirrot-metodi. Parametreina nappulan mahdolliset siirrot sekä siirtyvä nappula.
    * muodollisessa parametrissa saadussa arrayssa 1 merkkaa mahdollista siirtoa.
-   * Metodi testaa voidaanko siirrot suorittaa. 
+   * Metodi testaa voidaanko siirrot suorittaa.
    * Testi 1 == onko ruudussa oma nappula. Testi 2 == onko matkalla esteitä. Metodi ei testaa
    * aiheuttaako siirto itsemurhatilanteen. Tätä varten Peli-luokan tulee kutsua erikseen
    * Metodi palauttaa matriisin, jossa ykkönen merkkaa mahdollista siirtoa
    */
-  
+
   public int[][] testaaSiirrot(int[][] siirrot, Nappula nappula){
     boolean onkoRatsu = nappula instanceof Ratsu; /* Ratsule tarvitaan vain testi 1 */
     int sijaintiNo = annaSijaintiNo(nappula); /* kutsutaan apumetodia (alla) */
     int sijaintiAbc = annaSijaintiAbc(nappula); /* kutsutaan apumetodia (alla) */
     boolean valkoinen = nappula.annaVari(); /* testataan minkä värinen nappula on siirtymässä */
     int[][] sallitutSiirrot = new int[8][8]; /* luodaan uusi matriisi sallituista siirroista */
-    
+
       /*
    * Testataan onko mahdollisissa siirtoruuduissa oma tai vastustajan nappula vai onko ruutu tyhjä
    * 0 == ei sallittu, 1 == sallittu, 2 == sallittu - syö vastustajan
    */
-    
+
     for(int i = 0; i < 8; i++){
       for(int a = 0; a < 8; a++){
         if(siirrot[i][a] != 1){
@@ -221,10 +221,10 @@ class Pelilauta{
    * suuntaa. Jos reitillä on matkalla ruutu, johon ei voi siirtyä, kulkeminen päättyy. Jos reitillä on syötävä
    * nappula, kulku päättyy. Kuljetut ruudut merkataan numerolla 3.
    */
-    
+
    int b = sijaintiNo; /* aloitetaan nappulan nykyisestä paikasta */
-   int c = sijaintiAbc;   
-  
+   int c = sijaintiAbc;
+
    if(onkoRatsu == false){
      while (b>0 && b<7 && c>0 && c<7){ /* jatketaan kulkemista kunnes tullaan laudan reunalle */
        b++; /* ensimmäinen kahdeksasta suunnasta */
@@ -237,11 +237,11 @@ class Pelilauta{
          sallitutSiirrot[b][c] = 3; /* suuntaan voi kulkea, merkataan ruutu ja jatketaan */
        }
      }
-     
+
      /* aloitetaan uudestaan ja kuljetaan kaikki kahdeksan suuntaa */
      b = sijaintiNo;
      c = sijaintiAbc;
-     
+
      while (b>0 && b<7 && c>0 && c<7){
        c++;
        if (sallitutSiirrot[b][c] == 0){
@@ -252,11 +252,11 @@ class Pelilauta{
        } else {
          sallitutSiirrot[b][c] = 3;
        }
-     }     
-     
+     }
+
      b = sijaintiNo;
      c = sijaintiAbc;
-     
+
      while (b>0 && b<7 && c>0 && c<7){
        b--;
        if (sallitutSiirrot[b][c] == 0){
@@ -267,10 +267,10 @@ class Pelilauta{
        } else {
          sallitutSiirrot[b][c] = 3;
        }
-     } 
+     }
        b = sijaintiNo;
        c = sijaintiAbc;
-     
+
        while (b>0 && b<7 && c>0 && c<7){
        c--;
        if (sallitutSiirrot[b][c] == 0){
@@ -281,27 +281,27 @@ class Pelilauta{
        } else {
          sallitutSiirrot[b][c] = 3;
        }
-     }  
-       
-       b = sijaintiNo;
-       c = sijaintiAbc;
-     
-       while (b>0 && b<7 && c>0 && c<7){
-       b--;
-       c--;
-       if (sallitutSiirrot[b][c] == 0){
-         break;
-       } else if (sallitutSiirrot[b][c] == 2){
-         sallitutSiirrot[b][c] = 3;
-         break;
-       } else {
-         sallitutSiirrot[b][c] = 3;
-       }
-     }  
+     }
 
        b = sijaintiNo;
        c = sijaintiAbc;
-     
+
+       while (b>0 && b<7 && c>0 && c<7){
+       b--;
+       c--;
+       if (sallitutSiirrot[b][c] == 0){
+         break;
+       } else if (sallitutSiirrot[b][c] == 2){
+         sallitutSiirrot[b][c] = 3;
+         break;
+       } else {
+         sallitutSiirrot[b][c] = 3;
+       }
+     }
+
+       b = sijaintiNo;
+       c = sijaintiAbc;
+
        while (b>0 && b<7 && c>0 && c<7){
        b++;
        c++;
@@ -313,11 +313,11 @@ class Pelilauta{
        } else {
          sallitutSiirrot[b][c] = 3;
        }
-     }  
-    
+     }
+
        b = sijaintiNo;
        c = sijaintiAbc;
-     
+
        while (b>0 && b<7 && c>0 && c<7){
        b++;
        c--;
@@ -329,11 +329,11 @@ class Pelilauta{
        } else {
          sallitutSiirrot[b][c] = 3;
        }
-     }  
-       
+     }
+
        b = sijaintiNo;
        c = sijaintiAbc;
-     
+
        while (b>0 && b<7 && c>0 && c<7){
        b--;
        c++;
@@ -347,7 +347,7 @@ class Pelilauta{
        }
      }
    } else {                        /* merkataan hevosen kaikki siirrot 3:lla sillä se voi ylittää nappuloita */
-      for(int i = 0; i < 8; i++){ 
+      for(int i = 0; i < 8; i++){
        for(int a = 0; a < 8; a++){
          if (sallitutSiirrot[i][a] >0){
            sallitutSiirrot[i][a] = 3;
@@ -355,12 +355,12 @@ class Pelilauta{
        }
       }
    }
-   
+
              /*
    * Siivotaan matriisi niin, että sallitut siirrot ovat ykkösiä ja muut nollia kaikille nappuloille
    */
-   
-   for(int i = 0; i < 8; i++){ 
+
+   for(int i = 0; i < 8; i++){
        for(int a = 0; a < 8; a++){
          if (sallitutSiirrot[i][a] <3){
            sallitutSiirrot[i][a] = 0;
@@ -369,16 +369,16 @@ class Pelilauta{
          }
        }
    }
-         
-   
+
+
    return sallitutSiirrot;
   }
-  
+
             /*
    * itsemurha-metodi. Parametrina siirtyvä nappula ja sen uusi paikka koordinaatteina.
    * Metodi luo pelilaudan tilanteesta kopion ja testaa syntyykö vastustajalle shakki (false == ei synny)
    */
-  
+
   public boolean itsemurha(Nappula nappula, int uusiNo, int uusiAbc){
     boolean onkoItsari;
     boolean vari = nappula.annaVari();
@@ -388,13 +388,13 @@ class Pelilauta{
     onkoItsari = kopioPeli.annaShakki();
     return onkoItsari;
   }
-    
+
                 /*
    * testaaShakki-metodi. Parametrina testattava vari (kuninkaan vari jota mahdollisesti uhataan).
    * palauttaa
    */
-      
-    
+
+
   public void testaaShakki(boolean vari){
  /* hakee kuninkaan paikan laudalta */
     int sNoK =0;
@@ -410,7 +410,7 @@ class Pelilauta{
      /* luo attribuutit testaamista varten */
     int[][] testiSiirrot = new int[8][8];
     int[][] sallitutTestiSiirrot = new int[8][8];
-    
+
     /* käy läpi koko laudan ja kaikki sillä olevat vastustajan nappulat */
     for (int i = 0; i < 8; i++){
       for (int a = 0; i < 8; a++){
@@ -431,7 +431,7 @@ class Pelilauta{
     asetaShakki(false);
     return;
   }
- 
+
                 /*
    * apumetodi, joka antaa parametrinaan saaman nappulan rivin pelilaudalla
    * Jos nappulaa ei löydy, metodi palauttaa 9
@@ -447,12 +447,12 @@ class Pelilauta{
      }
      return 9;
   }
-  
+
                  /*
    * apumetodi, joka antaa parametrinaan saaman nappulan sarakkeen pelilaudalla
    * Jos nappulaa ei löydy, metodi palauttaa 9
    */
-  
+
     public int annaSijaintiAbc(Nappula nappula){
      for (int i = 0; i < 8; i++){
       for (int a = 0; i < 8; a++){
@@ -462,10 +462,8 @@ class Pelilauta{
       }
      }
      return 9;
-  }  
+  }
 
-	public static 
-	
 	/*aloittaaa GUIN:n rakentamisen*/
 	public static void createGUI(){
 		JFrame frame = new JFrame();
@@ -475,9 +473,7 @@ class Pelilauta{
 		frame.setResizable(false);
 		frame.add(mainPanel);
 		frame.pack();
-		mainPanel.add(label);
 		mainPanel.setLayout(null);
-		Dimension size = label.getPreferredSize();
 		JButton exitButton = new JButton("X");															//sulkemis nappi
 
 		ActionListener acLi = new ActionListener() {
@@ -486,23 +482,23 @@ class Pelilauta{
 		        System.exit(0);
 		    }
 		};
-		
+
 		exitButton.addActionListener(acLi);
-	  exitButton.setBounds(25,25,45,40);
-    mainPanel.add(exitButton);
-		buildSelectors(mainPanel, acLiX);
+	  	exitButton.setBounds(25,25,45,40);
+    	mainPanel.add(exitButton);
+		buildSelectors(mainPanel);
 		frame.setVisible(true);
 	}
 
 	/*rakentaa 64 näkymätöntä nappia ruutujen päälle jotkat hallisevat siirtoja*/
-	public static void buildSelectors(MainPanel mp, ActionListener al){
+	public static void buildSelectors(MainPanel mp){
 		int xc; int yc;
 		int id = -1;
 		ActionListener valitseR = new ActionListener() {
 			 @Override
 			 public void actionPerformed(ActionEvent e) {
-				 Ruutu r = (Ruutu) e.getSource());
-				 Nappula.setValittu(Peli.getOmanVarNap().annaNappula(r.getX(), r.getY()));
+				 Ruutu r = ((Ruutu) e.getSource());
+				 Nappula.setValittu(Ihmispelaaja.getOmanVarNap().annaNappula(r.getX(), r.getY()));
 				 //getSLauta
 			 }
 		};
@@ -512,10 +508,9 @@ class Pelilauta{
 				for(int y = 0; y < 2; y++){
 					id++;
 					ruutuValikko.put(id, new JButton());
-					ruutuValikko.get(id).addActionListener(al);
 					ruutuValikko.get(id).setBounds(xc,yc,100,100);
 					ruutuValikko.get(id).setContentAreaFilled(false);
-			    mp.add(ruutuValikko.get(id));
+			    	mp.add(ruutuValikko.get(id));
 					ruutuValikko.get(id).addActionListener(valitseR);
 					System.out.println(xc+" "+yc);
 					xc += 100;
@@ -526,7 +521,7 @@ class Pelilauta{
 
 	public static void varitaRuudut(int[][] ruudut){
 		for (int x = 0; x < ruudut.length; x++){
-			for (int y = 0; y < x[y].length; y++){
+			for (int y = 0; y < ruudut[x].length; y++){
 				if (ruudut[x][y] == 1){
 					colorizeRuutu(ruutuValikko.get(x+(y*7)));
 					valitutRuudut.add(ruutuValikko.get(x+(y*7)));
@@ -534,22 +529,22 @@ class Pelilauta{
 			}
 		}
 	}
-	
+
 	public static void normaalisoiRuudut(){
 		for(JButton x: valitutRuudut){
-			x.normalizeRuutu();
+			normalizeRuutu(x);
 		}
-		normalizeRuutu.clear();
+		valitutRuudut.clear();
 	}
-	
+
 	public static void colorizeRuutu(JButton b){
 		b.setContentAreaFilled(true);
 	}
-	
+
 	public static void normalizeRuutu(JButton b){
 		b.setContentAreaFilled(false);
 	}
-	
+
 	/*Rakentaa sivu merkit*/
 	public static void buildSideLabels(MainPanel mp){
 		char[] ruutuK = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};																		//ruudun kirjain
@@ -569,6 +564,5 @@ class Pelilauta{
 			ruutuMerkki.get(x+8).setLocation(75, 91+(100*(x-1)));
 		}
 	}
-	
+
 }
-  
