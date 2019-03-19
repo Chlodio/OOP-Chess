@@ -16,6 +16,11 @@ class Sotilas extends Nappula{
     return this.vari;
   }
   
+  public String annaNimi(){
+		return "sotilas";
+	}
+	
+  
   public void asetaElossa(boolean elossa){
     this.elossa = elossa;
   }
