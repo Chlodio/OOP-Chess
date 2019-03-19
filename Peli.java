@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+
 class Peli {
 	
 	private static Pelilauta SLauta; ///En tiedä mistä saisin pelilaudan, niin tallennnan sen tähän ainakin väliaikasesti
@@ -174,8 +180,8 @@ class Peli {
 	
 	
 	public void tallennaPeli(){
-		PrintWriter out = new PrintWriter("tallennettuPeli.txt") 
-    out.println(this.pelaajanVuoro);
+		PrintWriter out = new PrintWriter("tallennettuPeli.txt");
+    		out.println(this.pelaajanVuoro);
 		out.println(pelilauta.annaShakki());
 		out.println(this.pelaaja2.annaNimi());
 		for (int i = 0; i < 7; i++){
