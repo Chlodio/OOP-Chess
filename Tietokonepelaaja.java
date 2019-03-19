@@ -2,6 +2,10 @@ class Tietokonepelaaja extends Pelaaja {
 	
 	public Ihmispelaaja(){}
 	
+	public String annaNimi(){
+		return "tietokonepelaaja";
+	}
+	
 	
 	public void liikuttaa(Pelilauta pelilauta){
 		int parhaaanNappulanArvo = 10;
