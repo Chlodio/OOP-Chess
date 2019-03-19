@@ -1,3 +1,4 @@
+import java.util.concurrent.ThreadLocalRandom;
 class Tietokonepelaaja extends Pelaaja {
 	
 	public Ihmispelaaja(){}
