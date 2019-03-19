@@ -1,22 +1,22 @@
 class Peli {
-	
+
 	private static Pelilauta SLauta; ///En tiedä mistä saisin pelilaudan, niin tallennnan sen tähän ainakin väliaikasesti
-	
+
 	private boolean pelaajanVuoro; // true = pelaaja1
 	private Pelilauta pelilauta;
 	private Pelaaja pelaaja1;
 	private Pelaaja pelaaja2;
-	
+
 	public Peli(){}
-	
+
 	public static void setSLauta(Pelilauta p){
 		rSLauta = p;
 	}
-	
+
 	public static Pelilauta getSLauta(){
 		return SLauta;
 	}
-	
+
 	public boolean tallennettuToimivaPeli(String tiedostonNimi) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(tiedostonNimi));
 		try {
@@ -48,7 +48,7 @@ class Peli {
 			String[] tiedot = rivit[i].split(",");
 			int paikka1 = Integer.parseInt(tiedot[0]);
 			int paikka2 = Integer.parseInt(tiedot[1]);
-			if (tiedot.length != 5){					
+			if (tiedot.length != 5){
 				return false;
 			}
 			else if (paikka1 < 0 || paikka1 > 7){
@@ -74,17 +74,17 @@ class Peli {
 			return false;
 		}
 	}
-	
-	
+
+
 	/*Nappulat tarvitsevat konstruktorin, joka asettaa ne laudalle, saaden parametrit seuraavassa järjesteyksessä: x-koordinaatti, y-koordinaatti, onValkoinen, pelilauta jonka laudalle se asetetaan, onLiikkunut*/
 	/*JUHA: konstuktori tarvitsi vain boolean varin, lisasin konstruktoriin myos boolean onLiikkunut.*/
 	/*JUHA: Nappulat asetatetaan laudalle Pelilaudan metodilla asetaNappula(Nappula, int, int).*/
-	
+
 	public void asetaPeliAsetuksilla(){
 		Pelilauta pelilauta = new Pelilauta();
 		setSLauta(pelilauta);
 		this.pelilauta = pelilauta;
-		
+
 		pelilauta.asetaNappula(new Sotilas(true, false), 1, 0);
 		pelilauta.asetaNappula(new Sotilas(true, false), 1, 1);
 		pelilauta.asetaNappula(new Sotilas(true, false), 1, 2);
@@ -120,8 +120,8 @@ class Peli {
 		Nappula.luoNappulaGui();
 		this.pelaajanVuoro = 1;
 	}
-	
-	
+
+
 	public void lataaPeliAsetuksilla(){
 		Pelilauta pelilauta = new Pelilauta();
 		this.pelilauta = pelilauta;
@@ -170,12 +170,12 @@ class Peli {
 			}
 		}
 	}
-	
-	
-	
+
+
+
 	public void tallennaPeli(){
-		PrintWriter out = new PrintWriter("tallennettuPeli.txt") 
-    out.println(this.pelaajanVuoro);
+		PrintWriter out = new PrintWriter("tallennettuPeli.txt");
+    	out.println(this.pelaajanVuoro);
 		out.println(pelilauta.annaShakki());
 		out.println(this.pelaaja2.annaNimi());
 		for (int i = 0; i < 7; i++){
@@ -183,15 +183,15 @@ class Peli {
 				Nappula nappula = this.pelilauta.annaNappula(i, j);
 				if (nappula != null){
 					/*JUHA: muokkasin nappula.annaLiikkunut.*/
-					out.println(i, ",", j, ",", nappula.annaNimi(), ",", nappula.annaVari(), ",", nappula.annaLiikkunut())
+					out.println(i, ",", j, ",", nappula.annaNimi(), ",", nappula.annaVari(), ",", nappula.annaLiikkunut());
 				}
 			}
 		}
 		out.close();
 	}
-	
-	
-	
+
+
+
 	public boolean onShakkimatti(){
 		for (int i = 0; i < 7; i++){
 			for (int j = 0; j < 7; j++){
@@ -211,14 +211,14 @@ class Peli {
 		}
 		return true;
 	}
-	
-	
-	
+
+
+
 	public void pelaa(){
 		while (!this.pelilauta.onShakkimatti()){
 			for (int i = 0; i < 7; i++){
 				for (int j = 0; j < 7; j++){
-					if (this.pelilauta.annaNappula(i, j){
+					if (this.pelilauta.annaNappula(i, j)){
 						if (this.pelaajanVuoro){
 							pelaaja1.liikuttaa(pelilauta);
 							this.pelaajanVuoro = false;
@@ -233,8 +233,8 @@ class Peli {
 		}
 		pelilauta.asetaShakkimatti();
 	}
-	
-	
-	
-	
+
+
+
+
 }
