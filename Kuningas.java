@@ -16,6 +16,11 @@ public class Kuningas extends Nappula{
     return this.vari;
   }
   
+  public String annaNimi(){
+		return "tietokonepelaaja";
+	}
+	
+  
   public void asetaElossa(boolean elossa){
     this.elossa = elossa;
   }

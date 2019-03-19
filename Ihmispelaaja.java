@@ -12,6 +12,11 @@ class Ihmispelaaja extends Pelaaja {
 	
 	public Ihmispelaaja(){}
 	
+	public String annaNimi(){
+		return "ihmispelaaja";
+	}
+	
+	
 	public void liikuttaa(Pelilauta pelilauta){
 		int[][] omanVarinNappulat = new int[8][8];
 		getOmanVarNap(omanVarinNappulat);
