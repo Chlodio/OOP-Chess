@@ -16,7 +16,7 @@ class Peli {
 	public Peli(){}
 
 	public static void setSLauta(Pelilauta p){
-		rSLauta = p;
+		SLauta = p;
 	}
 
 	public static Pelilauta getSLauta(){

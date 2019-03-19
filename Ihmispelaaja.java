@@ -1,22 +1,22 @@
 class Ihmispelaaja extends Pelaaja {
-	
+
 	private static int[][] omanVarNap;
-	
+
 	public static void setOmanVarNap(int[][] i){
 		omanVarNap = i;
 	}
-	
-	public static int[][] getOmanVarNap(){
+
+	public static int[][] getOmanVarNap(int[][] i){
 		return omanVarNap;
 	}
-	
+
 	public Ihmispelaaja(){}
-	
+
 	public String annaNimi(){
 		return "ihmispelaaja";
 	}
-	
-	
+
+
 	public void liikuttaa(Pelilauta pelilauta){
 		int[][] omanVarinNappulat = new int[8][8];
 		getOmanVarNap(omanVarinNappulat);
@@ -27,20 +27,21 @@ class Ihmispelaaja extends Pelaaja {
 				}
 			}
 		}
-		
+
 		/*TÄHÄN ALLE TARVITAAN TOMIN KOODIA*/
-		Nappula nappula = Nappula.getValittu(); /*pelaajan valitsema nappula omanVarinNappuloista*/;
-		int[][] siirrot = nappula.siirrot(); /*JUHA: parametriksi tarvitaan Pelilauta*/
+		Tuomari.asetaVaihe(0);
+		Nappula nappula = Nappula.getValittu(); 	/*pelaajan valitsema nappula omanVarinNappuloista*/;
+		int[][] siirrot = nappula.siirrot(pelilauta); /*JUHA: parametriksi tarvitaan Pelilauta*/
 		int[][] sallitutSiirrot = pelilauta.testaaSiirrot(siirrot, nappula);
 		Pelilauta.varitaRuudut(sallitutSiirrot);
 		int uusiSijaintiNo =	x%8  	/*pelaajan valitsema uusi sijainti sallitutSiirroista*/;
 		int uusiSijaintiAbc = 	x/8	/*pelaajan valitsema uusi sijainti sallitutSiirroista*/;
-		Pelilauta.normaalisoiRuudut(sallitutSiirrot);
+		Pelilauta.normaalisoiRuudut();
 		/*JUHA: tähän voi lisätä vielä itse-murhatestin. Eli kyseinen siirto voidaan testata metodilla pelilauta.itsemurha(Nappula,int,int). Jos true, niin sitten pitäisi kysyä uutta siirtoa*/
 		/*JUHA: huom: sallitutSiirrot ei palauta linnoitusmahdollisuutta. Tämä pitää kysyä erikseen pelilauta.linnoitusMahdollista(Kuningas,Torni)*/
 		pelilauta.liiku(nappula, uusiSijaintiNo, uusiSijaintiAbc);
 	}
-	
-	
-	
+
+
+
 }

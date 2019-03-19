@@ -39,6 +39,8 @@ class Pelilauta{
 
 	public static ArrayList<JButton> valitutRuudut = new ArrayList();
 
+
+
   /*
    * Pelilaudan attribuutit alla
    */
@@ -71,7 +73,7 @@ class Pelilauta{
    * asetus ja tarkastus-metodit
    */
 
-	public MainPanel getMainPanel(){
+	public static MainPanel getMainPanel(){
 		return mainPanel;
 	}
 
@@ -498,7 +500,9 @@ class Pelilauta{
 			 @Override
 			 public void actionPerformed(ActionEvent e) {
 				 Ruutu r = ((Ruutu) e.getSource());
-				 Nappula.setValittu(Ihmispelaaja.getOmanVarNap().annaNappula(r.getX(), r.getY()));
+				 Nappula.setValittu(
+				 	Peli.getSLauta().annaNappula(r.getX(), r.getY())
+				);
 				 //getSLauta
 			 }
 		};

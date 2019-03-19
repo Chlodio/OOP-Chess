@@ -44,11 +44,12 @@ abstract class Nappula{
   public static void luoNappulaGui(){
     Dimension koko;
     for(Nappula x: lista){
-        x.asetaGui(new JLabel(x.getSymbooli()) );
+		JLabel label = new JLabel(x.getSymbooli());
+        x.asetaGUI(label);
         x.getIkoni().setFont(new Font(label.getFont().getName(), 1, 100));
         koko = x.getIkoni().getPreferredSize();
         x.getIkoni().setBounds(100, 100, koko.width, koko.height);
-        pelilauta.getMainPanel().add(x.getIkoni());
+        Pelilauta.getMainPanel().add(x.getIkoni());
     }
   }
 
