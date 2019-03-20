@@ -15,7 +15,7 @@ class Tietokonepelaaja extends Pelaaja {
 		int[][] vastustajanNappulat = new int[8][8];
 		for(int i = 0; i < 7; i++){
 			for(int j = 0; i < 7; j++){
-				if (pelilauta.annaNappula(i, j) != null && pelilauta.annaNappula(i, j).annaVari() == onValkoinen){
+				if (pelilauta.annaNappula(i, j) != null && pelilauta.annaNappula(i, j).annaVari() == true){
 					omanVarinNappulat[i][j] = 1;
 				}
 			}
@@ -30,7 +30,7 @@ class Tietokonepelaaja extends Pelaaja {
 		for(int i = 0; i < 7; i++){
 			for(int j = 0; i < 7; j++){
 				if (omanVarinNappulat[i][j] > 0){
-					int[][] siirrot = pelilauta.annaNappula(i, j).siirrot();
+					int[][] siirrot = pelilauta.annaNappula(i, j).siirrot(pelilauta);
 					int[][] sallitutSiirrot = pelilauta.testaaSiirrot(siirrot, pelilauta.annaNappula(i, j));
 					for (int k = 0; k < 7; k++){
 						for (int l = 0; l < 7; l++){
@@ -64,7 +64,7 @@ class Tietokonepelaaja extends Pelaaja {
 				int random2 = ThreadLocalRandom.current().nextInt(0, 8);
 				int random3 = ThreadLocalRandom.current().nextInt(0, 8);
 				int random4 = ThreadLocalRandom.current().nextInt(0, 8);
-				int[][] siirrot = pelilauta.annaNappula(random,random2).siirrot();
+				int[][] siirrot = pelilauta.annaNappula(random,random2).siirrot(pelilauta);
 				int[][] sallitutSiirrot = pelilauta.testaaSiirrot(siirrot, pelilauta.annaNappula(random,random2));
 				if (sallitutSiirrot[random3][random4] > 0 && !pelilauta.itsemurha(pelilauta.annaNappula(random, random2), random3, random4)){
 					pelilauta.liiku(pelilauta.annaNappula(random, random2), random3, random4);
