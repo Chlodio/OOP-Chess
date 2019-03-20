@@ -1,46 +1,46 @@
 class Sotilas extends Nappula{
-  
+
   public Sotilas(boolean vari, boolean liikkunut){
     this.vari = vari;
     this.arvo = 1;
     this.liikkunut = liikkunut;
     this.elossa = true;
-    if (!vari){ 
+    if (!vari){
        this.symbooli = "♙";
     } else {
       this.symbooli = "♟";
     }
   }
-  
+
   public boolean annaVari(){
     return this.vari;
   }
-  
+
   public String annaNimi(){
 		return "sotilas";
 	}
-	
-  
+
+
   public void asetaElossa(boolean elossa){
     this.elossa = elossa;
   }
-  
+
   public boolean annaElossa(){
     return this.elossa;
   }
-  
+
   public int annaArvo(){
     return this.arvo;
   }
-  
+
   public void asetaLiikkunut(){
     this.liikkunut = true;
   }
-  
+
   public boolean annaLiikkunut(){
     return this.liikkunut;
   }
-  
+
   public int[][] siirrot(Pelilauta lauta){
     int sNo = lauta.annaSijaintiNo(this);
     int sAbc = lauta.annaSijaintiAbc(this);
@@ -69,15 +69,15 @@ class Sotilas extends Nappula{
     }
     return siirrot;
   }
-  
+
   public void muutu(Pelilauta lauta){
     int sNo = lauta.annaSijaintiNo(this);
     int sAbc = lauta.annaSijaintiAbc(this);
     boolean vari = this.vari;
-    Kuningatar uusi = new Kuningatar(vari);
+    Kuningatar uusi = new Kuningatar(vari, false);
     uusi.asetaLiikkunut();
     this.asetaElossa(false);
     lauta.asetaNappula(uusi, sNo, sAbc);
   }
-  
+
 }

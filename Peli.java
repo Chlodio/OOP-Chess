@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.ArrayList;
 
 class Peli {
 
@@ -24,12 +24,12 @@ class Peli {
 	}
 
 	public boolean tallennettuToimivaPeli(String tiedostonNimi) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(tiedostonNimi));
+		BufferedReader br = new BufferedReader(new FileReader("tallennus.txt"));
+		String[] rivit = new String[19];
 		try {
-			String[] rivit = new String[19];
 			String rivi = br.readLine();
 			int indeksi = 0;
-			while (line != null){
+			while (rivi != null){
 				rivit[indeksi] = rivi;
 				rivi = br.readLine();
 				indeksi += 1;
@@ -124,18 +124,18 @@ class Peli {
 		pelilauta.asetaNappula(new Kuningatar(true, false), 0, 4);
 		pelilauta.asetaNappula(new Kuningatar(false, false), 7, 4);
 		Nappula.luoNappulaGui();
-		this.pelaajanVuoro = 1;
+		this.pelaajanVuoro = true;
 	}
 
 
 	public void lataaPeliAsetuksilla(){
 		Pelilauta pelilauta = new Pelilauta();
 		this.pelilauta = pelilauta;
-		BufferedReader br = new BufferedReader(new FileReader(tiedostonNimi));
+		BufferedReader br = new BufferedReader(new FileReader("tallennus.txt"));
 		String[] rivit = new String[19];
 		String rivi = br.readLine();
 		int indeksi = 0;
-		while (line != null){
+		while (rivi != null){
 			rivit[indeksi] = rivi;
 			rivi = br.readLine();
 			indeksi += 1;

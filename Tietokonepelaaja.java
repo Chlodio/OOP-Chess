@@ -1,13 +1,13 @@
 import java.util.concurrent.ThreadLocalRandom;
 class Tietokonepelaaja extends Pelaaja {
-	
+
 	public Ihmispelaaja(){}
-	
+
 	public String annaNimi(){
 		return "tietokonepelaaja";
 	}
-	
-	
+
+
 	public void liikuttaa(Pelilauta pelilauta){
 		int parhaaanNappulanArvo = 10;
 		int parhaanSyodynNappulanArvo = 0;
@@ -73,9 +73,9 @@ class Tietokonepelaaja extends Pelaaja {
 			}
 		}
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }
