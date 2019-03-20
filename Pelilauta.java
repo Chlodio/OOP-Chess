@@ -106,7 +106,7 @@ class Pelilauta{
    * metodi tarkastaa onko linnoittautuminen mahdollista
    */
 
-  public boolean linnoitusMahdollista(Kuningas kuningas, Torni torni){
+  public boolean linnoitusMahdollista(Nappula kuningas, Nappula torni){
           /*
    * tarkastetaan liikkuminen ja shakki-tilanne
    */
@@ -181,7 +181,26 @@ class Pelilauta{
     if (onkoSotilas && (sijaintiNo == 0 || sijaintiNo == 7)){
       nappula.muutu(this);
     }
-
+    /* testataan onko siirto linnoitus ja toteutetaan jos on*/
+    
+    if (nappula instanceof Kuningas && Math.abs(vanhaAbc - sijaintiAbc)>1){
+      if(sijaintiNo == 0 && sijaintiAbc == 2){
+        lauta[0][3] = lauta[0][0];
+        lauta[0][0] = null;
+      }
+      if(sijaintiNo == 0 && sijaintiAbc == 6){
+        lauta[0][5] = lauta[0][7];
+        lauta[0][7] = null;
+      }
+      if(sijaintiNo == 7 && sijaintiAbc == 2){
+        lauta[7][3] = lauta[7][0];
+        lauta[7][0] = null;
+      }
+      if(sijaintiNo == 7 && sijaintiAbc == 6){
+        lauta[7][5] = lauta[7][7];
+        lauta[7][5] = null;
+      }
+      }
   }
 
      /*
@@ -357,6 +376,22 @@ class Pelilauta{
        }
       }
    }
+    /* testataan onko linnoitus mahdollista ja merkitään siirrot kuninkaalle*/
+   
+   if(nappula instanceof Kuningas){
+     if(linnoitusMahdollista(nappula, annaNappula(0,0))){
+       sallitutSiirrot[0][1]=1;
+     }
+     if(linnoitusMahdollista(nappula, annaNappula(0,7))){
+          sallitutSiirrot[0][5]=1;
+     }
+     if(linnoitusMahdollista(nappula, annaNappula(7,0))){
+          sallitutSiirrot[7][1]=1;
+     }
+     if(linnoitusMahdollista(nappula, annaNappula(7,7))){
+          sallitutSiirrot[7][5]=1;
+     }
+        }
 
              /*
    * Siivotaan matriisi niin, että sallitut siirrot ovat ykkösiä ja muut nollia kaikille nappuloille
