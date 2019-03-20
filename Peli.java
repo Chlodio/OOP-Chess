@@ -144,7 +144,7 @@ class Peli {
 		this.pelaajanVuoro = Boolean.parseBoolean(rivit[0]);
 		this.pelaaja1 = new Ihmispelaaja();
 		if (Boolean.parseBoolean(rivit[1])){
-			pelilauta.asetaShakki();
+			pelilauta.asetaShakki(true);
 		}
 		String pelaaja2Nimi = rivit[2];
 		if (pelaaja2Nimi == "ihmispelaaja"){
