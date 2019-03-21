@@ -380,16 +380,16 @@ class Pelilauta{
    
    if(nappula instanceof Kuningas){
      if(linnoitusMahdollista(nappula, annaNappula(0,0))){
-       sallitutSiirrot[0][1]=1;
+       sallitutSiirrot[0][1]=3;
      }
      if(linnoitusMahdollista(nappula, annaNappula(0,7))){
-          sallitutSiirrot[0][5]=1;
+          sallitutSiirrot[0][5]=3;
      }
      if(linnoitusMahdollista(nappula, annaNappula(7,0))){
-          sallitutSiirrot[7][1]=1;
+          sallitutSiirrot[7][1]=3;
      }
      if(linnoitusMahdollista(nappula, annaNappula(7,7))){
-          sallitutSiirrot[7][5]=1;
+          sallitutSiirrot[7][5]=3;
      }
         }
 
