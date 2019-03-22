@@ -5,11 +5,14 @@ class Sotilas extends Nappula{
     this.arvo = 1;
     this.liikkunut = liikkunut;
     this.elossa = true;
-    if (!vari){
-       this.symbooli = "\2659";
-    } else {
-      this.symbooli = "\265F";
-    }
+}
+
+  public String getSymbooli(){
+	  if (!this.annaVari()){
+		 return "\u2659";
+	  } else {
+		return "\u265F";
+	  }
   }
 
   public boolean annaVari(){

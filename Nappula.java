@@ -1,6 +1,7 @@
 import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Color;
 
 abstract class Nappula{
   private static int id = -1;                                     //kuinka monta nappulaa on luotu
@@ -46,6 +47,7 @@ abstract class Nappula{
     Dimension koko;
 	JLabel label = new JLabel(n.getSymbooli());
     n.asetaGUI(label);
+	label.setForeground(Color.black);
     n.getIkoni().setFont(new Font(label.getFont().getName(), 1, 100));
     koko = n.getIkoni().getPreferredSize();
     n.getIkoni().setBounds(100, 100, koko.width, koko.height);

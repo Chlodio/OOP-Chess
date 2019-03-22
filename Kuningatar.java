@@ -5,11 +5,14 @@ public class Kuningatar extends Nappula{
     this.arvo = 9;
     this.liikkunut = liikkunut;
     this.elossa = true;
-    if (!vari){
-       this.symbooli = "\2655";
-    } else {
-      this.symbooli = "\265B";
-    }
+  }
+
+  public String getSymbooli(){
+	  if (!this.annaVari()){
+		 return "\u2655";
+	  } else {
+		return "\u265B";
+	  }
   }
 
   public boolean annaVari(){

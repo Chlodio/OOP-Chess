@@ -5,11 +5,14 @@ public class Lahetti extends Nappula{
     this.arvo = 3;
     this.liikkunut = liikkunut;
     this.elossa = true;
-    if (!vari){
-       this.symbooli = "\2657";
-    } else {
-      this.symbooli = "\265D";
-    }
+  }
+
+  public String getSymbooli(){
+	  if (!this.annaVari()){
+		 return "\u2657";
+	  } else {
+		return "\u265D";
+	  }
   }
 
   public boolean annaVari(){

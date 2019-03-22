@@ -5,11 +5,14 @@ public class Kuningas extends Nappula{
     this.arvo = 10;
     this.liikkunut = liikkunut;
     this.elossa = true;
-    if (!vari){
-       this.symbooli = "\u2654";
-    } else {
-      this.symbooli = "\u265A";
-    }
+  }
+
+  public String getSymbooli(){
+	  if (!this.annaVari()){
+		 return "\u2654";
+	  } else {
+		return "\u265A";
+	  }
   }
 
   public boolean annaVari(){

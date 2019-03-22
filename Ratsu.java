@@ -5,11 +5,14 @@ public class Ratsu extends Nappula{
     this.arvo = 3;
     this.liikkunut = false;
     this.elossa = true;
-    if (!vari){
-       this.symbooli = "\2658";
-    } else {
-      this.symbooli = "\265E";
-    }
+  }
+
+  public String getSymbooli(){
+	  if (!this.annaVari()){
+		 return "\u2658";
+	  } else {
+		return "\u265E";
+	  }
   }
 
   public boolean annaVari(){
