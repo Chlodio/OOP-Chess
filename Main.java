@@ -18,5 +18,16 @@ class Main{
 				Pelilauta.createGUI();
 			}
 		});
+		Peli peli = new Peli();
+		if (peli.tallennettuToimivaPeli()){
+			if (/*selection == tallennettuPeli*/){
+				peli.lataaPeliAsetuksilla();
+			}
+		}
+		else {
+			peli.asetaPeliasetuksilla();
+		}
+		peli.pelaa();
+		java.lang.System.exit(0)
 	}
 }
