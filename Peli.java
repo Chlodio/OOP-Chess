@@ -23,8 +23,8 @@ class Peli {
 		return SLauta;
 	}
 
-	public boolean tallennettuToimivaPeli(String tiedostonNimi) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader("tallennus.txt"));
+	public boolean tallennettuToimivaPeli() throws IOException{
+		BufferedReader br = new BufferedReader(new FileReader("tallennettuPeli.txt"));
 		String[] rivit = new String[19];
 		try {
 			String rivi = br.readLine();
@@ -128,10 +128,10 @@ class Peli {
 	}
 
 
-	public void lataaPeliAsetuksilla(){
+	public void lataaPeliAsetuksilla() throws IOException{
 		Pelilauta pelilauta = new Pelilauta();
 		this.pelilauta = pelilauta;
-		BufferedReader br = new BufferedReader(new FileReader("tallennus.txt"));
+		BufferedReader br = new BufferedReader(new FileReader("tallennettuPeli.txt"));
 		String[] rivit = new String[19];
 		String rivi = br.readLine();
 		int indeksi = 0;
