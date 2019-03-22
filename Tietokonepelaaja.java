@@ -14,7 +14,7 @@ class Tietokonepelaaja extends Pelaaja {
 		int parhaanNappulanLahtopaikkaNo;
 		int parhaanNappulanLahtopaikkaAbc;
 		int parhaanNappulanSijoituspaikkaNo;
-		int parhaanNappulanSijoituspaikka;
+		int parhaanNappulanSijoituspaikkaAbc;
 		int[][] omanVarinNappulat = new int[8][8];
 		int[][] vastustajanNappulat = new int[8][8];
 		for(int i = 0; i < 7; i++){
