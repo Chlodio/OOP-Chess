@@ -2,9 +2,9 @@ abstract class Pelaaja {
 	
 	public Pelaaja(){}
 	
-	public String annaNimi();
+	abstract String annaNimi();
 	
-	public void liikuttaa();
+	abstract void liikuttaa();
 
 	
 }
