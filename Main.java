@@ -19,7 +19,7 @@ class Main{
 			}
 		});
 		Peli peli = new Peli();
-		if (peli.tallennettuToimivaPeli("tallennettuPeli.txt")){
+		if (peli.tallennettuToimivaPeli()){
 			if (/*selection == tallennettuPeli*/){
 				peli.lataaPeliAsetuksilla();
 			}
