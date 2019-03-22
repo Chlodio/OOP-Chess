@@ -204,7 +204,7 @@ class Peli {
 			for (int j = 0; j < 7; j++){
 				Nappula nappula = this.pelilauta.annaNappula(i, j);
 				if (nappula != null && nappula.annaVari() == this.pelaajanVuoro){
-					int[][] nappulanSiirrot = this.pelilauta.annaNappula(i, j).siirrot();
+					int[][] nappulanSiirrot = this.pelilauta.annaNappula(i, j).siirrot(this.pelilauta);
 					int[][] nappulanOikeatSiirrot = this.pelilauta.testaaSiirrot(nappulanSiirrot, nappula);
 					for (int k = 0; k < 7; k++){
 						for (int l = 0; l < 7; l++){
