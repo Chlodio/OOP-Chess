@@ -157,22 +157,22 @@ class Peli {
 			String[] tiedot = rivit[i].split(",");
 			ArrayList<Nappula> nappulat = new ArrayList<Nappula>();
 			if (tiedot[2] == "sotilas"){
-				pelilauta.asetaNappula(new Sotilas(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4]), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1])));
+				pelilauta.asetaNappula(new Sotilas(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
 			}
 			if (tiedot[2] == "torni"){
-				pelilauta.asetaNappula(new Torni(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4]), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1])));
+				pelilauta.asetaNappula(new Torni(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
 			}
 			if (tiedot[2] == "hevonen"){
-				pelilauta.asetaNappula(new Ratsu(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4]), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1])));
+				pelilauta.asetaNappula(new Ratsu(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
 			}
 			if (tiedot[2] == "lahetti"){
-				pelilauta.asetaNappula(new Lahetti(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4]), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1])));
+				pelilauta.asetaNappula(new Lahetti(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
 			}
 			if (tiedot[2] == "kuningatar"){
-				pelilauta.asetaNappula(new Kuningatar(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4]), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1])));
+				pelilauta.asetaNappula(new Kuningatar(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
 			}
 			if (tiedot[2] == "kuningas"){
-				pelilauta.asetaNappula(new Kuningas(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4]), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1])));
+				pelilauta.asetaNappula(new Kuningas(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
 			}
 		}
 	}
@@ -181,7 +181,7 @@ class Peli {
 
 	public void tallennaPeli(){
 		PrintWriter out = new PrintWriter("tallennettuPeli.txt");
-    		out.println(this.pelaajanVuoro);
+    out.println(this.pelaajanVuoro);
 		out.println(pelilauta.annaShakki());
 		out.println(this.pelaaja2.annaNimi());
 		for (int i = 0; i < 7; i++){
@@ -203,7 +203,7 @@ class Peli {
 			for (int j = 0; j < 7; j++){
 				Nappula nappula = this.pelilauta.annaNappula(i, j);
 				if (nappula != null && nappula.annaVari() == this.pelaajanVuoro){
-					int[][] nappulanSiirrot = this.pelilauta[i][j].siirrot();
+					int[][] nappulanSiirrot = this.pelilauta.annaNappula(i, j).siirrot();
 					int[][] nappulanOikeatSiirrot = this.pelilauta.testaaSiirrot(nappulanSiirrot, nappula);
 					for (int k = 0; k < 7; k++){
 						for (int l = 0; l < 7; l++){
