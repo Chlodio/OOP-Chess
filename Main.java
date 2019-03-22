@@ -19,13 +19,13 @@ class Main{
 			}
 		});
 		Peli peli = new Peli();
-		if (peli.tallennettuToimivaPeli()){
+		if (peli.tallennettuToimivaPeli("tallennettuPeli.txt")){
 			if (/*selection == tallennettuPeli*/){
 				peli.lataaPeliAsetuksilla();
 			}
 		}
 		else {
-			peli.asetaPeliasetuksilla();
+			peli.asetaPeliAsetuksilla();
 		}
 		peli.pelaa();
 		java.lang.System.exit(0)
