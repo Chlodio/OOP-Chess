@@ -1,4 +1,4 @@
-class Ihmispelaaja extends Pelaaja {
+class Ihmispelaaja implements Pelaaja {
 
 	private static int[][] omanVarNap;
 	private static Pelilauta TLauta;
