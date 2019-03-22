@@ -1,10 +1,8 @@
-abstract class Pelaaja {
+public interface Pelaaja {
 	
-	public Pelaaja(){}
+	public String annaNimi();
 	
-	abstract String annaNimi();
-	
-	abstract void liikuttaa();
+	public void liikuttaa(Pelilauta pelilauta);
 
 	
 }
