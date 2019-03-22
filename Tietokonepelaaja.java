@@ -1,7 +1,7 @@
 import java.util.concurrent.ThreadLocalRandom;
 class Tietokonepelaaja extends Pelaaja {
 
-	public Ihmispelaaja(){}
+	public Tietokonepelaaja(){}
 
 	public String annaNimi(){
 		return "tietokonepelaaja";
@@ -9,8 +9,12 @@ class Tietokonepelaaja extends Pelaaja {
 
 
 	public void liikuttaa(Pelilauta pelilauta){
-		int parhaaanNappulanArvo = 10;
+		int parhaanNappulanArvo = 11;
 		int parhaanSyodynNappulanArvo = 0;
+		int parhaanNappulanLahtopaikkaNo;
+		int parhaanNappulanLahtopaikkaAbc;
+		int parhaanNappulanSijoituspaikkaNo;
+		int parhaanNappulanSijoituspaikka;
 		int[][] omanVarinNappulat = new int[8][8];
 		int[][] vastustajanNappulat = new int[8][8];
 		for(int i = 0; i < 7; i++){
@@ -34,19 +38,19 @@ class Tietokonepelaaja extends Pelaaja {
 					int[][] sallitutSiirrot = pelilauta.testaaSiirrot(siirrot, pelilauta.annaNappula(i, j));
 					for (int k = 0; k < 7; k++){
 						for (int l = 0; l < 7; l++){
-							if (sallitutSiirrot[k][l] > 0 && vastustajanNappulat[k][l] > 0 && pelilauta.annaNappula(i, j).annaArvo() < parhaanNappulanArvo && !pelilauta.itsemurha(pelilauta.annaNappula(i, j)), k, l){
-								int parhaanNappulanLahtopaikkaNo = i;
-								int parhaanNappulanLahtopaikkaAbc = j;
-								int parhaanNappulanSijoituspaikkaNo = k;
-								int parhaanNappulanSijoituspaikka = l;
+							if (sallitutSiirrot[k][l] > 0 && vastustajanNappulat[k][l] > 0 && pelilauta.annaNappula(i, j).annaArvo() < parhaanNappulanArvo && !pelilauta.itsemurha(pelilauta.annaNappula(i, j), k, l)){
+								parhaanNappulanLahtopaikkaNo = i;
+								parhaanNappulanLahtopaikkaAbc = j;
+								parhaanNappulanSijoituspaikkaNo = k;
+								parhaanNappulanSijoituspaikka = l;
 								parhaanNappulanArvo = pelilauta.annaNappula(i, j).annaArvo();
 								parhaanSyodynNappulanArvo = pelilauta.annaNappula(k, l).annaArvo();
 							}
-							else if (sallitutSiirrot[k][l] > 0 && vastustajanNappulat[k][l] > 0 && pelilauta.annaNappula(i, j).annaArvo() == parhaanNappulanArvo && pelilauta.annaNappula(k, l).annaArvo() > parhaanSyodynNappulanArvo && !pelilauta.itsemurha(pelilauta.annaNappula(i, j)), k, l){
-								int parhaanNappulanLahtopaikkaNo = i;
-								int parhaanNappulanLahtopaikkaAbc = j;
-								int parhaanNappulanSijoituspaikkaNo = k;
-								int parhaanNappulanSijoituspaikka = l;
+							else if (sallitutSiirrot[k][l] > 0 && vastustajanNappulat[k][l] > 0 && pelilauta.annaNappula(i, j).annaArvo() == parhaanNappulanArvo && pelilauta.annaNappula(k, l).annaArvo() > parhaanSyodynNappulanArvo && !pelilauta.itsemurha(pelilauta.annaNappula(i, j), k, l)){
+								parhaanNappulanLahtopaikkaNo = i;
+								parhaanNappulanLahtopaikkaAbc = j;
+								parhaanNappulanSijoituspaikkaNo = k;
+								parhaanNappulanSijoituspaikka = l;
 								parhaanNappulanArvo = pelilauta.annaNappula(i, j).annaArvo();
 								parhaanSyodynNappulanArvo = pelilauta.annaNappula(k, l).annaArvo();
 							}
@@ -55,7 +59,7 @@ class Tietokonepelaaja extends Pelaaja {
 				}
 			}
 		}
-		if (parhaanNappulanArvo < 10){
+		if (parhaanNappulanArvo < 11){
 			pelilauta.liiku(pelilauta.annaNappula(parhaanNappulanLahtopaikkaNo, parhaanNappulanLahtopaikkaAbc), parhaanNappulanSijoituspaikkaNo, parhaanNappulanSijoituspaikkaAbc);
 		}
 		else {
