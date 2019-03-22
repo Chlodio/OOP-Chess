@@ -43,7 +43,7 @@ class Ihmispelaaja extends Pelaaja {
 			setOmanVarNap(omanVarinNappulat);
 			for(int i = 0; i < 7; i++){
 				for(int j = 0; i < 7; j++){
-					if (pelilauta.annaNappula(i,  j) != null && pelilauta.annaNappula(i, j).annaVari() == onValkoinen){
+					if (pelilauta.annaNappula(i,  j) != null && pelilauta.annaNappula(i, j).annaVari()){
 						omanVarinNappulat[i][j] = 1;
 					}
 				}
