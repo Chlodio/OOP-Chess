@@ -189,7 +189,8 @@ class Peli {
 				Nappula nappula = this.pelilauta.annaNappula(i, j);
 				if (nappula != null){
 					/*JUHA: muokkasin nappula.annaLiikkunut.*/
-					out.println(i, ",", j, ",", nappula.annaNimi(), ",", nappula.annaVari(), ",", nappula.annaLiikkunut());
+      					String s = Integer.toString(i) + ","+ Integer.toString(j)+ ","+ nappula.annaNimi()+ ","+ Boolean.toString(nappula.annaVari())+ ","+ Boolean.toString(nappula.annaLiikkunut());
+    					out.println(s);
 				}
 			}
 		}
