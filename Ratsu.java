@@ -1,46 +1,46 @@
 public class Ratsu extends Nappula{
-    
+
   public Ratsu(boolean vari, boolean liikkunut){
     this.vari = vari;
     this.arvo = 3;
     this.liikkunut = false;
     this.elossa = true;
-    if (!vari){ 
-       this.symbooli = "♘";
+    if (!vari){
+       this.symbooli = "\2658";
     } else {
-      this.symbooli = "♞";
+      this.symbooli = "\265E";
     }
   }
-  
+
   public boolean annaVari(){
     return this.vari;
   }
-    
+
   public String annaNimi(){
 	  return "ratsu";
   }
-	
-  
+
+
   public void asetaElossa(boolean elossa){
     this.elossa = elossa;
   }
-  
+
   public boolean annaElossa(){
     return this.elossa;
   }
-  
+
   public int annaArvo(){
     return this.arvo;
   }
-  
+
   public void asetaLiikkunut(){
     this.liikkunut = true;
   }
-  
+
   public boolean annaLiikkunut(){
     return this.liikkunut;
   }
-  
+
   public int[][] siirrot(Pelilauta lauta){
     int sNo = lauta.annaSijaintiNo(this);
     int sAbc = lauta.annaSijaintiAbc(this);
@@ -56,22 +56,22 @@ public class Ratsu extends Nappula{
     }
     if (sNo > 1 &&  sAbc < 7){
       siirrot[sNo-2][sAbc+1] =1;
-    }    
+    }
     if (sNo > 1 && sAbc > 0){
       siirrot[sNo-2][sAbc-1]=1;
     }
     if (sNo > 0 &&  sAbc > 1){
       siirrot[sNo-1][sAbc-2] =1;
-    }    
+    }
     if (sNo < 7 && sAbc > 1){
       siirrot[sNo+1][sAbc-2]=1;
     }
     if (sNo < 6 &&  sAbc > 0){
       siirrot[sNo+2][sAbc-1] =1;
-    }    
+    }
     return siirrot;
   }
   public void muutu(Pelilauta lauta){
   }
-  
+
 }

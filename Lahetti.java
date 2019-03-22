@@ -1,45 +1,45 @@
 public class Lahetti extends Nappula{
-    
+
   public Lahetti(boolean vari, boolean liikkunut){
     this.vari = vari;
     this.arvo = 3;
     this.liikkunut = liikkunut;
     this.elossa = true;
-    if (!vari){ 
-       this.symbooli = "♗";
+    if (!vari){
+       this.symbooli = "\2657";
     } else {
-      this.symbooli = "♝";
-    } 
+      this.symbooli = "\265D";
+    }
   }
-  
+
   public boolean annaVari(){
     return this.vari;
   }
   public String annaNimi(){
 		return "lahetti";
 	}
-	
-  
+
+
   public void asetaElossa(boolean elossa){
     this.elossa = elossa;
   }
-  
+
   public boolean annaElossa(){
     return this.elossa;
   }
-  
+
   public int annaArvo(){
     return this.arvo;
   }
-  
+
   public void asetaLiikkunut(){
     this.liikkunut = true;
   }
-  
+
   public boolean annaLiikkunut(){
     return this.liikkunut;
   }
-  
+
   public int[][] siirrot(Pelilauta lauta){
     int sNo = lauta.annaSijaintiNo(this);
     int sAbc = lauta.annaSijaintiAbc(this);
@@ -74,8 +74,8 @@ public class Lahetti extends Nappula{
     }
     return siirrot;
   }
-  
+
   public void muutu(Pelilauta lauta){
   }
-  
+
 }

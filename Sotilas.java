@@ -6,9 +6,9 @@ class Sotilas extends Nappula{
     this.liikkunut = liikkunut;
     this.elossa = true;
     if (!vari){
-       this.symbooli = "♙";
+       this.symbooli = "\2659";
     } else {
-      this.symbooli = "♟";
+      this.symbooli = "\265F";
     }
   }
 

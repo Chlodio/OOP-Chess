@@ -1,46 +1,46 @@
 public class Kuningatar extends Nappula{
-    
+
   public Kuningatar(boolean vari, boolean liikkunut){
     this.vari = vari;
     this.arvo = 9;
     this.liikkunut = liikkunut;
     this.elossa = true;
-    if (!vari){ 
-       this.symbooli = "♕";
+    if (!vari){
+       this.symbooli = "\2655";
     } else {
-      this.symbooli = "♛";
-    } 
+      this.symbooli = "\265B";
+    }
   }
-  
+
   public boolean annaVari(){
     return this.vari;
   }
-  
+
   public String annaNimi(){
 		return "kuningatar";
 	}
-	
-  
+
+
   public void asetaElossa(boolean elossa){
     this.elossa = elossa;
   }
-  
+
   public boolean annaElossa(){
     return this.elossa;
   }
-  
+
   public int annaArvo(){
     return this.arvo;
   }
-  
+
   public void asetaLiikkunut(){
     this.liikkunut = true;
   }
-  
+
   public boolean annaLiikkunut(){
     return this.liikkunut;
   }
-  
+
   public int[][] siirrot(Pelilauta lauta){
     int sNo = lauta.annaSijaintiNo(this);
     int sAbc = lauta.annaSijaintiAbc(this);
@@ -93,7 +93,7 @@ public class Kuningatar extends Nappula{
       siirrot[eka+1][toka-1]=1;
       eka++;
       toka--;
-    }    
+    }
     return siirrot;
   }
     public void muutu(Pelilauta lauta){
