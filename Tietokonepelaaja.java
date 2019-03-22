@@ -1,5 +1,5 @@
 import java.util.concurrent.ThreadLocalRandom;
-class Tietokonepelaaja extends Pelaaja {
+class Tietokonepelaaja implements Pelaaja {
 
 	public Tietokonepelaaja(){}
 
