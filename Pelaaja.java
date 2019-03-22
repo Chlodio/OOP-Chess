@@ -1,12 +1,10 @@
-class Pelaaja {
+abstract class Pelaaja {
 	
 	public Pelaaja(){}
 	
-	public String annaNimi(){
-		return "pelaaja"
-	}
+	public String annaNimi();
 	
-	public void Liikuttaa;
+	public void liikuttaa();
 
 	
 }
