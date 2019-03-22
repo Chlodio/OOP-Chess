@@ -61,4 +61,5 @@ abstract class Nappula{
   abstract boolean annaLiikkunut();
   abstract int[][] siirrot(Pelilauta lauta);
   abstract void muutu(Pelilauta lauta);
+	abstract String annaNimi();
 }
