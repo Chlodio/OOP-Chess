@@ -11,10 +11,10 @@ class Tietokonepelaaja implements Pelaaja {
 	public void liikuttaa(Pelilauta pelilauta){
 		int parhaanNappulanArvo = 11;
 		int parhaanSyodynNappulanArvo = 0;
-		int parhaanNappulanLahtopaikkaNo;
-		int parhaanNappulanLahtopaikkaAbc;
-		int parhaanNappulanSijoituspaikkaNo;
-		int parhaanNappulanSijoituspaikkaAbc;
+		int parhaanNappulanLahtopaikkaNo = 0;
+		int parhaanNappulanLahtopaikkaAbc = 0;
+		int parhaanNappulanSijoituspaikkaNo = 0;
+		int parhaanNappulanSijoituspaikkaAbc = 0;
 		int[][] omanVarinNappulat = new int[8][8];
 		int[][] vastustajanNappulat = new int[8][8];
 		for(int i = 0; i < 7; i++){
