@@ -6,6 +6,7 @@ class Pelaaja {
 		return "pelaaja"
 	}
 	
+	public void Liikuttaa;
 
 	
 }
