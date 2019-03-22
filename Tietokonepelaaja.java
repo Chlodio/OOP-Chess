@@ -50,7 +50,7 @@ class Tietokonepelaaja extends Pelaaja {
 								parhaanNappulanLahtopaikkaNo = i;
 								parhaanNappulanLahtopaikkaAbc = j;
 								parhaanNappulanSijoituspaikkaNo = k;
-								parhaanNappulanSijoituspaikka = l;
+								parhaanNappulanSijoituspaikkaAbc = l;
 								parhaanNappulanArvo = pelilauta.annaNappula(i, j).annaArvo();
 								parhaanSyodynNappulanArvo = pelilauta.annaNappula(k, l).annaArvo();
 							}
