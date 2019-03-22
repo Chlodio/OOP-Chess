@@ -182,7 +182,7 @@ class Pelilauta{
       nappula.muutu(this);
     }
     /* testataan onko siirto linnoitus ja toteutetaan jos on*/
-    
+
     if (nappula instanceof Kuningas && Math.abs(vanhaAbc - sijaintiAbc)>1){
       if(sijaintiNo == 0 && sijaintiAbc == 2){
         lauta[0][3] = lauta[0][0];
@@ -377,7 +377,7 @@ class Pelilauta{
       }
    }
     /* testataan onko linnoitus mahdollista ja merkitään siirrot kuninkaalle*/
-   
+
    if(nappula instanceof Kuningas){
      if(linnoitusMahdollista(nappula, annaNappula(0,0))){
        sallitutSiirrot[0][1]=3;
@@ -559,7 +559,6 @@ class Pelilauta{
 					ruutuValikko.get(id).setContentAreaFilled(false);
 			    	mp.add(ruutuValikko.get(id));
 					ruutuValikko.get(id).addActionListener(valitseR);
-					System.out.println(xc+" "+yc);
 					xc += 100;
 				}
 			}

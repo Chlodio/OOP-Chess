@@ -20,12 +20,12 @@ public class MainPanel extends JPanel{
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		
+
 		/*Rakentaa valkoisen taustan GUI:ille;
 		vaikka ilmanan tätäkin pärjää, swing haluaa ohjeet miltä laudan pitäisi näyttää*/
 		g.setColor(Color.white);
 		g.fillRect(0, 0, 1600, 900);
-		
+
 		/*Rakentaa shakki ruudut*/
 		String[] boardColors = {"#990033", "#BFC1C2", "#990033"};
 		int xc; int yc;
@@ -45,7 +45,7 @@ public class MainPanel extends JPanel{
 			if (squareColor){ 						squareColor = false;}
 			else { 									squareColor = true; }
 		}
-		
+
 		/*Luo laatikon syödyille nappuloille*/
 		g.setColor(Color.decode("#000000"));
 		g.drawRect(924, 409, 651, 201);
@@ -53,7 +53,7 @@ public class MainPanel extends JPanel{
 	    	g.fillRect(925, 410, 650, 200);
 	}
 
-	public void add(JLabel l){
+	public void addInto(JLabel l){
 		this.add(l);
 	}
 }

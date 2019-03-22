@@ -17,7 +17,8 @@ abstract class Nappula{
   /*konstrukti*/
   public Nappula(){
       id++;
-      lista[id] = this;
+///      lista[id] = this;
+	  Nappula.luoNappulaGui(this);
   }
 
   /*Linkitetään nappula sen graafiseen esitykseen*/
@@ -41,16 +42,15 @@ abstract class Nappula{
     valittu = n;
   }
 
-  public static void luoNappulaGui(){
+  public static void luoNappulaGui(Nappula n){
     Dimension koko;
-    for(Nappula x: lista){
-		JLabel label = new JLabel(x.getSymbooli());
-        x.asetaGUI(label);
-        x.getIkoni().setFont(new Font(label.getFont().getName(), 1, 100));
-        koko = x.getIkoni().getPreferredSize();
-        x.getIkoni().setBounds(100, 100, koko.width, koko.height);
-        Pelilauta.getMainPanel().add(x.getIkoni());
-    }
+	JLabel label = new JLabel(n.getSymbooli());
+    n.asetaGUI(label);
+    n.getIkoni().setFont(new Font(label.getFont().getName(), 1, 100));
+    koko = n.getIkoni().getPreferredSize();
+    n.getIkoni().setBounds(100, 100, koko.width, koko.height);
+    Pelilauta.getMainPanel().addInto(n.getIkoni());
+
   }
 
   abstract boolean annaVari();
