@@ -42,6 +42,7 @@ class Main{
    peli.asetaPeliAsetuksilla();
   }
   peli.pelaa();
+
   //java.lang.System.exit(0);		//tarvitaanko me sulkeutumista, jos GUI hallitsee sitä?
  }
 

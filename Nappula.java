@@ -2,11 +2,14 @@ import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Color;
+import java.util.ArrayList;
 
 abstract class Nappula{
   private static int id = -1;                                     //kuinka monta nappulaa on luotu
   protected static Nappula[] lista = new Nappula[17];             //Array nappuloista
   protected static Nappula valittu;
+  protected static ArrayList<Nappula> valSuodut = new ArrayList<>();
+  protected static ArrayList<Nappula> musSuodut = new ArrayList<>();
 
   protected boolean vari;
   protected boolean elossa;
@@ -23,6 +26,22 @@ abstract class Nappula{
 ///      lista[id] = this;
 	//  Nappula.luoNappulaGui(this);
   }
+	public void poistaLaudalta(){
+		if(!this.annaVari()){
+			this.getIkoni().setLocation(
+				920+(38*valSuodut.size()),
+				500
+			);
+			valSuodut.add(this);
+		}
+		else{
+			this.getIkoni().setLocation(
+				920+(38*musSuodut.size()),
+				400
+			);
+			musSuodut.add(this);
+		}
+	}
 
   /*Linkitetään nappula sen graafiseen esitykseen*/
   public void asetaGUI(JLabel label){

@@ -32,6 +32,9 @@ public class Torni extends Nappula{
 
   public void asetaElossa(boolean elossa){
     this.elossa = elossa;
+	if (!elossa){
+		this.poistaLaudalta();
+	}
   }
 
   public boolean annaElossa(){

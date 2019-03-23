@@ -120,10 +120,10 @@ public class Peli {
   pelilauta.asetaNappula(new Ratsu(true, false), 0, 5);
   pelilauta.asetaNappula(new Ratsu(false, false), 7, 2);
   pelilauta.asetaNappula(new Ratsu(false, false), 7, 5);
-  pelilauta.asetaNappula(new Kuningas(true, false), 0, 3);
-  pelilauta.asetaNappula(new Kuningas(false, false), 7, 3);
-  pelilauta.asetaNappula(new Kuningatar(true, false), 0, 4);
-  pelilauta.asetaNappula(new Kuningatar(false, false), 7, 4);
+  pelilauta.asetaNappula(new Kuningas(true, false), 0, 4);
+  pelilauta.asetaNappula(new Kuningas(false, false), 7, 4);
+  pelilauta.asetaNappula(new Kuningatar(true, false), 0, 3);
+  pelilauta.asetaNappula(new Kuningatar(false, false), 7, 3);
   this.pelaajanVuoro = true;
   this.pelaaja1 = new Ihmispelaaja();
  }
