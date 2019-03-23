@@ -1,7 +1,7 @@
 /*Pitää huolta että kaikki tehdää järjestyksessä*/
 
 public class Tuomari{
-	private static int vaihe = 0;
+	private static int vaihe = -1;
 	//-1 	= nappuloihin ei saa koskea
 	//0 	= mahdollisuus valita nappula
 	//1 	= ruudun valinta

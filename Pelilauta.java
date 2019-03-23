@@ -503,16 +503,17 @@ class Pelilauta{
 
 	/*aloittaaa GUIN:n rakentamisen*/
 	public static void createGUI(){
-		JFrame frame = new JFrame();
-		frame.setSize(1600, 900);
+		JFrame frame = new JFrame("Shakki");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container panel = frame.getContentPane();
 		frame.setResizable(false);
 		frame.add(mainPanel);
-		frame.pack();
 		mainPanel.setLayout(null);
-		JButton exitButton = new JButton("X");															//sulkemis nappi
+		frame.setSize(1600, 900);
 
+
+
+		JButton exitButton = new JButton("X");
 		ActionListener acLi = new ActionListener() {
 		    @Override
 			public void actionPerformed(ActionEvent e) {
@@ -524,6 +525,7 @@ class Pelilauta{
 	  	exitButton.setBounds(25,25,45,40);
     	mainPanel.add(exitButton);
 		buildSelectors(mainPanel);
+		frame.pack();
 		frame.setVisible(true);
 	}
 
@@ -537,13 +539,13 @@ class Pelilauta{
 				 Ruutu r = ((Ruutu) e.getSource());
 				 if (Tuomari.onkoVaihe(0)){
 					Nappula.setValittu(
-					 	Peli.getSLauta().annaNappula(r.getX(), r.getY())
+					 	Peli.getSLauta().annaNappula(r.haeX(), r.haeY())
 					);
 					Tuomari.asetaVaihe(1);
 					Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
 				}
 				else if (Tuomari.onkoVaihe(1)){
-					r.select();
+					r.valikoi();
 					Tuomari.asetaVaihe(2);
 					Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
 				}
@@ -554,11 +556,13 @@ class Pelilauta{
 			for(int z = 0; z < 4; z++){
 				for(int y = 0; y < 2; y++){
 					id++;
-					ruutuValikko.put(id, new JButton());
+					ruutuValikko.put(id, new Ruutu(id));
+					ruutuValikko.get(id).addActionListener(valitseR);
 					ruutuValikko.get(id).setBounds(xc,yc,100,100);
+					ruutuValikko.get(id).setBackground(Color.decode("#800080"));
 					ruutuValikko.get(id).setContentAreaFilled(false);
 			    	mp.add(ruutuValikko.get(id));
-					ruutuValikko.get(id).addActionListener(valitseR);
+
 					xc += 100;
 				}
 			}

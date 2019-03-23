@@ -2,6 +2,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.BorderFactory;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,8 +10,6 @@ import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 
 public class MainPanel extends JPanel{
 
@@ -19,7 +18,7 @@ public class MainPanel extends JPanel{
 	public Dimension getPreferredSize(){ return new Dimension(1600, 900); }
 
 	public void paintComponent(Graphics g){
-		super.paintComponent(g);
+
 
 		/*Rakentaa valkoisen taustan GUI:ille;
 		vaikka ilmanan tätäkin pärjää, swing haluaa ohjeet miltä laudan pitäisi näyttää*/

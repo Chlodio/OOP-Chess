@@ -15,15 +15,15 @@ public class Ruutu extends JButton{
 	}
 
 
-	public int getX(){
+	public int haeX(){
 		return this.id%8;
 	}
 
-	public int getY(){
+	public int haeY(){
 		return this.id/8;
 	}
 
-	public void select(){
+	public void valikoi(){
 		valittu = this;
 	}
 
