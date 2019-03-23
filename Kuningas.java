@@ -1,6 +1,7 @@
 public class Kuningas extends Nappula{
 
   public Kuningas(boolean vari, boolean liikkunut){
+	super(vari);
     this.vari = vari;
     this.arvo = 10;
     this.liikkunut = liikkunut;

@@ -1,6 +1,7 @@
 public class Ratsu extends Nappula{
 
   public Ratsu(boolean vari, boolean liikkunut){
+	super(vari);
     this.vari = vari;
     this.arvo = 3;
     this.liikkunut = false;

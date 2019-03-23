@@ -16,10 +16,12 @@ abstract class Nappula{
   protected JLabel ikoni;
 
   /*konstrukti*/
-  public Nappula(){
+  public Nappula(boolean b){
       id++;
-///      lista[id] = this;
+	  this.vari = b;
 	  Nappula.luoNappulaGui(this);
+///      lista[id] = this;
+	//  Nappula.luoNappulaGui(this);
   }
 
   /*Linkitetään nappula sen graafiseen esitykseen*/

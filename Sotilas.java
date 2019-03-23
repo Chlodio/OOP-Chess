@@ -1,6 +1,7 @@
 class Sotilas extends Nappula{
 
   public Sotilas(boolean vari, boolean liikkunut){
+	super(vari);
     this.vari = vari;
     this.arvo = 1;
     this.liikkunut = liikkunut;

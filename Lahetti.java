@@ -1,6 +1,7 @@
 public class Lahetti extends Nappula{
 
   public Lahetti(boolean vari, boolean liikkunut){
+	super(vari);
     this.vari = vari;
     this.arvo = 3;
     this.liikkunut = liikkunut;
@@ -8,6 +9,7 @@ public class Lahetti extends Nappula{
   }
 
   public String getSymbooli(){
+	  System.out.println(this.annaVari());
 	  if (!this.annaVari()){
 		 return "\u2657";
 	  } else {
