@@ -36,7 +36,6 @@ class Ihmispelaaja implements Pelaaja {
 
 
 	public void liikuttaa(Pelilauta pelilauta){
-					System.out.println("Ihmisen vuoro");
 		if (Tuomari.onkoVaihe(0)){
 			setTLauta(pelilauta);
 			setTPelaaja(this);

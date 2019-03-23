@@ -15,6 +15,8 @@ import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /*
    * Huom1: Luokka Pelilauta ei sisällä suunnitelmasta poiketen metodia shakkimatti. Ehdotan, että tämä testataan Peli-
@@ -517,16 +519,50 @@ class Pelilauta{
 
 
 		JButton exitButton = new JButton("X");
-		ActionListener acLi = new ActionListener() {
+		ActionListener sulje = new ActionListener() {
 		    @Override
 			public void actionPerformed(ActionEvent e) {
 		        System.exit(0);
 		    }
 		};
 
-		exitButton.addActionListener(acLi);
+		exitButton.addActionListener(sulje);
 	  	exitButton.setBounds(25,25,45,40);
     	mainPanel.add(exitButton);
+
+		JButton saveButton = new JButton("Tallenna");
+		ActionListener tallenna = new ActionListener() {
+		    @Override
+			public void actionPerformed(ActionEvent e) {
+				try{
+					if (Main.getTPeli() != null){
+						Main.getTPeli().tallennaPeli();
+					}
+				}
+				catch(FileNotFoundException er){}
+		    }
+		};
+
+		saveButton.addActionListener(tallenna);
+	  	saveButton.setBounds(950,25,100,40);
+    	mainPanel.add(saveButton);
+
+		JButton loadButton = new JButton("Lataa");
+		ActionListener lataaPeli = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try{
+					if (Main.getTPeli() != null){
+						Main.getTPeli().lataaPeliAsetuksilla();
+					}
+				}
+				catch(IOException er){}
+			}
+		};
+		loadButton.addActionListener(lataaPeli);
+		loadButton.setBounds(1075,25,100,40);
+		mainPanel.add(loadButton);
+
 		buildSelectors(mainPanel);
 		frame.pack();
 		frame.setVisible(true);

@@ -12,6 +12,7 @@ import java.io.IOException;
 
 
 class Main{
+	private static Peli TPeli;
  public static void main(String[] args){
   SwingUtilities.invokeLater(new Runnable() {
    public void run(){
@@ -19,6 +20,7 @@ class Main{
    }
   });
   Peli peli = new Peli();
+  TPeli = peli;
   boolean tallennettuPeli = false;
   try {
     tallennettuPeli = peli.tallennettuToimivaPeli();
@@ -42,4 +44,9 @@ class Main{
   peli.pelaa();
   //java.lang.System.exit(0);		//tarvitaanko me sulkeutumista, jos GUI hallitsee sitä?
  }
+
+ public static Peli getTPeli(){
+	 return TPeli;
+ }
+
 }

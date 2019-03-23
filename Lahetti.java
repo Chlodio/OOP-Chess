@@ -9,7 +9,6 @@ public class Lahetti extends Nappula{
   }
 
   public String getSymbooli(){
-	  System.out.println(this.annaVari());
 	  if (!this.annaVari()){
 		 return "\u2657";
 	  } else {
