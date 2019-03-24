@@ -76,7 +76,9 @@ abstract class Nappula{
 
   }
 
-  abstract boolean annaVari();
+  public boolean annaVari(){
+     return this.vari;
+  }
   abstract void asetaElossa(boolean elossa);
   abstract boolean annaElossa();
   abstract int annaArvo();
