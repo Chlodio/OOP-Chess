@@ -16,9 +16,7 @@ public class Kuningas extends Nappula{
 	  }
   }
 
-  public boolean annaVari(){
-    return this.vari;
-  }
+
 
   public String annaNimi(){
 		return "tietokonepelaaja";
