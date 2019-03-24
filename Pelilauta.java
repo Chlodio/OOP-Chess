@@ -657,14 +657,17 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 	}
 
 	public static void varitaRuudut(int[][] ruudut){
+		xd = 0;
 		for (int x = 0; x < ruudut.length; x++){
 			for (int y = 0; y < ruudut[x].length; y++){
 				if (ruudut[x][y] == 1){
+					xd++;
 					colorizeRuutu(ruutuValikko.get(x+(y*7)));
 					valitutRuudut.add(ruutuValikko.get(x+(y*7)));
 				}
 			}
 		}
+		System.out.println("Mahdollisten siirtojen lukumäärä:"+" "+Integer.toString(xd));
 	}
 
 	public static void normaalisoiRuudut(){
