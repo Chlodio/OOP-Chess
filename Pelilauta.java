@@ -623,20 +623,36 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 			 public void actionPerformed(ActionEvent e) {
 				 Ruutu r = ((Ruutu) e.getSource());
 				 if (Tuomari.onkoVaihe(0)){
-					Nappula.setValittu(
-					 	Peli.getSLauta().annaNappula(r.haeY(), r.haeX())
-					);
-					System.out.println(r.haeY()+" "+r.haeX());
-					System.out.println(Peli.getSLauta().annaNappula(r.haeY(), r.haeX()).annaNimi());
-					System.out.println("Vari: "+Peli.getSLauta().annaNappula(r.haeY(), r.haeX()).annaVari());
-
-					Tuomari.asetaVaihe(1);
-					Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
+					 Nappula nap = Peli.getSLauta().annaNappula(r.haeY(), r.haeX());
+					 Pelilauta pel = Ihmispelaaja.getTLauta();
+					 r.ekavalikoi();
+				//	 int[][] siirrot = nap.siirrot(pel);
+		 		//	 int[][] sallitutSiirrot = pel.testaaSiirrot(siirrot, nap);
+					 if( nap != null){
+						Nappula.setValittu(nap);
+						Tuomari.asetaVaihe(1);
+						System.out.println(Integer.toString(r.haeY())+" "+Integer.toString(r.haeX()));
+						Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
+					} else{
+						Tuomari.julistaLaittomaksi();
+					}
 				}
 				else if (Tuomari.onkoVaihe(1)){
-					r.valikoi();
-					Tuomari.asetaVaihe(2);
-					Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
+					if (r != Ruutu.haeEkavalittu()){
+						if (r.onkoSallitu()){
+							r.valikoi();
+							Tuomari.asetaVaihe(2);
+							Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
+						} else{
+							Tuomari.julistaLaittomaksi();
+						}
+					} else{
+						/*Nappulan valikointi resetoituu*/
+						System.out.println("Tuomari: Nappulan vaihto.");
+						Ruutu.resetValittu();
+						Pelilauta.normaalisoiRuudut();
+						Tuomari.asetaVaihe(0);
+					}
 				}
 			 }
 		};
@@ -650,7 +666,6 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 					ruutuValikko.get(id).setBackground(Color.decode("#800080"));
 					ruutuValikko.get(id).setContentAreaFilled(false);
 			    	mp.add(ruutuValikko.get(id));
-					System.out.println(Integer.toString(y)+" "+Integer.toString(x));
 					xc += 100;
 				}
 
@@ -668,12 +683,24 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 					xd++;
 					colorizeRuutu(ruutuValikko.get(id));
 					valitutRuudut.add(ruutuValikko.get(id));
+					((Ruutu) ruutuValikko.get(id)).asetaSallitu(true);
 				}
 				id++;
 			}
 		}
 		System.out.println("Mahdollisten siirtojen lukumäärä:"+" "+Integer.toString(xd));
 	}
+
+
+	public static boolean onkoSiirtoja(int[][] ruudut){
+		for (int x = 0; x < ruudut.length; x++){
+			for (int y = 0; y < ruudut[x].length; y++){
+				if (ruudut[x][y] == 1){ return true; }
+			}
+		}
+		return false;
+	}
+
 
 	public static void normaalisoiRuudut(){
 		for(JButton x: valitutRuudut){
@@ -688,6 +715,7 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 
 	public static void normalizeRuutu(JButton b){
 		b.setContentAreaFilled(false);
+		((Ruutu) b).asetaSallitu(false);
 	}
 
 	/*Rakentaa sivu merkit*/

@@ -24,4 +24,8 @@ public class Tuomari{
 		return vaihe == v;
 	}
 
+	public static void julistaLaittomaksi(){
+		System.out.println("Tuomari: Laiton siirto !");
+	}
+
 }

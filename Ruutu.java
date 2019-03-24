@@ -5,14 +5,17 @@ import javax.swing.JButton;
 public class Ruutu extends JButton{
 	private int id;
 	public static Ruutu valittu;
+	public static Ruutu ekaValinta;
 	private int yk;
 	private int xk;
+	private boolean sallittu;
 
 	public Ruutu(int id, int y, int x){
 		super(Integer.toString(y)+" "+Integer.toString(x));
 		this.id = id;
 		this.yk = y;
 		this.xk = x;
+		this.sallittu = false;
 	}
 
 	public int getId(){
@@ -32,6 +35,35 @@ public class Ruutu extends JButton{
 
 	public void valikoi(){
 		valittu = this;
+	}
+
+	public static void resetValittu(){
+		valittu = null;
+	}
+
+	public static Ruutu haeValittu(){
+		return valittu;
+	}
+
+	public void ekavalikoi(){
+		ekaValinta = this;
+	}
+
+	public static void resetEkavalittu(){
+		ekaValinta = null;
+	}
+
+	public static Ruutu haeEkavalittu(){
+		return ekaValinta;
+	}
+
+
+	public void asetaSallitu(boolean s){
+		this.sallittu = s;
+	}
+
+	public boolean onkoSallitu(){
+		return this.sallittu;
 	}
 
 }
