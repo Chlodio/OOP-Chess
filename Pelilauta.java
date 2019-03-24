@@ -657,7 +657,7 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 	}
 
 	public static void varitaRuudut(int[][] ruudut){
-		xd = 0;
+		int xd = 0;
 		for (int x = 0; x < ruudut.length; x++){
 			for (int y = 0; y < ruudut[x].length; y++){
 				if (ruudut[x][y] == 1){
