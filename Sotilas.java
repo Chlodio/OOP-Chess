@@ -49,7 +49,7 @@ class Sotilas extends Nappula{
     int sNo = lauta.annaSijaintiNo(this);
     int sAbc = lauta.annaSijaintiAbc(this);
     int[][] siirrot = new int[8][8];
-    if (sNo < 7){
+    if (sNo < 6){
       siirrot[sNo+1][sAbc]=1;
       if (this.liikkunut == false){
         siirrot[sNo+2][sAbc] = 1;
@@ -62,7 +62,7 @@ class Sotilas extends Nappula{
           }
         }
       }
-      if(sAbc < 7){
+      if(sAbc < 6){
         Nappula n2 = lauta.annaNappula(sNo+1,sAbc+1);
         if (n2 != null){
           if (this.vari != n2.annaVari()){
