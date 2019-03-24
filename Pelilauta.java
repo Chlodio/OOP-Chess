@@ -112,9 +112,12 @@ class Pelilauta{
    */
 
   public boolean linnoitusMahdollista(Nappula kuningas, Nappula torni){
-          /*
+    if( kuningas == null || torni == null){
+    return false;
+    }     
+	  /*
    * tarkastetaan liikkuminen ja shakki-tilanne
-   */
+   */    
     boolean t1 = kuningas.annaLiikkunut();
     boolean t2 = torni.annaLiikkunut();
     boolean t3 = this.annaShakki();
@@ -203,7 +206,7 @@ class Pelilauta{
       }
       if(sijaintiNo == 7 && sijaintiAbc == 6){
         lauta[7][5] = lauta[7][7];
-        lauta[7][5] = null;
+        lauta[7][7] = null;
       }
       }
   }
@@ -411,7 +414,16 @@ class Pelilauta{
          }
        }
    }
-
+	               /*
+   * Poistetaan itsemurhaan johtavat siirrot
+   */
+   for(int x = 0; x<8; x++){
+     for(int y = 0; y<8; y++){
+       if(sallitutSiirrot[x][y] == 1 && this.itsemurha(nappula, x, y)){
+           sallitutSiirrot[x][y] = 0;
+         }
+     }
+   }
 
    return sallitutSiirrot;
   }
@@ -425,7 +437,7 @@ class Pelilauta{
     boolean onkoItsari;
     boolean vari = nappula.annaVari();
     Pelilauta kopioPeli = new Pelilauta(this);  /* kopio pelin */
-    kopioPeli.liiku(nappula, uusiNo, uusiAbc); /* suorittaa siirron kopiopelissä */
+    kopioPeli.liiku(nappula, uusiNo, uusiAbc, true); /* suorittaa siirron kopiopelissä */
     kopioPeli.testaaShakki(vari); /* testaa tuliko vastustajalle shakki */
     onkoItsari = kopioPeli.annaShakki();
     return onkoItsari;
@@ -505,6 +517,36 @@ class Pelilauta{
      }
      return 9;
   }
+	/* metodi itsemurha-metodin testiä varten, ei sivuvaikutuksia*/
+public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopiopeli){
+    
+    int vanhaNo = annaSijaintiNo(nappula);
+    int vanhaAbc = annaSijaintiAbc(nappula);
+    asetaNappula(nappula, sijaintiNo, sijaintiAbc);  /* asettaa nappulan uudelle paikalleen*/
+    lauta[vanhaNo][vanhaAbc]= null; /* poistaa nappulan alkuperäiseltä paikaltaan*/
+    
+    /* testataan onko siirto linnoitus ja toteutetaan jos on*/
+    
+    if (nappula instanceof Kuningas && Math.abs(vanhaAbc - sijaintiAbc)>1){
+      if(sijaintiNo == 0 && sijaintiAbc == 2){
+        lauta[0][3] = lauta[0][0];
+        lauta[0][0] = null;
+      }
+      if(sijaintiNo == 0 && sijaintiAbc == 6){
+        lauta[0][5] = lauta[0][7];
+        lauta[0][7] = null;
+      }
+      if(sijaintiNo == 7 && sijaintiAbc == 2){
+        lauta[7][3] = lauta[7][0];
+        lauta[7][0] = null;
+      }
+      if(sijaintiNo == 7 && sijaintiAbc == 6){
+        lauta[7][5] = lauta[7][7];
+        lauta[7][7] = null;
+      }
+      }
+  }
+	  
 
 	/*aloittaaa GUIN:n rakentamisen*/
 	public static void createGUI(){
