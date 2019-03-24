@@ -16,6 +16,7 @@ public class Tuomari{
 	}
 
 	public static void asetaVaihe(int v){
+		System.out.println("Tuomari: Vaihe "+v+"!");
 		vaihe = v;
 	}
 

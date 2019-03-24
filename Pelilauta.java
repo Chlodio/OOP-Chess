@@ -114,10 +114,10 @@ class Pelilauta{
   public boolean linnoitusMahdollista(Nappula kuningas, Nappula torni){
     if( kuningas == null || torni == null){
     return false;
-    }     
+    }
 	  /*
    * tarkastetaan liikkuminen ja shakki-tilanne
-   */    
+   */
     boolean t1 = kuningas.annaLiikkunut();
     boolean t2 = torni.annaLiikkunut();
     boolean t3 = this.annaShakki();
@@ -528,14 +528,14 @@ class Pelilauta{
   }
 	/* metodi itsemurha-metodin testiä varten, ei sivuvaikutuksia*/
 public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopiopeli){
-    
+
     int vanhaNo = annaSijaintiNo(nappula);
     int vanhaAbc = annaSijaintiAbc(nappula);
     asetaNappula(nappula, sijaintiNo, sijaintiAbc);  /* asettaa nappulan uudelle paikalleen*/
     lauta[vanhaNo][vanhaAbc]= null; /* poistaa nappulan alkuperäiseltä paikaltaan*/
-    
+
     /* testataan onko siirto linnoitus ja toteutetaan jos on*/
-    
+
     if (nappula instanceof Kuningas && Math.abs(vanhaAbc - sijaintiAbc)>1){
       if(sijaintiNo == 0 && sijaintiAbc == 2){
         lauta[0][3] = lauta[0][0];
@@ -555,7 +555,7 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
       }
       }
   }
-	  
+
 
 	/*aloittaaa GUIN:n rakentamisen*/
 	public static void createGUI(){
@@ -629,8 +629,11 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 				 Ruutu r = ((Ruutu) e.getSource());
 				 if (Tuomari.onkoVaihe(0)){
 					Nappula.setValittu(
-					 	Peli.getSLauta().annaNappula(r.haeX(), r.haeY())
+					 	Peli.getSLauta().annaNappula(r.haeY(), r.haeX())
 					);
+					System.out.println(r.haeY()+" "+r.haeX());
+					System.out.println(Peli.getSLauta().annaNappula(r.haeY(), r.haeX()));
+					System.out.println(Ihmispelaaja.getTLauta());
 					Tuomari.asetaVaihe(1);
 					Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
 				}
