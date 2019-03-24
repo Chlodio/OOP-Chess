@@ -255,7 +255,7 @@ class Pelilauta{
    int c = sijaintiAbc;
 
    if(onkoRatsu == false){
-     while (b>0 && b<7 && c>0 && c<7){ /* jatketaan kulkemista kunnes tullaan laudan reunalle */
+     while (b>-1 && b<7 && c>-1 && c<8){ /* jatketaan kulkemista kunnes tullaan laudan reunalle */
        b++; /* ensimmäinen kahdeksasta suunnasta */
        if (sallitutSiirrot[b][c] == 0){
          break; /* suuntaan ei voinut kulkea */
@@ -271,7 +271,7 @@ class Pelilauta{
      b = sijaintiNo;
      c = sijaintiAbc;
 
-     while (b>0 && b<7 && c>0 && c<7){
+     while (b>-1 && b<8 && c>-1 && c<7){
        c++;
        if (sallitutSiirrot[b][c] == 0){
          break;
@@ -286,7 +286,7 @@ class Pelilauta{
      b = sijaintiNo;
      c = sijaintiAbc;
 
-     while (b>0 && b<7 && c>0 && c<7){
+     while (b>0 && b<8 && c>-1 && c<8){
        b--;
        if (sallitutSiirrot[b][c] == 0){
          break;
@@ -300,7 +300,7 @@ class Pelilauta{
        b = sijaintiNo;
        c = sijaintiAbc;
 
-       while (b>0 && b<7 && c>0 && c<7){
+       while (b>-1 && b<8 && c>0 && c<8){
        c--;
        if (sallitutSiirrot[b][c] == 0){
          break;
@@ -315,7 +315,7 @@ class Pelilauta{
        b = sijaintiNo;
        c = sijaintiAbc;
 
-       while (b>0 && b<7 && c>0 && c<7){
+       while (b>0 && b<8 && c>0 && c<8){
        b--;
        c--;
        if (sallitutSiirrot[b][c] == 0){
@@ -331,7 +331,7 @@ class Pelilauta{
        b = sijaintiNo;
        c = sijaintiAbc;
 
-       while (b>0 && b<7 && c>0 && c<7){
+       while (b>-1 && b<7 && c>0 && c<-1){
        b++;
        c++;
        if (sallitutSiirrot[b][c] == 0){
@@ -347,7 +347,7 @@ class Pelilauta{
        b = sijaintiNo;
        c = sijaintiAbc;
 
-       while (b>0 && b<7 && c>0 && c<7){
+       while (b>-1 && b<7 && c>0 && c<8){
        b++;
        c--;
        if (sallitutSiirrot[b][c] == 0){
@@ -363,7 +363,7 @@ class Pelilauta{
        b = sijaintiNo;
        c = sijaintiAbc;
 
-       while (b>0 && b<7 && c>0 && c<7){
+       while (b>0 && b<8 && c>-1 && c<7){
        b--;
        c++;
        if (sallitutSiirrot[b][c] == 0){
