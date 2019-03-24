@@ -457,7 +457,7 @@ class Pelilauta{
     int sNoK =0;
     int sAbcK =0;
     for (int i = 0; i < 8; i++){
-      for (int a = 0; i < 8; a++){
+      for (int a = 0; a < 8; a++){
         if(lauta[i][a] instanceof Kuningas && lauta[i][a].annaVari() == vari){
           sNoK = i;
           sAbcK = a;
@@ -470,7 +470,7 @@ class Pelilauta{
 
     /* käy läpi koko laudan ja kaikki sillä olevat vastustajan nappulat */
     for (int i = 0; i < 8; i++){
-      for (int a = 0; i < 8; a++){
+      for (int a = 0; a < 8; a++){
         if (lauta[i][a] != null){ /* laudalla on nappula*/
           if (vari != lauta[i][a].annaVari()){ /* nappula on vastustajan */
             testiSiirrot = lauta[i][a].siirrot(this); /* kutsutaan nappulan metodia joka palauttaa mahd. siirrot */
@@ -496,7 +496,7 @@ class Pelilauta{
 
   public int annaSijaintiNo(Nappula nappula){
      for (int i = 0; i < 8; i++){
-      for (int a = 0; i < 8; a++){
+      for (int a = 0; a < 8; a++){
         if(lauta[i][a] == nappula){
           return i;
         }
@@ -512,7 +512,7 @@ class Pelilauta{
 
     public int annaSijaintiAbc(Nappula nappula){
      for (int i = 0; i < 8; i++){
-      for (int a = 0; i < 8; a++){
+      for (int a = 0; a < 8; a++){
         if(lauta[i][a] == nappula){
           return a;
         }
