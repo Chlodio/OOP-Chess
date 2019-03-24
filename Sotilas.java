@@ -45,11 +45,12 @@ class Sotilas extends Nappula{
     return this.liikkunut;
   }
 
-  public int[][] siirrot(Pelilauta lauta){
+    public int[][] siirrot(Pelilauta lauta){
     int sNo = lauta.annaSijaintiNo(this);
     int sAbc = lauta.annaSijaintiAbc(this);
     int[][] siirrot = new int[8][8];
-    if (sNo < 6){
+    if(this.vari){
+    if (sNo < 7){
       siirrot[sNo+1][sAbc]=1;
       if (this.liikkunut == false){
         siirrot[sNo+2][sAbc] = 1;
@@ -71,6 +72,32 @@ class Sotilas extends Nappula{
         }
       }
     }
+    }
+    if(!this.vari){
+      if (sNo > 0){
+      siirrot[sNo-1][sAbc]=1;
+      if (this.liikkunut == false){
+        siirrot[sNo-2][sAbc] = 1;
+      }
+      if(sAbc > 0){
+        Nappula n1 = lauta.annaNappula(sNo-1,sAbc-1);
+        if (n1 != null){
+          if (this.vari != n1.annaVari()){
+            siirrot[sNo-1][sAbc-1] = 1;
+          }
+        }
+      }
+      if(sAbc < 6){
+        Nappula n2 = lauta.annaNappula(sNo-1,sAbc+1);
+        if (n2 != null){
+          if (this.vari != n2.annaVari()){
+            siirrot[sNo-1][sAbc+1] = 1;
+          }
+        }
+      }
+    }
+    }
+
     return siirrot;
   }
 
