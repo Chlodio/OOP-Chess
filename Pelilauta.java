@@ -434,6 +434,9 @@ class Pelilauta{
    */
 
   public boolean itsemurha(Nappula nappula, int uusiNo, int uusiAbc){
+    if (nappula == null){
+	    return false;
+    }
     boolean onkoItsari;
     boolean vari = nappula.annaVari();
     Pelilauta kopioPeli = new Pelilauta(this);  /* kopio pelin */
