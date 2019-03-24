@@ -624,12 +624,12 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 				 Ruutu r = ((Ruutu) e.getSource());
 				 if (Tuomari.onkoVaihe(0)){
 					Nappula.setValittu(
-					 	Peli.getSLauta().annaNappula(r.haeY(), r.haeX())
+					 	Peli.getSLauta().annaNappula(7, 0)
 					);
 					System.out.println(r.haeY()+" "+r.haeX());
 					System.out.println(Peli.getSLauta().annaNappula(r.haeY(), r.haeX()).annaNimi());
 					System.out.println("Vari: "+Peli.getSLauta().annaNappula(r.haeY(), r.haeX()).annaVari());
-					System.out.println(Ihmispelaaja.getTLauta());
+
 					Tuomari.asetaVaihe(1);
 					Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
 				}
@@ -640,22 +640,23 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 				}
 			 }
 		};
-		for(int x = 0; x < 8; x++){
-			xc = 100; yc = 750-(x*100);
-			for(int z = 4; z > 0; z--){
-				for(int y = 2; y > 0; y--){
+		for(int y = 0; y < 8; y++){
+			xc = 100; yc = 750-(y*100);
+			for(int x = 0; x < 8; x++){
 					id++;
-					ruutuValikko.put(id, new Ruutu(id));
+					ruutuValikko.put(id, new Ruutu(id, y, x));
 					ruutuValikko.get(id).addActionListener(valitseR);
 					ruutuValikko.get(id).setBounds(xc,yc,100,100);
 					ruutuValikko.get(id).setBackground(Color.decode("#800080"));
 					ruutuValikko.get(id).setContentAreaFilled(false);
 			    	mp.add(ruutuValikko.get(id));
-
+					System.out.println(Integer.toString(y)+" "+Integer.toString(x));
 					xc += 100;
 				}
-			}
-		}
+
+			}ruutuValikko.get(id).setContentAreaFilled(true);
+
+
 	}
 
 	public static void varitaRuudut(int[][] ruudut){

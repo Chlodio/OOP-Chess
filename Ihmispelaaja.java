@@ -59,8 +59,8 @@ class Ihmispelaaja implements Pelaaja {
 		else if (Tuomari.onkoVaihe(2)){
 			Tuomari.asetaVaihe(-1);							/*Toisen vuorolla ei tarvi koskea ruutuihin*/
 			Nappula nappula = Nappula.getValittu();
-			int uusiSijaintiNo =	Ruutu.valittu.haeX();  	/*pelaajan valitsema uusi sijainti sallitutSiirroista*/;
-			int uusiSijaintiAbc = 	Ruutu.valittu.haeY();	/*pelaajan valitsema uusi sijainti sallitutSiirroista*/;
+			int uusiSijaintiNo =	Ruutu.valittu.haeY();  	/*pelaajan valitsema uusi sijainti sallitutSiirroista*/;
+			int uusiSijaintiAbc = 	Ruutu.valittu.haeX();	/*pelaajan valitsema uusi sijainti sallitutSiirroista*/;
 			Pelilauta.normaalisoiRuudut();
 			/*JUHA: tähän voi lisätä vielä itse-murhatestin. Eli kyseinen siirto voidaan testata metodilla pelilauta.itsemurha(Nappula,int,int). Jos true, niin sitten pitäisi kysyä uutta siirtoa*/
 			/*JUHA: huom: sallitutSiirrot ei palauta linnoitusmahdollisuutta. Tämä pitää kysyä erikseen pelilauta.linnoitusMahdollista(Kuningas,Torni)*/

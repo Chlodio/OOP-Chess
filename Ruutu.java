@@ -5,9 +5,14 @@ import javax.swing.JButton;
 public class Ruutu extends JButton{
 	private int id;
 	public static Ruutu valittu;
+	private int yk;
+	private int xk;
 
-	public Ruutu(int id){
+	public Ruutu(int id, int y, int x){
+		super(Integer.toString(y)+" "+Integer.toString(x));
 		this.id = id;
+		this.yk = y;
+		this.xk = x;
 	}
 
 	public int getId(){
@@ -16,11 +21,13 @@ public class Ruutu extends JButton{
 
 
 	public int haeX(){
-		return this.id%8;
+		return this.xk;
+//		return this.id%8;
 	}
 
 	public int haeY(){
-		return this.id/8;
+		return this.yk;
+	//	return this.id/8;
 	}
 
 	public void valikoi(){

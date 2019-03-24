@@ -35,7 +35,7 @@ class Main{
       }
       catch (IOException e){
         System.out.println("Ei pitäisi päästä tänne asti");
-      }
+	}
     }
   }
   else {
