@@ -16,9 +16,6 @@ class Sotilas extends Nappula{
 	  }
   }
 
-  public boolean annaVari(){
-    return this.vari;
-  }
 
   public String annaNimi(){
 		return "sotilas";
