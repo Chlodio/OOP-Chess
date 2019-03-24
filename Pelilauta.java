@@ -434,16 +434,22 @@ class Pelilauta{
    */
 
   public boolean itsemurha(Nappula nappula, int uusiNo, int uusiAbc){
+    return false;
+	  /*
     if (nappula == null){
 	    return false;
     }
     boolean onkoItsari;
     boolean vari = nappula.annaVari();
     Pelilauta kopioPeli = new Pelilauta(this);  /* kopio pelin */
+	  /*
     kopioPeli.liiku(nappula, uusiNo, uusiAbc, true); /* suorittaa siirron kopiopelissä */
+	  /*
     kopioPeli.testaaShakki(vari); /* testaa tuliko vastustajalle shakki */
+	 /*
     onkoItsari = kopioPeli.annaShakki();
     return onkoItsari;
+	  */
   }
 
                 /*
