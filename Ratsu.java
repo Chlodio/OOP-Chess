@@ -16,9 +16,6 @@ public class Ratsu extends Nappula{
 	  }
   }
 
-  public boolean annaVari(){
-    return this.vari;
-  }
 
   public String annaNimi(){
 	  return "ratsu";
