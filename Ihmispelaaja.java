@@ -50,11 +50,10 @@ class Ihmispelaaja implements Pelaaja {
 			}
 		}
 		else if (Tuomari.onkoVaihe(1)){
-			System.out.println(Nappula.getValittu());
+			System.out.println(Nappula.getValittu().annaNimi());
 			Nappula nappula = Nappula.getValittu(); 	/*pelaajan valitsema nappula omanVarinNappuloista*/;
 			int[][] siirrot = nappula.siirrot(pelilauta); /*JUHA: parametriksi tarvitaan Pelilauta*/
 			int[][] sallitutSiirrot = pelilauta.testaaSiirrot(siirrot, nappula);
-			System.out.println("mahdollisia siirtoja: "+Integer.toString(sallitutSiirrot.length));
 			Pelilauta.varitaRuudut(sallitutSiirrot);
 		}
 		else if (Tuomari.onkoVaihe(2)){
