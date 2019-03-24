@@ -42,7 +42,7 @@ class Ihmispelaaja implements Pelaaja {
 			int[][] omanVarinNappulat = new int[8][8];
 			setOmanVarNap(omanVarinNappulat);
 			for(int i = 0; i < 7; i++){
-				for(int j = 0; i < 7; j++){
+				for(int j = 0; j < 7; j++){
 					if (pelilauta.annaNappula(i,  j) != null && pelilauta.annaNappula(i, j).annaVari()){
 						omanVarinNappulat[i][j] = 1;
 					}
