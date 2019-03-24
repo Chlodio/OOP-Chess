@@ -21,9 +21,6 @@ public class Torni extends Nappula{
 	  }
   }
 
-  public boolean annaVari(){
-    return this.vari;
-  }
 
     public String annaNimi(){
 	    return "torni";
