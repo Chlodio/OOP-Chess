@@ -434,7 +434,6 @@ class Pelilauta{
    */
 
   public boolean itsemurha(Nappula nappula, int uusiNo, int uusiAbc){
-    return false;
     if (nappula == null){
 	    return false;
     }
