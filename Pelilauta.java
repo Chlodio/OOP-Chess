@@ -609,6 +609,7 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 		mainPanel.add(loadButton);
 
 		buildSelectors(mainPanel);
+		buildSideLabels(mainPanel);
 		frame.pack();
 		frame.setVisible(true);
 	}
@@ -626,7 +627,8 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 					 	Peli.getSLauta().annaNappula(r.haeY(), r.haeX())
 					);
 					System.out.println(r.haeY()+" "+r.haeX());
-					System.out.println(Peli.getSLauta().annaNappula(r.haeY(), r.haeX()));
+					System.out.println(Peli.getSLauta().annaNappula(r.haeY(), r.haeX()).annaNimi());
+					System.out.println("Vari: "+Peli.getSLauta().annaNappula(r.haeY(), r.haeX()).annaVari());
 					System.out.println(Ihmispelaaja.getTLauta());
 					Tuomari.asetaVaihe(1);
 					Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
@@ -639,9 +641,9 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 			 }
 		};
 		for(int x = 0; x < 8; x++){
-			xc = 100; yc = 50+(x*100);
-			for(int z = 0; z < 4; z++){
-				for(int y = 0; y < 2; y++){
+			xc = 100; yc = 750-(x*100);
+			for(int z = 4; z > 0; z--){
+				for(int y = 2; y > 0; y--){
 					id++;
 					ruutuValikko.put(id, new Ruutu(id));
 					ruutuValikko.get(id).addActionListener(valitseR);
@@ -947,7 +949,7 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
          }
        }
    }
-                
+
 return sallitutSiirrot;
 }
 
