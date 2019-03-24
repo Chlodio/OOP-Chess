@@ -66,11 +66,15 @@ class Pelilauta{
    */
 
   public Pelilauta(Pelilauta kopio){
-    this.lauta = kopio.lauta;
+    this.lauta = new Nappula[8][8];
+    for (int i = 0; i<8; i++){
+      for (int a = 0; a<8; a++){
+        lauta[i][a] = kopio.lauta[i][a];
+      }
+    }
     this.shakki = kopio.shakki;
     this.shakkimatti = kopio.shakkimatti;
   }
-
       /*
    * asetus ja tarkastus-metodit
    */
@@ -136,7 +140,7 @@ class Pelilauta{
 
 
     if (torniAbc == 0){
-      for (int i =1; i>4; i++){
+      for (int i =1; i<4; i++){
         if (annaNappula(torniNo,i) != null){
           return false;
         }
@@ -163,7 +167,7 @@ class Pelilauta{
         return false;
       }
     }
-    return false;
+    return true;
   }
 
    /*
@@ -434,16 +438,16 @@ class Pelilauta{
    */
 
   public boolean itsemurha(Nappula nappula, int uusiNo, int uusiAbc){
-  //  if (nappula == null){
+    if (nappula == null){
 	    return false;
-  //  }
-  //  boolean onkoItsari;
-  //  boolean vari = nappula.annaVari();
-  //  Pelilauta kopioPeli = new Pelilauta(this);  /* kopioi pelin */
-  //  kopioPeli.liikuItsari(nappula, uusiNo, uusiAbc); /* suorittaa siirron kopiopelissä */
-  //  kopioPeli.testaaShakkiItsari(vari); /* testaa tuliko vastustajalle shakki */
-  //  onkoItsari = kopioPeli.annaShakki();
-  //  return onkoItsari;
+    }
+    boolean onkoItsari;
+    boolean vari = nappula.annaVari();
+    Pelilauta kopioPeli = new Pelilauta(this);  /* kopioi pelin */
+    kopioPeli.liikuItsari(nappula, uusiNo, uusiAbc); /* suorittaa siirron kopiopelissä */
+    kopioPeli.testaaShakkiItsari(vari); /* testaa tuliko vastustajalle shakki */
+    onkoItsari = kopioPeli.annaShakki();
+    return onkoItsari;
   }
 
                 /*
@@ -520,37 +524,7 @@ class Pelilauta{
      }
      return 9;
   }
-	/* metodi itsemurha-metodin testiä varten, ei sivuvaikutuksia*/
-public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopiopeli){
-
-    int vanhaNo = annaSijaintiNo(nappula);
-    int vanhaAbc = annaSijaintiAbc(nappula);
-    asetaNappula(nappula, sijaintiNo, sijaintiAbc);  /* asettaa nappulan uudelle paikalleen*/
-    lauta[vanhaNo][vanhaAbc]= null; /* poistaa nappulan alkuperäiseltä paikaltaan*/
-
-    /* testataan onko siirto linnoitus ja toteutetaan jos on*/
-
-    if (nappula instanceof Kuningas && Math.abs(vanhaAbc - sijaintiAbc)>1){
-      if(sijaintiNo == 0 && sijaintiAbc == 2){
-        lauta[0][3] = lauta[0][0];
-        lauta[0][0] = null;
-      }
-      if(sijaintiNo == 0 && sijaintiAbc == 6){
-        lauta[0][5] = lauta[0][7];
-        lauta[0][7] = null;
-      }
-      if(sijaintiNo == 7 && sijaintiAbc == 2){
-        lauta[7][3] = lauta[7][0];
-        lauta[7][0] = null;
-      }
-      if(sijaintiNo == 7 && sijaintiAbc == 6){
-        lauta[7][5] = lauta[7][7];
-        lauta[7][7] = null;
-      }
-      }
-  }
-
-
+	
 	/*aloittaaa GUIN:n rakentamisen*/
 	public static void createGUI(){
 		JFrame frame = new JFrame("Shakki");
@@ -742,7 +716,7 @@ public void liikuItsari(Nappula nappula, int sijaintiNo, int sijaintiAbc){
     int vanhaNo = annaSijaintiNo(nappula);
     int vanhaAbc = annaSijaintiAbc(nappula);
     lauta[sijaintiNo][sijaintiAbc] = nappula;  /* asettaa nappulan uudelle paikalleen*/
-    lauta[vanhaNo][vanhaAbc] = null; /* poistaa nappulan alkuperäiseltä paikaltaan*/
+    lauta[vanhaNo][vanhaAbc] = null; /* poistaa nappulan alkuperÃ¤iseltÃ¤ paikaltaan*/
 
     /* testataan onko siirto linnoitus ja toteutetaan jos on*/
 
@@ -781,7 +755,7 @@ public void liikuItsari(Nappula nappula, int sijaintiNo, int sijaintiAbc){
     int[][] testiSiirrot = new int[8][8];
     int[][] sallitutTestiSiirrot = new int[8][8];
 
-    /* kÃ¤y lÃ¤pi koko laudan ja kaikki sillÃ¤ olevat vastustajan nappulat */
+    /* kÃƒÂ¤y lÃƒÂ¤pi koko laudan ja kaikki sillÃƒÂ¤ olevat vastustajan nappulat */
     for (int i = 0; i < 8; i++){
       for (int a = 0; a < 8; a++){
         if (lauta[i][a] != null){ /* laudalla on nappula*/
@@ -789,7 +763,7 @@ public void liikuItsari(Nappula nappula, int sijaintiNo, int sijaintiAbc){
             testiSiirrot = lauta[i][a].siirrot(this); /* kutsutaan nappulan metodia joka palauttaa mahd. siirrot */
             /* kutsutaan pelilaudan metodia joka testaa voisiko siirrot toteuttaa */
             sallitutTestiSiirrot = testaaSiirrotItsari(testiSiirrot, lauta[i][a]);
-            /* testataan voiko joku nappuloista siirtyÃ¤ kuninkaan ruutuun */
+            /* testataan voiko joku nappuloista siirtyÃƒÂ¤ kuninkaan ruutuun */
             if (sallitutTestiSiirrot[sNoK][sAbcK] == 1){
             asetaShakki(true);
             return;
@@ -805,12 +779,12 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
     boolean onkoRatsu = nappula instanceof Ratsu; /* Ratsule tarvitaan vain testi 1 */
     int sijaintiNo = annaSijaintiNo(nappula); /* kutsutaan apumetodia (alla) */
     int sijaintiAbc = annaSijaintiAbc(nappula); /* kutsutaan apumetodia (alla) */
-    boolean valkoinen = nappula.annaVari(); /* testataan minkÃ¤ vÃ¤rinen nappula on siirtymÃ¤ssÃ¤ */
+    boolean valkoinen = nappula.annaVari(); /* testataan minkÃƒÂ¤ vÃƒÂ¤rinen nappula on siirtymÃƒÂ¤ssÃƒÂ¤ */
     int[][] sallitutSiirrot = new int[8][8]; /* luodaan uusi matriisi sallituista siirroista */
 
       /*
-   * Testataan onko mahdollisissa siirtoruuduissa oma tai vastustajan nappula vai onko ruutu tyhjÃ¤
-   * 0 == ei sallittu, 1 == sallittu, 2 == sallittu - syÃ¶ vastustajan
+   * Testataan onko mahdollisissa siirtoruuduissa oma tai vastustajan nappula vai onko ruutu tyhjÃƒÂ¤
+   * 0 == ei sallittu, 1 == sallittu, 2 == sallittu - syÃƒÂ¶ vastustajan
    */
 
     for(int i = 0; i < 8; i++){
@@ -818,7 +792,7 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
         if(siirrot[i][a] != 1){
           sallitutSiirrot[i][a] = 0; /* siirto ei mahdollinen nappulalle */
         } else if(lauta[i][a] == null) {
-          sallitutSiirrot[i][a] = 1; /* siirto on mahdollinen nappulalle eikÃ¤ ruudussa ole toista nappulaa */
+          sallitutSiirrot[i][a] = 1; /* siirto on mahdollinen nappulalle eikÃƒÂ¤ ruudussa ole toista nappulaa */
         } else if(lauta[i][a].annaVari() != valkoinen) {
           sallitutSiirrot[i][a] = 2; /* siirto on mahdollinen, ruudussa on vastustajan nappula */
         } else {
@@ -827,16 +801,15 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
       }
     }
           /*
-   * Testataan onko reitillÃ¤ muita nappuloita. Ratsulle testiÃ¤ ei tarvita. Kuljetaan kaikki kahdeksan mahdollista
-   * suuntaa. Jos reitillÃ¤ on matkalla ruutu, johon ei voi siirtyÃ¤, kulkeminen pÃ¤Ã¤ttyy. Jos reitillÃ¤ on syÃ¶tÃ¤vÃ¤
-   * nappula, kulku pÃ¤Ã¤ttyy. Kuljetut ruudut merkataan numerolla 3.
+   * Testataan onko reitillÃƒÂ¤ muita nappuloita. Ratsulle testiÃƒÂ¤ ei tarvita. Kuljetaan kaikki kahdeksan mahdollista
+   * suuntaa. Jos reitillÃƒÂ¤ on matkalla ruutu, johon ei voi siirtyÃƒÂ¤, kulkeminen pÃƒÂ¤ÃƒÂ¤ttyy. Jos reitillÃƒÂ¤ on syÃƒÂ¶tÃƒÂ¤vÃƒÂ¤
+   * nappula, kulku pÃƒÂ¤ÃƒÂ¤ttyy. Kuljetut ruudut merkataan numerolla 3.
    */
-
    int b = sijaintiNo; /* aloitetaan nappulan nykyisestÃ¤ paikasta */
    int c = sijaintiAbc;
 
    if(onkoRatsu == false){
-     while (b>0 && b<7 && c>0 && c<7){ /* jatketaan kulkemista kunnes tullaan laudan reunalle */
+     while (b>-1 && b<7 && c>-1 && c<8){ /* jatketaan kulkemista kunnes tullaan laudan reunalle */
        b++; /* ensimmÃ¤inen kahdeksasta suunnasta */
        if (sallitutSiirrot[b][c] == 0){
          break; /* suuntaan ei voinut kulkea */
@@ -852,7 +825,7 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
      b = sijaintiNo;
      c = sijaintiAbc;
 
-     while (b>0 && b<7 && c>0 && c<7){
+     while (b>-1 && b<8 && c>-1 && c<7){
        c++;
        if (sallitutSiirrot[b][c] == 0){
          break;
@@ -867,7 +840,7 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
      b = sijaintiNo;
      c = sijaintiAbc;
 
-     while (b>0 && b<7 && c>0 && c<7){
+     while (b>0 && b<8 && c>-1 && c<8){
        b--;
        if (sallitutSiirrot[b][c] == 0){
          break;
@@ -881,7 +854,7 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
        b = sijaintiNo;
        c = sijaintiAbc;
 
-       while (b>0 && b<7 && c>0 && c<7){
+       while (b>-1 && b<8 && c>0 && c<8){
        c--;
        if (sallitutSiirrot[b][c] == 0){
          break;
@@ -896,7 +869,7 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
        b = sijaintiNo;
        c = sijaintiAbc;
 
-       while (b>0 && b<7 && c>0 && c<7){
+       while (b>0 && b<8 && c>0 && c<8){
        b--;
        c--;
        if (sallitutSiirrot[b][c] == 0){
@@ -912,7 +885,7 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
        b = sijaintiNo;
        c = sijaintiAbc;
 
-       while (b>0 && b<7 && c>0 && c<7){
+       while (b>-1 && b<7 && c>0 && c<-1){
        b++;
        c++;
        if (sallitutSiirrot[b][c] == 0){
@@ -928,7 +901,7 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
        b = sijaintiNo;
        c = sijaintiAbc;
 
-       while (b>0 && b<7 && c>0 && c<7){
+       while (b>-1 && b<7 && c>0 && c<8){
        b++;
        c--;
        if (sallitutSiirrot[b][c] == 0){
@@ -944,7 +917,7 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
        b = sijaintiNo;
        c = sijaintiAbc;
 
-       while (b>0 && b<7 && c>0 && c<7){
+       while (b>0 && b<8 && c>-1 && c<7){
        b--;
        c++;
        if (sallitutSiirrot[b][c] == 0){
@@ -966,9 +939,8 @@ public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
       }
    }
 
-
              /*
-   * Siivotaan matriisi niin, ettÃ¤ sallitut siirrot ovat ykkÃ¶siÃ¤ ja muut nollia kaikille nappuloille
+   * Siivotaan matriisi niin, ettÃƒÂ¤ sallitut siirrot ovat ykkÃƒÂ¶siÃƒÂ¤ ja muut nollia kaikille nappuloille
    */
 
    for(int i = 0; i < 8; i++){
