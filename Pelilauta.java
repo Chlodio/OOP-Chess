@@ -163,7 +163,7 @@ class Pelilauta{
         return false;
       }
     }
-    return true;
+    return false;
   }
 
    /*
@@ -434,16 +434,16 @@ class Pelilauta{
    */
 
   public boolean itsemurha(Nappula nappula, int uusiNo, int uusiAbc){
-    if (nappula == null){
+  //  if (nappula == null){
 	    return false;
-    }
-    boolean onkoItsari;
-    boolean vari = nappula.annaVari();
-    Pelilauta kopioPeli = new Pelilauta(this);  /* kopioi pelin */
-    kopioPeli.liikuItsari(nappula, uusiNo, uusiAbc); /* suorittaa siirron kopiopelissä */
-    kopioPeli.testaaShakkiItsari(vari); /* testaa tuliko vastustajalle shakki */
-    onkoItsari = kopioPeli.annaShakki();
-    return onkoItsari;
+  //  }
+  //  boolean onkoItsari;
+  //  boolean vari = nappula.annaVari();
+  //  Pelilauta kopioPeli = new Pelilauta(this);  /* kopioi pelin */
+  //  kopioPeli.liikuItsari(nappula, uusiNo, uusiAbc); /* suorittaa siirron kopiopelissä */
+  //  kopioPeli.testaaShakkiItsari(vari); /* testaa tuliko vastustajalle shakki */
+  //  onkoItsari = kopioPeli.annaShakki();
+  //  return onkoItsari;
   }
 
                 /*
