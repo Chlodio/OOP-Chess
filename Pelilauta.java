@@ -102,7 +102,7 @@ class Pelilauta{
   public void asetaNappula(Nappula nappula, int sNo, int sAbc){
     lauta[sNo][sAbc] = nappula;
 	if(nappula.getIkoni() != null){
-		nappula.getIkoni().setLocation(105+(sAbc*100), 45+(sNo*100));
+		nappula.getIkoni().setLocation(105+(sAbc*100), 745-(sNo*100));
 	}
 	//  nappula.getIkoni().setLocation(105+(sAbc*100), 45+(sNo*100));
   }
@@ -624,7 +624,7 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 				 Ruutu r = ((Ruutu) e.getSource());
 				 if (Tuomari.onkoVaihe(0)){
 					Nappula.setValittu(
-					 	Peli.getSLauta().annaNappula(7, 0)
+					 	Peli.getSLauta().annaNappula(r.haeY(), r.haeX())
 					);
 					System.out.println(r.haeY()+" "+r.haeX());
 					System.out.println(Peli.getSLauta().annaNappula(r.haeY(), r.haeX()).annaNimi());
@@ -654,20 +654,22 @@ public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc, Boolean kopi
 					xc += 100;
 				}
 
-			}ruutuValikko.get(id).setContentAreaFilled(true);
+			}
 
 
 	}
 
 	public static void varitaRuudut(int[][] ruudut){
 		int xd = 0;
+		int id = 0;
 		for (int x = 0; x < ruudut.length; x++){
 			for (int y = 0; y < ruudut[x].length; y++){
 				if (ruudut[x][y] == 1){
 					xd++;
-					colorizeRuutu(ruutuValikko.get(x+(y*7)));
-					valitutRuudut.add(ruutuValikko.get(x+(y*7)));
+					colorizeRuutu(ruutuValikko.get(id));
+					valitutRuudut.add(ruutuValikko.get(id));
 				}
+				id++;
 			}
 		}
 		System.out.println("Mahdollisten siirtojen lukumäärä:"+" "+Integer.toString(xd));

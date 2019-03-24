@@ -27,7 +27,7 @@ abstract class Nappula{
 	//  Nappula.luoNappulaGui(this);
   }
 	public void poistaLaudalta(){
-		if(!this.annaVari()){
+		if(this.annaVari()){
 			this.getIkoni().setLocation(
 				920+(38*valSuodut.size()),
 				500

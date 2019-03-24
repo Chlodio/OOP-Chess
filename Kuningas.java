@@ -9,7 +9,7 @@ public class Kuningas extends Nappula{
   }
 
   public String getSymbooli(){
-	  if (!this.annaVari()){
+	  if (this.annaVari()){
 		 return "\u2654";
 	  } else {
 		return "\u265A";

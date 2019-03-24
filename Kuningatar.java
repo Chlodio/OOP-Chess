@@ -9,7 +9,7 @@ public class Kuningatar extends Nappula{
   }
 
   public String getSymbooli(){
-	  if (!this.annaVari()){
+	  if (this.annaVari()){
 		 return "\u2655";
 	  } else {
 		return "\u265B";

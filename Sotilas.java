@@ -9,7 +9,7 @@ class Sotilas extends Nappula{
 }
 
   public String getSymbooli(){
-	  if (!this.annaVari()){
+	  if (this.annaVari()){
 		 return "\u2659";
 	  } else {
 		return "\u265F";
