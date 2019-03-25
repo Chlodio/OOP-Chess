@@ -26,28 +26,20 @@ public class Peli {
 
  public boolean tallennettuToimivaPeli() throws IOException{
   BufferedReader br = new BufferedReader(new FileReader("tallennettuPeli.txt"));
-  String[] rivit = new String[19];
-  try {
-   String rivi = br.readLine();
-   int indeksi = 0;
-   while (rivi != null){
-    rivit[indeksi] = rivi;
-    rivi = br.readLine();
-    indeksi += 1;
-   }
-  }
-  catch (IOException e){
-   return false;
-  }
-  finally {
-   br.close();
-  }
+  ArrayList<String> riveja = new ArrayList<String>();
+  String rivi = br.readLine();
+  while (rivi != null){
+   riveja.add(rivi);
+   rivi = br.readLine();
+ }
+  br.close();
+  String[] rivit = riveja.toArray(new String[riveja.size()]);
   for (int i = 0; i < 5; i++){
    if (rivit[i] == null){
     return false;
    }
   }
-  if (rivit[0] != "1" && rivit[0] != "2" || rivit[1] != "true" && rivit[1] != "false" || rivit[2] != "tietokonepelaaja" && rivit[2] != "ihmispelaaja"){
+  if (rivit[0] != "true" && rivit[0] != "false" || rivit[1] != "true" && rivit[1] != "false" || rivit[2] != "tietokonepelaaja" && rivit[2] != "ihmispelaaja"){
    return false;
   }
   int kuninkaat = 0;
@@ -133,15 +125,14 @@ public class Peli {
   Pelilauta pelilauta = new Pelilauta();
   this.pelilauta = pelilauta;
   BufferedReader br = new BufferedReader(new FileReader("tallennettuPeli.txt"));
-  String[] rivit = new String[19];
+  ArrayList<String> riveja = new ArrayList<String>();
   String rivi = br.readLine();
-  int indeksi = 0;
   while (rivi != null){
-   rivit[indeksi] = rivi;
+   riveja.add(rivi);
    rivi = br.readLine();
-   indeksi += 1;
   }
   br.close();
+  String[] rivit = riveja.toArray(new String[riveja.size()]);
   this.pelaajanVuoro = Boolean.parseBoolean(rivit[0]);
   this.pelaaja1 = new Ihmispelaaja();
   if (Boolean.parseBoolean(rivit[1])){
