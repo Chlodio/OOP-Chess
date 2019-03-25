@@ -43,7 +43,7 @@ class Main{
   }
   peli.pelaa();
 
-  //java.lang.System.exit(0);		//tarvitaanko me sulkeutumista, jos GUI hallitsee sitä?
+  //java.lang.System.exit(0);		//tarvitaanko me sulkeutumista, jos GUI hallitsee sitä? //Ei tarvita
  }
 
  public static Peli getTPeli(){
