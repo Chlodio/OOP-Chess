@@ -12,7 +12,7 @@ import java.io.IOException;
 
 
 class Main{
-	private static Peli TPeli;
+ private static Peli TPeli;
  public static void main(String[] args){
   SwingUtilities.invokeLater(new Runnable() {
    public void run(){
@@ -21,14 +21,20 @@ class Main{
   });
   Peli peli = new Peli();
   TPeli = peli;
-	 peli.asetaPeliAsetuksilla();
-	 peli.pelaa();
+  peli.asetaPeliAsetuksilla();
+  peli.pelaa();
+  try {
+    Thread.sleep(5000);
+  } 
+  catch(InterruptedException e) {
+    System.out.println("got interrupted!");
+  }
 
-  //java.lang.System.exit(0);		//tarvitaanko me sulkeutumista, jos GUI hallitsee sitä? //Ei tarvita
+  //java.lang.System.exit(0);  //tarvitaanko me sulkeutumista, jos GUI hallitsee sitä? //Ei tarvita
  }
 
  public static Peli getTPeli(){
-	 return TPeli;
+  return TPeli;
  }
 
 }

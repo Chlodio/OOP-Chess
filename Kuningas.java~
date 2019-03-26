@@ -1,7 +1,7 @@
 public class Kuningas extends Nappula{
 
   public Kuningas(boolean vari, boolean liikkunut){
- super(vari);
+	super(vari);
     this.vari = vari;
     this.arvo = 10;
     this.liikkunut = liikkunut;
@@ -9,25 +9,25 @@ public class Kuningas extends Nappula{
   }
 
   public String getSymbooli(){
-   if (this.annaVari()){
-   return "\u2654";
-   } else {
-  return "\u265A";
-   }
+	  if (this.annaVari()){
+		 return "\u2654";
+	  } else {
+		return "\u265A";
+	  }
   }
 
 
 
   public String annaNimi(){
-  return "kuningas";
- }
+		return "tietokonepelaaja";
+	}
 
 
   public void asetaElossa(boolean elossa){
     this.elossa = elossa;
- if (!elossa){
-  this.poistaLaudalta();
- }
+	if (!elossa){
+		this.poistaLaudalta();
+	}
   }
 
   public boolean annaElossa(){

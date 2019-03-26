@@ -119,7 +119,7 @@ public class Peli {
   pelilauta.asetaNappula(new Kuningatar(false, false), 7, 3);
   this.pelaajanVuoro = true;
   this.pelaaja1 = new Ihmispelaaja();
-  this.pelaaja2 = new Ihmispelaaja();
+  //this.pelaaja2 = new Ihmispelaaja();
 
  }
 
@@ -217,23 +217,18 @@ public class Peli {
 
 
  public void pelaa(){
-  if (!onShakkimatti()){
-    if (Tuomari.onkoVaihe(-1)){
+  while (!onShakkimatti()){
       Tuomari.asetaVaihe(0);    //Nyt saa valikoida nappulan
+      if (this.pelaajanVuoro){
+       pelaaja1.liikuttaa(pelilauta);
+       this.pelaajanVuoro = false;
+      }
+      else {
+       pelaaja2.liikuttaa(pelilauta);
+       this.pelaajanVuoro = true;
     }
-    if (this.pelaajanVuoro){
-      pelaaja1.liikuttaa(pelilauta);
-      this.pelaajanVuoro = false;
-    }
-    else {
-      pelaaja2.liikuttaa(pelilauta);
-      this.pelaajanVuoro = true;
-    }
- }
-  else {
-    pelilauta.asetaShakkimatti();
-  }
-  
+   }
+  pelilauta.asetaShakkimatti();
  }
 
 
