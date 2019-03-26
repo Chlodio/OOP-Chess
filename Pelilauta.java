@@ -599,8 +599,8 @@ class Pelilauta{
 			 public void actionPerformed(ActionEvent e) {
 				 Ruutu r = ((Ruutu) e.getSource());
 				 if (Tuomari.onkoVaihe(0)){
-		//			     System.out.println(Ihmispelaaja.getOmanVarNap());
-//						 if (1){
+					     System.out.println(Ihmispelaaja.getOmanVarNap());
+						 if (Ihmispelaaja.getOmanVarNap()[r.haeY()][r.haeX()] == 1){
 						 Nappula nap = Peli.getSLauta().annaNappula(r.haeY(), r.haeX());
 						 Pelilauta pel = Ihmispelaaja.getTLauta();
 						 r.ekavalikoi();
@@ -612,7 +612,7 @@ class Pelilauta{
 							System.out.println(Integer.toString(r.haeY())+" "+Integer.toString(r.haeX()));
 							Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
 						} else{ Tuomari.julistaLaittomaksi(); }
-			//		} else{ Tuomari.julistaLaittomaksi(); }
+				} else{ Tuomari.julistaLaittomaksi(); }
 				}
 				else if (Tuomari.onkoVaihe(1)){
 					if (r != Ruutu.haeEkavalittu()){

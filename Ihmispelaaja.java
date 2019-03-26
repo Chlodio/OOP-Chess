@@ -5,12 +5,12 @@ class Ihmispelaaja implements Pelaaja {
 	private static Ihmispelaaja TPelaaja;
 
 	public static void setOmanVarNap(int[][] i){
-		System.out.println(i);
 		omanVarNap = i;
+		System.out.println(omanVarNap);
 
 	}
 
-	public static int[][] getOmanVarNap(int[][] i){
+	public static int[][] getOmanVarNap(){
 		return omanVarNap;
 	}
 
@@ -42,8 +42,8 @@ class Ihmispelaaja implements Pelaaja {
 			setTLauta(pelilauta);
 			setTPelaaja(this);
 			int[][] omanVarinNappulat = new int[8][8];
-			for(int i = 0; i < 7; i++){
-				for(int j = 0; j < 7; j++){
+			for(int i = 0; i <= 7; i++){
+				for(int j = 0; j <= 7; j++){
 					if (pelilauta.annaNappula(i,  j) != null && pelilauta.annaNappula(i, j).annaVari()){
 						omanVarinNappulat[i][j] = 1;
 					}
