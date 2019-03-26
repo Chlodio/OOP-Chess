@@ -649,7 +649,7 @@ class Pelilauta{
      ruutuValikko.put(id, new Ruutu(id, y, x));
      ruutuValikko.get(id).addActionListener(valitseR);
      ruutuValikko.get(id).setBounds(xc,yc,80,80);
-     ruutuValikko.get(id).setBackground(Color.decode("#800080"));
+     ruutuValikko.get(id).setBackground( new Color(0.5f, 0f, 0.5f, .5f) );
      ruutuValikko.get(id).setContentAreaFilled(false);
         mp.add(ruutuValikko.get(id));
      xc += 80;
