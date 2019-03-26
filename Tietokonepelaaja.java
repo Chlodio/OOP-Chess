@@ -40,7 +40,7 @@ class Tietokonepelaaja implements Pelaaja {
      int[][] sallitutSiirrot = pelilauta.testaaSiirrot(siirrot, pelilauta.annaNappula(i, j));
      for (int k = 0; k < 7; k++){
       for (int l = 0; l < 7; l++){
-       if (sallitutSiirrot[k][l] > 0 && vastustajanNappulat[k][l] > 0 && pelilauta.annaNappula(i, j).annaArvo() < parhaanNappulanArvo && !pelilauta.itsemurha(pelilauta.annaNappula(i, j), k, l)){
+       if (sallitutSiirrot[k][l] > 0 && vastustajanNappulat[k][l] > 0 && pelilauta.annaNappula(i, j).annaArvo() < parhaanNappulanArvo){
         parhaanNappulanLahtopaikkaNo = i;
         parhaanNappulanLahtopaikkaAbc = j;
         parhaanNappulanSijoituspaikkaNo = k;
@@ -48,7 +48,7 @@ class Tietokonepelaaja implements Pelaaja {
         parhaanNappulanArvo = pelilauta.annaNappula(i, j).annaArvo();
         parhaanSyodynNappulanArvo = pelilauta.annaNappula(k, l).annaArvo();
        }
-       else if (sallitutSiirrot[k][l] > 0 && vastustajanNappulat[k][l] > 0 && pelilauta.annaNappula(i, j).annaArvo() == parhaanNappulanArvo && pelilauta.annaNappula(k, l).annaArvo() > parhaanSyodynNappulanArvo && !pelilauta.itsemurha(pelilauta.annaNappula(i, j), k, l)){
+       else if (sallitutSiirrot[k][l] > 0 && vastustajanNappulat[k][l] > 0 && pelilauta.annaNappula(i, j).annaArvo() == parhaanNappulanArvo && pelilauta.annaNappula(k, l).annaArvo() > parhaanSyodynNappulanArvo){
         parhaanNappulanLahtopaikkaNo = i;
         parhaanNappulanLahtopaikkaAbc = j;
         parhaanNappulanSijoituspaikkaNo = k;
@@ -72,7 +72,7 @@ class Tietokonepelaaja implements Pelaaja {
     int random4 = ThreadLocalRandom.current().nextInt(0, 8);
     int[][] siirrot = pelilauta.annaNappula(random,random2).siirrot(pelilauta);
     int[][] sallitutSiirrot = pelilauta.testaaSiirrot(siirrot, pelilauta.annaNappula(random,random2));
-    if (sallitutSiirrot[random3][random4] > 0 && !pelilauta.itsemurha(pelilauta.annaNappula(random, random2), random3, random4)){
+    if (sallitutSiirrot[random3][random4] > 0){
      pelilauta.liiku(pelilauta.annaNappula(random, random2), random3, random4);
      break;
     }

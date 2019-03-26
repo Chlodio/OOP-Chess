@@ -119,7 +119,7 @@ public class Peli {
   pelilauta.asetaNappula(new Kuningatar(false, false), 7, 3);
   this.pelaajanVuoro = true;
   this.pelaaja1 = new Ihmispelaaja();
-  this.pelaaja2 = new Tietokonepelaaja();
+  this.pelaaja2 = new Ihmispelaaja();
 
  }
 
@@ -203,7 +203,7 @@ public class Peli {
      int[][] nappulanOikeatSiirrot = this.pelilauta.testaaSiirrot(nappulanSiirrot, nappula);
      for (int k = 0; k < 7; k++){
       for (int l = 0; l < 7; l++){
-       if (nappulanOikeatSiirrot[k][l] == 1 && !this.pelilauta.itsemurha(this.pelilauta.annaNappula(k, l), k, l)){
+       if (nappulanOikeatSiirrot[k][l] == 1){
         return false;
        }
       }
