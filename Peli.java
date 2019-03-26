@@ -24,7 +24,7 @@ public class Peli {
  public static Pelilauta getSLauta(){
   return SLauta;
  }
- 
+
  public boolean tallennettuToimivaPeli() throws IOException{
   BufferedReader br = new BufferedReader(new FileReader("tallennettuPeli.txt"));
   ArrayList<String> riveja = new ArrayList<String>();
@@ -224,18 +224,24 @@ public class Peli {
     if (this.pelaajanVuoro){
       this.pelaajanVuoro = false;
       pelaaja1.liikuttaa(pelilauta);
-      
+
     }
     else {
       this.pelaajanVuoro = true;
       pelaaja2.liikuttaa(pelilauta);
-      
+
     }
  }
   else {
     pelilauta.asetaShakkimatti();
+	if (this.pelaajanVuoro){
+		Pelilauta.tulosta("Tuomari: Valkoinen pelaaja voittaa!");
+	}
+	else{
+		Pelilauta.tulosta("Tuomari: Musta pelaaja voittaa!");
+	}
+	Pelilauta.tulosta("Tuomari: congratulations!");
   }
-  
  }
 
 

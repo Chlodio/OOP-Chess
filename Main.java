@@ -25,7 +25,7 @@ class Main{
   peli.pelaa();
   try {
     Thread.sleep(5000);
-  } 
+  }
   catch(InterruptedException e) {
     System.out.println("got interrupted!");
   }

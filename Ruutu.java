@@ -11,7 +11,8 @@ public class Ruutu extends JButton{
 	private boolean sallittu;
 
 	public Ruutu(int id, int y, int x){
-		super(Integer.toString(y)+" "+Integer.toString(x));
+		super();
+	//	super(Integer.toString(y)+" "+Integer.toString(x));
 		this.id = id;
 		this.yk = y;
 		this.xk = x;
