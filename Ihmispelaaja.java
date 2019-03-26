@@ -5,7 +5,9 @@ class Ihmispelaaja implements Pelaaja {
 	private static Ihmispelaaja TPelaaja;
 
 	public static void setOmanVarNap(int[][] i){
+		System.out.println(i);
 		omanVarNap = i;
+
 	}
 
 	public static int[][] getOmanVarNap(int[][] i){
@@ -40,7 +42,6 @@ class Ihmispelaaja implements Pelaaja {
 			setTLauta(pelilauta);
 			setTPelaaja(this);
 			int[][] omanVarinNappulat = new int[8][8];
-			setOmanVarNap(omanVarinNappulat);
 			for(int i = 0; i < 7; i++){
 				for(int j = 0; j < 7; j++){
 					if (pelilauta.annaNappula(i,  j) != null && pelilauta.annaNappula(i, j).annaVari()){
@@ -48,6 +49,7 @@ class Ihmispelaaja implements Pelaaja {
 					}
 				}
 			}
+			setOmanVarNap(omanVarinNappulat);
 		}
 		else if (Tuomari.onkoVaihe(1)){
 			System.out.println(Nappula.getValittu().annaNimi());
@@ -57,7 +59,7 @@ class Ihmispelaaja implements Pelaaja {
 			Pelilauta.varitaRuudut(sallitutSiirrot);
 		}
 		else if (Tuomari.onkoVaihe(2)){
-			Tuomari.asetaVaihe(-1);							/*Toisen vuorolla ei tarvi koskea ruutuihin*/
+//			Tuomari.asetaVaihe(-1);							/*Toisen vuorolla ei tarvi koskea ruutuihin*/
 			Nappula nappula = Nappula.getValittu();
 			int uusiSijaintiNo =	Ruutu.valittu.haeY();  	/*pelaajan valitsema uusi sijainti sallitutSiirroista*/;
 			int uusiSijaintiAbc = 	Ruutu.valittu.haeX();	/*pelaajan valitsema uusi sijainti sallitutSiirroista*/;

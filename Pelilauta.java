@@ -105,9 +105,11 @@ class Pelilauta{
 
   public void asetaNappula(Nappula nappula, int sNo, int sAbc){
     lauta[sNo][sAbc] = nappula;
+	System.out.println(nappula.annaNimi());
 	if(nappula.getIkoni() != null){
 		nappula.getIkoni().setLocation(105+(sAbc*100), 745-(sNo*100));
 	}
+
 	//  nappula.getIkoni().setLocation(105+(sAbc*100), 45+(sNo*100));
   }
 
@@ -524,7 +526,7 @@ class Pelilauta{
      }
      return 9;
   }
-	
+
 	/*aloittaaa GUIN:n rakentamisen*/
 	public static void createGUI(){
 		JFrame frame = new JFrame("Shakki");
@@ -597,19 +599,20 @@ class Pelilauta{
 			 public void actionPerformed(ActionEvent e) {
 				 Ruutu r = ((Ruutu) e.getSource());
 				 if (Tuomari.onkoVaihe(0)){
-					 Nappula nap = Peli.getSLauta().annaNappula(r.haeY(), r.haeX());
-					 Pelilauta pel = Ihmispelaaja.getTLauta();
-					 r.ekavalikoi();
-				//	 int[][] siirrot = nap.siirrot(pel);
-		 		//	 int[][] sallitutSiirrot = pel.testaaSiirrot(siirrot, nap);
-					 if( nap != null){
-						Nappula.setValittu(nap);
-						Tuomari.asetaVaihe(1);
-						System.out.println(Integer.toString(r.haeY())+" "+Integer.toString(r.haeX()));
-						Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
-					} else{
-						Tuomari.julistaLaittomaksi();
-					}
+		//			     System.out.println(Ihmispelaaja.getOmanVarNap());
+//						 if (1){
+						 Nappula nap = Peli.getSLauta().annaNappula(r.haeY(), r.haeX());
+						 Pelilauta pel = Ihmispelaaja.getTLauta();
+						 r.ekavalikoi();
+					//	 int[][] siirrot = nap.siirrot(pel);
+			 		//	 int[][] sallitutSiirrot = pel.testaaSiirrot(siirrot, nap);
+						 if( nap != null){
+							Nappula.setValittu(nap);
+							Tuomari.asetaVaihe(1);
+							System.out.println(Integer.toString(r.haeY())+" "+Integer.toString(r.haeX()));
+							Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
+						} else{ Tuomari.julistaLaittomaksi(); }
+			//		} else{ Tuomari.julistaLaittomaksi(); }
 				}
 				else if (Tuomari.onkoVaihe(1)){
 					if (r != Ruutu.haeEkavalittu()){

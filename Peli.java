@@ -217,7 +217,6 @@ public class Peli {
   while (!onShakkimatti()){
       Tuomari.asetaVaihe(0);    //Nyt saa valikoida nappulan
       if (this.pelaajanVuoro){
-
        pelaaja1.liikuttaa(pelilauta);
        this.pelaajanVuoro = false;
       }
