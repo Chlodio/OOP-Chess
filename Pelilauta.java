@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.text.DefaultCaret;
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -573,7 +574,9 @@ class Pelilauta{
 
 
   textBox.setEditable(false);
-  scrollPanel.setBounds(740, 500, 572,200);
+  scrollPanel.setBounds(740, 500, 532,200);
+  DefaultCaret caret = (DefaultCaret)textBox.getCaret();
+  caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
   mainPanel.add(scrollPanel);
   //jp.setPreferredSize(new Dimension(200, 200));
 
@@ -724,6 +727,7 @@ class Pelilauta{
 
 public static void tulosta(String s){
  textBox.append(s+"\n");
+
 }
 
 public static void tulosta(String s, int n){

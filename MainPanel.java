@@ -47,9 +47,9 @@ public class MainPanel extends JPanel{
 
 		/*Luo laatikon syödyille nappuloille*/
 		g.setColor(Color.decode("#000000"));
-		g.drawRect(739, 327, 521, 151);
+		g.drawRect(739, 327, 531, 151);
 		g.setColor(Color.decode("#6E7F80"));
-	    	g.fillRect(740, 328, 520, 150);
+	    g.fillRect(740, 328, 530, 150);
 	}
 
 	public void addInto(JLabel l){
