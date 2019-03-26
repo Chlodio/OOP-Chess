@@ -29,15 +29,15 @@ abstract class Nappula{
 	public void poistaLaudalta(){
 		if(this.annaVari()){
 			this.getIkoni().setLocation(
-				920+(38*valSuodut.size()),
-				500
+				736+(30*valSuodut.size()),
+				400
 			);
 			valSuodut.add(this);
 		}
 		else{
 			this.getIkoni().setLocation(
-				920+(38*musSuodut.size()),
-				400
+				736+(30*musSuodut.size()),
+				300
 			);
 			musSuodut.add(this);
 		}
@@ -69,9 +69,9 @@ abstract class Nappula{
 	JLabel label = new JLabel(n.getSymbooli());
     n.asetaGUI(label);
 	label.setForeground(Color.black);
-    n.getIkoni().setFont(new Font(label.getFont().getName(), 1, 100));
+    n.getIkoni().setFont(new Font(label.getFont().getName(), 1, 75));
     koko = n.getIkoni().getPreferredSize();
-    n.getIkoni().setBounds(100, 100, koko.width, koko.height);
+    n.getIkoni().setBounds(80, 80, koko.width, koko.height);
     Pelilauta.getMainPanel().addInto(n.getIkoni());
 
   }

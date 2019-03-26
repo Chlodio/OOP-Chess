@@ -108,9 +108,8 @@ class Pelilauta{
 
   public void asetaNappula(Nappula nappula, int sNo, int sAbc){
     lauta[sNo][sAbc] = nappula;
- System.out.println(nappula.annaNimi());
  if(nappula.getIkoni() != null){
-  nappula.getIkoni().setLocation(105+(sAbc*100), 745-(sNo*100));
+  nappula.getIkoni().setLocation(84+(sAbc*80), 596-(sNo*80));
  }
 
  //  nappula.getIkoni().setLocation(105+(sAbc*100), 45+(sNo*100));
@@ -185,11 +184,11 @@ class Pelilauta{
 
     int vanhaNo = annaSijaintiNo(nappula);
     int vanhaAbc = annaSijaintiAbc(nappula);
-    
+
     if(vanhaNo == sijaintiNo && vanhaAbc == sijaintiAbc){
       return;
     }
-    
+
     if(lauta[sijaintiNo][sijaintiAbc] != null){
       lauta[sijaintiNo][sijaintiAbc].asetaElossa(false); /* Testaa onko paikalla nappula ja poistaa jos on */
     }
@@ -538,7 +537,7 @@ class Pelilauta{
   frame.setResizable(false);
   frame.add(mainPanel);
   mainPanel.setLayout(null);
-  frame.setSize(1600, 900);
+  frame.setSize(1280, 720);
 
 
 
@@ -551,7 +550,7 @@ class Pelilauta{
   };
 
   exitButton.addActionListener(sulje);
-    exitButton.setBounds(25,25,45,40);
+    exitButton.setBounds(10,10,45,40);
      mainPanel.add(exitButton);
 
   JButton saveButton = new JButton("Tallenna");
@@ -574,7 +573,7 @@ class Pelilauta{
 
 
   textBox.setEditable(false);
-  scrollPanel.setBounds(925, 625, 650,250);
+  scrollPanel.setBounds(740, 500, 572,200);
   mainPanel.add(scrollPanel);
   //jp.setPreferredSize(new Dimension(200, 200));
 
@@ -610,17 +609,13 @@ class Pelilauta{
     public void actionPerformed(ActionEvent e) {
      Ruutu r = ((Ruutu) e.getSource());
      if (Tuomari.onkoVaihe(0)){
-          System.out.println(Ihmispelaaja.getOmanVarNap());
        if (Ihmispelaaja.getOmanVarNap()[r.haeY()][r.haeX()] == 1){
        Nappula nap = Peli.getSLauta().annaNappula(r.haeY(), r.haeX());
        Pelilauta pel = Ihmispelaaja.getTLauta();
        r.ekavalikoi();
-     //  int[][] siirrot = nap.siirrot(pel);
-      //  int[][] sallitutSiirrot = pel.testaaSiirrot(siirrot, nap);
        if( nap != null){
        Nappula.setValittu(nap);
        Tuomari.asetaVaihe(1);
-       System.out.println(Integer.toString(r.haeY())+" "+Integer.toString(r.haeX()));
        Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
       } else{ Tuomari.julistaLaittomaksi(); }
     } else{ Tuomari.julistaLaittomaksi(); }
@@ -636,7 +631,7 @@ class Pelilauta{
       }
      } else{
       /*Nappulan valikointi resetoituu*/
-      System.out.println("Tuomari: Nappulan vaihto.");
+      tulosta("Tuomari: Nappulan vaihto.");
       Ruutu.resetValittu();
       Pelilauta.normaalisoiRuudut();
       Tuomari.asetaVaihe(0);
@@ -645,16 +640,16 @@ class Pelilauta{
     }
   };
   for(int y = 0; y < 8; y++){
-   xc = 100; yc = 750-(y*100);
+   xc = 80; yc = 600-(y*80);
    for(int x = 0; x < 8; x++){
      id++;
      ruutuValikko.put(id, new Ruutu(id, y, x));
      ruutuValikko.get(id).addActionListener(valitseR);
-     ruutuValikko.get(id).setBounds(xc,yc,100,100);
+     ruutuValikko.get(id).setBounds(xc,yc,80,80);
      ruutuValikko.get(id).setBackground(Color.decode("#800080"));
      ruutuValikko.get(id).setContentAreaFilled(false);
         mp.add(ruutuValikko.get(id));
-     xc += 100;
+     xc += 80;
     }
 
    }
@@ -676,7 +671,7 @@ class Pelilauta{
     id++;
    }
   }
-  System.out.println("Mahdollisten siirtojen lukumäärä:"+" "+Integer.toString(xd));
+  tulosta("Mahdollisten siirtojen lukumäärä:"+" "+Integer.toString(xd));
  }
 
 
@@ -713,16 +708,16 @@ class Pelilauta{
   for (int x = 1; x <= 8; x++){
    ruutuMerkki.put(x, new JLabel(Character.toString(ruutuK[x-1])));
    mp.add(ruutuMerkki.get(x));
-   ruutuMerkki.get(x).setFont(new Font(ruutuMerkki.get(x).getFont().getName(), 1,25));
+   ruutuMerkki.get(x).setFont(new Font(ruutuMerkki.get(x).getFont().getName(), 1,20));
    sizexc = ruutuMerkki.get(x).getPreferredSize();
-   ruutuMerkki.get(x).setBounds(100, 100, sizexc.width, sizexc.height);
-   ruutuMerkki.get(x).setLocation(38+(100*x), 850);
+   ruutuMerkki.get(x).setBounds(80, 80, sizexc.width, sizexc.height);
+   ruutuMerkki.get(x).setLocation(30+(80*x), 680);
    ruutuMerkki.put(x+8, new JLabel(Integer.toString(9-x)));
    mp.add(ruutuMerkki.get(x+8));
-   ruutuMerkki.get(x+8).setFont(new Font(ruutuMerkki.get(x+8).getFont().getName(), 1,25));
+   ruutuMerkki.get(x+8).setFont(new Font(ruutuMerkki.get(x+8).getFont().getName(), 1,20));
    sizexc = ruutuMerkki.get(x+8).getPreferredSize();
-   ruutuMerkki.get(x+8).setBounds(100, 100, sizexc.width, sizexc.height);
-   ruutuMerkki.get(x+8).setLocation(75, 91+(100*(x-1)));
+   ruutuMerkki.get(x+8).setBounds(80, 80, sizexc.width, sizexc.height);
+   ruutuMerkki.get(x+8).setLocation(60, 72+(80*(x-1)));
   }
  }
 

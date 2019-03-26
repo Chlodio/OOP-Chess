@@ -7,7 +7,6 @@ class Ihmispelaaja implements Pelaaja {
 
  public static void setOmanVarNap(int[][] i){
   omanVarNap = i;
-  System.out.println(omanVarNap);
 
  }
 
@@ -55,7 +54,6 @@ class Ihmispelaaja implements Pelaaja {
    setOmanVarNap(omanVarinNappulat);
   }
   else if (Tuomari.onkoVaihe(1)){
-   System.out.println(Nappula.getValittu().annaNimi());
    Nappula nappula = Nappula.getValittu();  /*pelaajan valitsema nappula omanVarinNappuloista*/;
    int[][] siirrot = nappula.siirrot(pelilauta); /*JUHA: parametriksi tarvitaan Pelilauta*/
    int[][] sallitutSiirrot = pelilauta.testaaSiirrot(siirrot, nappula);
