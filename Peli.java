@@ -225,8 +225,10 @@ public class Peli {
        pelaaja2.liikuttaa(pelilauta);
        this.pelaajanVuoro = true;
     }
+      if (this.onShakkimatti()){
+       pelilauta.asetaShakkimatti();
+      }
    }
-  pelilauta.asetaShakkimatti();
  }
 
 
