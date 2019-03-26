@@ -16,10 +16,8 @@ public class Tuomari{
 	}
 
 	public static void asetaVaihe(int v){
-		System.out.println("Tuomari: Vaihe "+v+"!");
-		if (vaihe == v){
-			System.exit(0);
-		}
+		Pelilauta.tulosta("Tuomari: Vaihe ", v);
+	//	if (vaihe == v){ System.exit(0);}
 		vaihe = v;
 	}
 
@@ -28,7 +26,7 @@ public class Tuomari{
 	}
 
 	public static void julistaLaittomaksi(){
-		System.out.println("Tuomari: Laiton siirto !");
+		Pelilauta.tulosta("Tuomari: Laiton siirto !");
 	}
 
 }

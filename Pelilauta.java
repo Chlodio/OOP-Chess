@@ -4,6 +4,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BorderFactory;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -41,7 +43,8 @@ class Pelilauta{
 
 	public static ArrayList<JButton> valitutRuudut = new ArrayList();
 
-
+	public static JTextArea textBox = new JTextArea();
+	public static JScrollPane scrollPanel = new JScrollPane(textBox);
 
   /*
    * Pelilaudan attribuutit alla
@@ -564,9 +567,17 @@ class Pelilauta{
 		    }
 		};
 
+
 		saveButton.addActionListener(tallenna);
 	  	saveButton.setBounds(950,25,100,40);
     	mainPanel.add(saveButton);
+
+
+		textBox.setEditable(false);
+		scrollPanel.setBounds(925, 625, 650,250);
+		mainPanel.add(scrollPanel);
+		//jp.setPreferredSize(new Dimension(200, 200));
+
 
 		JButton loadButton = new JButton("Lataa");
 		ActionListener lataaPeli = new ActionListener() {
@@ -714,6 +725,16 @@ class Pelilauta{
 			ruutuMerkki.get(x+8).setLocation(75, 91+(100*(x-1)));
 		}
 	}
+
+
+public static void tulosta(String s){
+	textBox.append(s+"\n");
+}
+
+public static void tulosta(String s, int n){
+	textBox.append(s+Integer.toString(n)+"\n");
+}
+
 public void liikuItsari(Nappula nappula, int sijaintiNo, int sijaintiAbc){
 
     int vanhaNo = annaSijaintiNo(nappula);

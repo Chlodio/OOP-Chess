@@ -21,7 +21,7 @@ class Main{
   });
   Peli peli = new Peli();
   TPeli = peli;
-	 peli.asetaPeliAsetuksilla
+	 peli.asetaPeliAsetuksilla();
 	 peli.pelaa();
 
   //java.lang.System.exit(0);		//tarvitaanko me sulkeutumista, jos GUI hallitsee sitä? //Ei tarvita
