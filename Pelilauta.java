@@ -124,7 +124,7 @@ class Pelilauta{
     if( kuningas == null || torni == null){
     return false;
     }
-	  /*
+   /*
    * tarkastetaan liikkuminen ja shakki-tilanne
    */
     boolean t1 = kuningas.annaLiikkunut();
@@ -138,8 +138,8 @@ class Pelilauta{
     int torniNo = this.annaSijaintiNo(torni);
 
               /*
-   * Pitkä linnoitus. Tarkastetaan onko kuninkaan ja tornin välissä nappuloita
-   * Tarkastetaan siirtyykö Kuningas uhatun ruudun yli
+   * PitkÃ¤ linnoitus. Tarkastetaan onko kuninkaan ja tornin vÃ¤lissÃ¤ nappuloita
+   * Tarkastetaan siirtyykÃ¶ Kuningas uhatun ruudun yli
    * tarkastetaan johtaako linnoitus itsemurhaan
    */
 
@@ -150,8 +150,8 @@ class Pelilauta{
           return false;
         }
       }
-      boolean k1 = this.itsemurha(kuningas, 3, torniNo);
-      boolean k2 = this.itsemurha(kuningas, 2, torniNo);
+      boolean k1 = this.itsemurha(kuningas, torniNo, 3);
+      boolean k2 = this.itsemurha(kuningas, torniNo, 2);
       if (k1 || k2){
         return false;
       }
@@ -166,9 +166,8 @@ class Pelilauta{
           return false;
         }
       }
-      boolean k3 = this.itsemurha(kuningas, 5, torniNo);
-      boolean k4 = this.itsemurha(kuningas, 6, torniNo);
-      if (k3 || k4){
+      boolean k3 = this.itsemurha(kuningas, torniNo, 5);
+      if (k3){
         return false;
       }
     }
@@ -182,17 +181,22 @@ class Pelilauta{
    * Liiku-metodi olettaa, että sitä kutsutaan vain sallituilla siirroilla
    */
 
-  public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc){
+    public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc){
 
     int vanhaNo = annaSijaintiNo(nappula);
     int vanhaAbc = annaSijaintiAbc(nappula);
+    
+    if(vanhaNo == sijaintiNo && vanhaAbc == sijaintiAbc){
+      return;
+    }
+    
     if(lauta[sijaintiNo][sijaintiAbc] != null){
       lauta[sijaintiNo][sijaintiAbc].asetaElossa(false); /* Testaa onko paikalla nappula ja poistaa jos on */
     }
     asetaNappula(nappula, sijaintiNo, sijaintiAbc); ; /* asettaa nappulan uudelle paikalleen*/
-    nappula.asetaLiikkunut(); /* päivittää nappulan liikkunut -parametrin*/
+    nappula.asetaLiikkunut(); /* pÃ¤ivittÃ¤Ã¤ nappulan liikkunut -parametrin*/
     if (vanhaNo < 8 && vanhaAbc < 8){
-    	lauta[vanhaNo][vanhaAbc]= null; /* poistaa nappulan alkuperäiseltä paikaltaan*/
+     lauta[vanhaNo][vanhaAbc]= null; /* poistaa nappulan alkuperÃ¤iseltÃ¤ paikaltaan*/
     }
     boolean onkoSotilas = nappula instanceof Sotilas;
     if (onkoSotilas && (sijaintiNo == 0 || sijaintiNo == 7)){
@@ -202,20 +206,16 @@ class Pelilauta{
 
     if (nappula instanceof Kuningas && Math.abs(vanhaAbc - sijaintiAbc)>1){
       if(sijaintiNo == 0 && sijaintiAbc == 2){
-        lauta[0][3] = lauta[0][0];
-        lauta[0][0] = null;
+        liiku(lauta[0][0], 0,3);
       }
       if(sijaintiNo == 0 && sijaintiAbc == 6){
-        lauta[0][5] = lauta[0][7];
-        lauta[0][7] = null;
+        liiku(lauta[0][7], 0,5);
       }
       if(sijaintiNo == 7 && sijaintiAbc == 2){
-        lauta[7][3] = lauta[7][0];
-        lauta[7][0] = null;
+        liiku(lauta[7][0], 7,3);
       }
       if(sijaintiNo == 7 && sijaintiAbc == 6){
-        lauta[7][5] = lauta[7][7];
-        lauta[7][7] = null;
+        liiku(lauta[7][7], 7,5);
       }
       }
   }
@@ -229,16 +229,16 @@ class Pelilauta{
    * Metodi palauttaa matriisin, jossa ykkönen merkkaa mahdollista siirtoa
    */
 
-  public int[][] testaaSiirrot(int[][] siirrot, Nappula nappula){
+ public int[][] testaaSiirrot(int[][] siirrot, Nappula nappula){
     boolean onkoRatsu = nappula instanceof Ratsu; /* Ratsule tarvitaan vain testi 1 */
     int sijaintiNo = annaSijaintiNo(nappula); /* kutsutaan apumetodia (alla) */
     int sijaintiAbc = annaSijaintiAbc(nappula); /* kutsutaan apumetodia (alla) */
-    boolean valkoinen = nappula.annaVari(); /* testataan minkä värinen nappula on siirtymässä */
+    boolean valkoinen = nappula.annaVari(); /* testataan minkÃ¤ vÃ¤rinen nappula on siirtymÃ¤ssÃ¤ */
     int[][] sallitutSiirrot = new int[8][8]; /* luodaan uusi matriisi sallituista siirroista */
 
       /*
-   * Testataan onko mahdollisissa siirtoruuduissa oma tai vastustajan nappula vai onko ruutu tyhjä
-   * 0 == ei sallittu, 1 == sallittu, 2 == sallittu - syö vastustajan
+   * Testataan onko mahdollisissa siirtoruuduissa oma tai vastustajan nappula vai onko ruutu tyhjÃ¤
+   * 0 == ei sallittu, 1 == sallittu, 2 == sallittu - syÃ¶ vastustajan
    */
 
     for(int i = 0; i < 8; i++){
@@ -246,7 +246,7 @@ class Pelilauta{
         if(siirrot[i][a] != 1){
           sallitutSiirrot[i][a] = 0; /* siirto ei mahdollinen nappulalle */
         } else if(lauta[i][a] == null) {
-          sallitutSiirrot[i][a] = 1; /* siirto on mahdollinen nappulalle eikä ruudussa ole toista nappulaa */
+          sallitutSiirrot[i][a] = 1; /* siirto on mahdollinen nappulalle eikÃ¤ ruudussa ole toista nappulaa */
         } else if(lauta[i][a].annaVari() != valkoinen) {
           sallitutSiirrot[i][a] = 2; /* siirto on mahdollinen, ruudussa on vastustajan nappula */
         } else {
@@ -255,22 +255,22 @@ class Pelilauta{
       }
     }
           /*
-   * Testataan onko reitillä muita nappuloita. Ratsulle testiä ei tarvita. Kuljetaan kaikki kahdeksan mahdollista
-   * suuntaa. Jos reitillä on matkalla ruutu, johon ei voi siirtyä, kulkeminen päättyy. Jos reitillä on syötävä
-   * nappula, kulku päättyy. Kuljetut ruudut merkataan numerolla 3.
+   * Testataan onko reitillÃ¤ muita nappuloita. Ratsulle testiÃ¤ ei tarvita. Kuljetaan kaikki kahdeksan mahdollista
+   * suuntaa. Jos reitillÃ¤ on matkalla ruutu, johon ei voi siirtyÃ¤, kulkeminen pÃ¤Ã¤ttyy. Jos reitillÃ¤ on syÃ¶tÃ¤vÃ¤
+   * nappula, kulku pÃ¤Ã¤ttyy. Kuljetut ruudut merkataan numerolla 3.
    */
 
-   int b = sijaintiNo; /* aloitetaan nappulan nykyisestä paikasta */
+   int b = sijaintiNo; /* aloitetaan nappulan nykyisestÃ¤ paikasta */
    int c = sijaintiAbc;
 
    if(onkoRatsu == false){
      while (b>-1 && b<7 && c>-1 && c<8){ /* jatketaan kulkemista kunnes tullaan laudan reunalle */
-       b++; /* ensimmäinen kahdeksasta suunnasta */
+       b++; /* ensimmÃ¤inen kahdeksasta suunnasta */
        if (sallitutSiirrot[b][c] == 0){
          break; /* suuntaan ei voinut kulkea */
        } else if (sallitutSiirrot[b][c] == 2){
          sallitutSiirrot[b][c] = 3;
-         break; /* suunnassa oli syötävä nappula, pidemmälle ei voi mennä, merkataan ruutu 3:lla */
+         break; /* suunnassa oli syÃ¶tÃ¤vÃ¤ nappula, pidemmÃ¤lle ei voi mennÃ¤, merkataan ruutu 3:lla */
        } else {
          sallitutSiirrot[b][c] = 3; /* suuntaan voi kulkea, merkataan ruutu ja jatketaan */
        }
@@ -340,7 +340,7 @@ class Pelilauta{
        b = sijaintiNo;
        c = sijaintiAbc;
 
-       while (b>-1 && b<7 && c>0 && c<-1){
+       while (b>-1 && b<7 && c>-1 && c<7){
        b++;
        c++;
        if (sallitutSiirrot[b][c] == 0){
@@ -384,7 +384,7 @@ class Pelilauta{
          sallitutSiirrot[b][c] = 3;
        }
      }
-   } else {                        /* merkataan hevosen kaikki siirrot 3:lla sillä se voi ylittää nappuloita */
+   } else {                        /* merkataan hevosen kaikki siirrot 3:lla sillÃ¤ se voi ylittÃ¤Ã¤ nappuloita */
       for(int i = 0; i < 8; i++){
        for(int a = 0; a < 8; a++){
          if (sallitutSiirrot[i][a] >0){
@@ -393,25 +393,25 @@ class Pelilauta{
        }
       }
    }
-    /* testataan onko linnoitus mahdollista ja merkitään siirrot kuninkaalle*/
+    /* testataan onko linnoitus mahdollista ja merkitÃ¤Ã¤n siirrot kuninkaalle*/
 
    if(nappula instanceof Kuningas){
      if(linnoitusMahdollista(nappula, annaNappula(0,0))){
-       sallitutSiirrot[0][1]=3;
+       sallitutSiirrot[0][2]=3;
      }
      if(linnoitusMahdollista(nappula, annaNappula(0,7))){
-          sallitutSiirrot[0][5]=3;
+          sallitutSiirrot[0][6]=3;
      }
      if(linnoitusMahdollista(nappula, annaNappula(7,0))){
-          sallitutSiirrot[7][1]=3;
+          sallitutSiirrot[7][2]=3;
      }
      if(linnoitusMahdollista(nappula, annaNappula(7,7))){
-          sallitutSiirrot[7][5]=3;
+          sallitutSiirrot[7][6]=3;
      }
         }
 
              /*
-   * Siivotaan matriisi niin, että sallitut siirrot ovat ykkösiä ja muut nollia kaikille nappuloille
+   * Siivotaan matriisi niin, ettÃ¤ sallitut siirrot ovat ykkÃ¶siÃ¤ ja muut nollia kaikille nappuloille
    */
 
    for(int i = 0; i < 8; i++){
@@ -423,7 +423,7 @@ class Pelilauta{
          }
        }
    }
-	               /*
+                /*
    * Poistetaan itsemurhaan johtavat siirrot
    */
    for(int x = 0; x<8; x++){
@@ -433,7 +433,7 @@ class Pelilauta{
          }
      }
    }
-
+   siirrot[sijaintiNo][sijaintiAbc] = 0;
    return sallitutSiirrot;
   }
 
