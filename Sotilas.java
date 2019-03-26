@@ -49,35 +49,39 @@ class Sotilas extends Nappula{
     int sNo = lauta.annaSijaintiNo(this);
     int sAbc = lauta.annaSijaintiAbc(this);
     int[][] siirrot = new int[8][8];
-    if(this.vari){
-    if (sNo < 7){
-      siirrot[sNo+1][sAbc]=1;
-      if (this.liikkunut == false){
-        siirrot[sNo+2][sAbc] = 1;
+    
+    if(this.vari){                                             // valkoisen siirrot
+   
+      if (sNo < 7 && lauta.annaNappula(sNo+1,sAbc)==null){       // voi mennä ylös && edessä ei nappulaa
+      siirrot[sNo+1][sAbc]=1;                                   // ota askel ylös
+      if (this.liikkunut == false && lauta.annaNappula(sNo+2,sAbc)==null){  // ei liikkunut ja edessä 2 vapaata
+        siirrot[sNo+2][sAbc] = 1;                                // ota kaksi askelta ylös
       }
-      if(sAbc > 0){
+    }
+      if(sAbc > 0){                                               // ei vasemmassa reunassa
         Nappula n1 = lauta.annaNappula(sNo+1,sAbc-1);
-        if (n1 != null){
-          if (this.vari != n1.annaVari()){
-            siirrot[sNo+1][sAbc-1] = 1;
+        if (n1 != null){                                         // vasemmassa yläviistossa nappula
+          if (this.vari != n1.annaVari()){                          // nappulan väri eri
+            siirrot[sNo+1][sAbc-1] = 1;                        // liiku vasenylä
           }
         }
       }
-      if(sAbc < 6){
-        Nappula n2 = lauta.annaNappula(sNo+1,sAbc+1);
-        if (n2 != null){
-          if (this.vari != n2.annaVari()){
-            siirrot[sNo+1][sAbc+1] = 1;
+      if(sAbc < 7){                                               // ei oikeassa reunassa
+        Nappula n2 = lauta.annaNappula(sNo+1,sAbc+1);             
+        if (n2 != null){                                           // oikea ylä on nappula
+          if (this.vari != n2.annaVari()){                           // nappulan väri on eri
+            siirrot[sNo+1][sAbc+1] = 1;                             // askel oikea ylä
           }
         }
       }
     }
-    }
+    
     if(!this.vari){
-      if (sNo > 0){
+      if (sNo > 0 && lauta.annaNappula(sNo-1,sAbc)==null){
       siirrot[sNo-1][sAbc]=1;
-      if (this.liikkunut == false){
+      if (this.liikkunut == false && lauta.annaNappula(sNo-2,sAbc)==null){
         siirrot[sNo-2][sAbc] = 1;
+      }
       }
       if(sAbc > 0){
         Nappula n1 = lauta.annaNappula(sNo-1,sAbc-1);
@@ -87,7 +91,7 @@ class Sotilas extends Nappula{
           }
         }
       }
-      if(sAbc < 6){
+      if(sAbc < 7){
         Nappula n2 = lauta.annaNappula(sNo-1,sAbc+1);
         if (n2 != null){
           if (this.vari != n2.annaVari()){
@@ -96,7 +100,7 @@ class Sotilas extends Nappula{
         }
       }
     }
-    }
+    
 
     return siirrot;
   }
