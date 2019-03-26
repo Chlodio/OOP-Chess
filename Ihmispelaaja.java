@@ -59,7 +59,7 @@ class Ihmispelaaja implements Pelaaja {
    Pelilauta.varitaRuudut(sallitutSiirrot);
   }
   else if (Tuomari.onkoVaihe(2)){
-//   Tuomari.asetaVaihe(-1);       /*Toisen vuorolla ei tarvi koskea ruutuihin*/
+    Tuomari.asetaVaihe(-1);       /*Toisen vuorolla ei tarvi koskea ruutuihin*/
    Nappula nappula = Nappula.getValittu();
    int uusiSijaintiNo = Ruutu.valittu.haeY();   /*pelaajan valitsema uusi sijainti sallitutSiirroista*/;
    int uusiSijaintiAbc =  Ruutu.valittu.haeX(); /*pelaajan valitsema uusi sijainti sallitutSiirroista*/;
