@@ -24,7 +24,7 @@ public class Peli {
  public static Pelilauta getSLauta(){
   return SLauta;
  }
-
+ 
  public boolean tallennettuToimivaPeli() throws IOException{
   BufferedReader br = new BufferedReader(new FileReader("tallennettuPeli.txt"));
   ArrayList<String> riveja = new ArrayList<String>();
@@ -118,8 +118,8 @@ public class Peli {
   pelilauta.asetaNappula(new Kuningatar(true, false), 0, 3);
   pelilauta.asetaNappula(new Kuningatar(false, false), 7, 3);
   this.pelaajanVuoro = true;
-  this.pelaaja1 = new Ihmispelaaja();
-  this.pelaaja2 = new Ihmispelaaja();
+  this.pelaaja1 = new Ihmispelaaja(true);
+  this.pelaaja2 = new Ihmispelaaja(false);
 
  }
 
@@ -137,13 +137,13 @@ public class Peli {
   br.close();
   String[] rivit = riveja.toArray(new String[riveja.size()]);
   this.pelaajanVuoro = Boolean.parseBoolean(rivit[0]);
-  this.pelaaja1 = new Ihmispelaaja();
+  this.pelaaja1 = new Ihmispelaaja(true);
   if (Boolean.parseBoolean(rivit[1])){
    pelilauta.asetaShakki(true);
   }
   String pelaaja2Nimi = rivit[2];
   if (pelaaja2Nimi == "ihmispelaaja"){
-   this.pelaaja2 = new Ihmispelaaja();
+   this.pelaaja2 = new Ihmispelaaja(false);
   }
   else {
    this.pelaaja2 = new Tietokonepelaaja();
@@ -222,12 +222,14 @@ public class Peli {
       Tuomari.asetaVaihe(0);    //Nyt saa valikoida nappulan
     }
     if (this.pelaajanVuoro){
-      pelaaja1.liikuttaa(pelilauta);
       this.pelaajanVuoro = false;
+      pelaaja1.liikuttaa(pelilauta);
+      
     }
     else {
-      pelaaja2.liikuttaa(pelilauta);
       this.pelaajanVuoro = true;
+      pelaaja2.liikuttaa(pelilauta);
+      
     }
  }
   else {

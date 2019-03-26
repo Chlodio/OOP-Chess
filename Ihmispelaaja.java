@@ -1,5 +1,6 @@
 class Ihmispelaaja implements Pelaaja {
 
+ private boolean vari;
  private static int[][] omanVarNap;
  private static Pelilauta TLauta;
  private static Ihmispelaaja TPelaaja;
@@ -30,7 +31,9 @@ class Ihmispelaaja implements Pelaaja {
   return TPelaaja;
  }
 
- public Ihmispelaaja(){}
+ public Ihmispelaaja(boolean vari){
+   this.vari = vari;
+ }
 
  public String annaNimi(){
   return "ihmispelaaja";
@@ -44,7 +47,7 @@ class Ihmispelaaja implements Pelaaja {
    int[][] omanVarinNappulat = new int[8][8];
    for(int i = 0; i <= 7; i++){
     for(int j = 0; j <= 7; j++){
-     if (pelilauta.annaNappula(i,  j) != null && pelilauta.annaNappula(i, j).annaVari()){
+     if (pelilauta.annaNappula(i,  j) != null && pelilauta.annaNappula(i, j).annaVari() == this.vari){
       omanVarinNappulat[i][j] = 1;
      }
     }
