@@ -119,7 +119,7 @@ public class Peli {
   pelilauta.asetaNappula(new Kuningatar(false, false), 7, 3);
   this.pelaajanVuoro = true;
   this.pelaaja1 = new Ihmispelaaja();
-  this.pelaaja2 = new Ihmispelaaja();
+  this.pelaaja2 = new Tietokonepelaaja();
 
  }
 

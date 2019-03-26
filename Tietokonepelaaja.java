@@ -19,8 +19,10 @@ class Tietokonepelaaja implements Pelaaja {
   int[][] vastustajanNappulat = new int[8][8];
   for(int i = 0; i < 7; i++){
    for(int j = 0; i < 7; j++){
-    if (pelilauta.annaNappula(i, j) != null && pelilauta.annaNappula(i, j).annaVari() == true){
-     omanVarinNappulat[i][j] = 1;
+    if (pelilauta.annaNappula(i, j) != null){
+      if (pelilauta.annaNappula(i, j).annaVari() == false){
+        omanVarinNappulat[i][j] = 1;
+      }
     }
    }
   }
