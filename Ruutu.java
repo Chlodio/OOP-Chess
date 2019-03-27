@@ -61,8 +61,10 @@ public class Ruutu extends JButton{
 	}
 
 	public static void resetEkavalittu(){
-		ekaValinta.setBorder(UIManager.getBorder("Button.border"));
-		ekaValinta = null;
+		if (ekaValinta != null){
+			ekaValinta.setBorder(UIManager.getBorder("Button.border"));
+			ekaValinta = null;
+		}
 	}
 
 	public static Ruutu haeEkavalittu(){

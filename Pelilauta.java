@@ -551,8 +551,63 @@ class Pelilauta{
   };
 
   exitButton.addActionListener(sulje);
-    exitButton.setBounds(10,10,45,40);
-     mainPanel.add(exitButton);
+  exitButton.setBounds(10,10,45,40);
+  mainPanel.add(exitButton);
+
+  JButton singleButton = new JButton("Yksinpeli");
+  ActionListener yksinpeli = new ActionListener() {
+  	@Override
+   public void actionPerformed(ActionEvent e) {
+         Main.getTPeli().asetaPeliAsetuksilla("yksinpeli");
+         Pelilauta.tulosta("Uusi yksinpeli aloitettu.");
+  	}
+  };
+
+  singleButton.addActionListener(yksinpeli);
+  singleButton.setBounds(740,25,100,40);
+  mainPanel.add(singleButton);
+
+  JButton multiButton = new JButton("Moninepeli");
+  ActionListener moninpeli = new ActionListener() {
+  	@Override
+   public void actionPerformed(ActionEvent e) {
+	   Main.getTPeli().asetaPeliAsetuksilla("kaksinpeli");
+       Pelilauta.tulosta("Uusi kaksinpeli aloitettu.");
+  	}
+  };
+
+  multiButton.addActionListener(moninpeli);
+  multiButton.setBounds(845,25,120,40);
+  mainPanel.add(multiButton);
+
+  JButton newGameButton = new JButton("Uusi peli");
+  ActionListener uusPeliB = new ActionListener() {
+  	@Override
+   public void actionPerformed(ActionEvent e) {
+	    Main.getTPeli().pelaa();
+  	}
+  };
+
+  newGameButton.addActionListener(uusPeliB);
+  newGameButton.setBounds(970,25,100,40);
+  mainPanel.add(newGameButton);
+
+  JButton loadButton = new JButton("Lataa");
+  ActionListener lataaPeli = new ActionListener() {
+   @Override
+   public void actionPerformed(ActionEvent e) {
+	   try {
+         Main.getTPeli().lataaPeliAsetuksilla();
+         Pelilauta.tulosta("Tallennettua peli� jatketaan...");
+       }
+       catch (IOException er){}
+
+   }
+  };
+
+  loadButton.addActionListener(lataaPeli);
+  loadButton.setBounds(1075,25,100,40);
+  mainPanel.add(loadButton);
 
   JButton saveButton = new JButton("Tallenna");
   ActionListener tallenna = new ActionListener() {
@@ -569,33 +624,14 @@ class Pelilauta{
 
 
   saveButton.addActionListener(tallenna);
-    saveButton.setBounds(950,25,100,40);
+    saveButton.setBounds(1180,25,95,40);
      mainPanel.add(saveButton);
-
 
   textBox.setEditable(false);
   scrollPanel.setBounds(740, 500, 532,200);
   DefaultCaret caret = (DefaultCaret)textBox.getCaret();
   caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
   mainPanel.add(scrollPanel);
-  //jp.setPreferredSize(new Dimension(200, 200));
-
-
-  JButton loadButton = new JButton("Lataa");
-  ActionListener lataaPeli = new ActionListener() {
-   @Override
-   public void actionPerformed(ActionEvent e) {
-    try{
-     if (Main.getTPeli() != null){
-      Main.getTPeli().lataaPeliAsetuksilla();
-     }
-    }
-    catch(IOException er){}
-   }
-  };
-  loadButton.addActionListener(lataaPeli);
-  loadButton.setBounds(1075,25,100,40);
-  mainPanel.add(loadButton);
 
   buildSelectors(mainPanel);
   buildSideLabels(mainPanel);

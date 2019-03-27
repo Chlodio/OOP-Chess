@@ -13,6 +13,7 @@ import java.io.IOException;
 
 class Main{
  private static Peli TPeli;
+ public static boolean tallennettuPeli;
  public static void main(String[] args){
   SwingUtilities.invokeLater(new Runnable() {
    public void run(){
@@ -28,38 +29,14 @@ class Main{
   catch (IOException e){
     tallennettuPeli = false;
   }
-  if (args.length < 2 || args.length > 2){
-    System.out.println("Aseta haluamasi asetukset.");
-    System.exit(0);
-  }
-  else if (!tallennettuPeli || args[1].equals("uusipeli")){
-    if (args[0].equals("yksinpeli")){
-      peli.asetaPeliAsetuksilla("yksinpeli");
-      Pelilauta.tulosta("Uusi yksinpeli aloitettu.");
-    }
-    else{
-      peli.asetaPeliAsetuksilla("kaksinpeli");
-      Pelilauta.tulosta("Uusi kaksinpeli aloitettu.");
-    }
-  }
-  else if (tallennettuPeli && args[1].equals("tallennettupeli")){
-    try {
-      peli.lataaPeliAsetuksilla();
-      Pelilauta.tulosta("Tallennettua peli� jatketaan...");
-    }
-    catch (IOException e){}
-  }
-  else {
-    Pelilauta.tulosta("Uusi kaksinpeli aloitettu.");
-    peli.asetaPeliAsetuksilla("kaksinpeli");
-  }
-  peli.pelaa();
-  try {
-    Thread.sleep(5000);
-  }
-  catch(InterruptedException e) {
-    System.out.println("got interrupted!");
-  }
+
+//  peli.pelaa();
+//  try {
+//    Thread.sleep(5000);
+//  }
+//  catch(InterruptedException e) {
+ //   System.out.println("got interrupted!");
+ // }
 
  }
 
