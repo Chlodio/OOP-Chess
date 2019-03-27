@@ -35,12 +35,15 @@ public class Peli {
  }
   br.close();
   String[] rivit = riveja.toArray(new String[riveja.size()]);
-  for (int i = 0; i < 5; i++){
-   if (rivit[i] == null){
+  if (rivit.length < 5){
+    System.out.println("checkpoint1");
     return false;
-   }
   }
-  if (rivit[0] != "true" && rivit[0] != "false" || rivit[1] != "true" && rivit[1] != "false" || rivit[2] != "tietokonepelaaja" && rivit[2] != "ihmispelaaja"){
+  if ((!rivit[0].equals("true") && !rivit[0].equals("false")) || (!rivit[1].equals("true") && !rivit[1].equals("false")) || (!rivit[2].equals("tietokonepelaaja") && !rivit[2].equals("ihmispelaaja"))){
+    System.out.println("checkpoint2");
+    System.out.println(rivit[0]);    
+    System.out.println(rivit[1]);
+    System.out.println(rivit[2]);
    return false;
   }
   int kuninkaat = 0;
@@ -49,28 +52,34 @@ public class Peli {
    int paikka1 = Integer.parseInt(tiedot[0]);
    int paikka2 = Integer.parseInt(tiedot[1]);
    if (tiedot.length != 5){
+     System.out.println("checkpoint3");
     return false;
    }
    else if (paikka1 < 0 || paikka1 > 7){
+     System.out.println("checkpoint4");
     return false;
    }
    else if (paikka2 < 0 || paikka2 > 7){
+     System.out.println("checkpoint5");
     return false;
    }
-   else if (tiedot[3] != "true" && tiedot[3] != "false"){
+   else if (!tiedot[3].equals("true") && !tiedot[3].equals("false"))
+   {System.out.println("checkpoint6");
     return false;
    }
-   else if (tiedot[4] != "true" && tiedot[4] != "false"){
+   else if (!tiedot[4].equals("true") && !tiedot[4].equals("false")){
+     System.out.println("checkpoint7");
     return false;
    }
-   else if (tiedot[2] == "kuningas"){
-    kuninkaat +=1;
+   else if (tiedot[2].equals("kuningas")){
+    kuninkaat += 1;
    }
   }
   if (kuninkaat == 2){
    return true;
   }
   else{
+    System.out.println("checkpoint9");
    return false;
   }
  }
@@ -80,7 +89,7 @@ public class Peli {
  /*JUHA: konstuktori tarvitsi vain boolean varin, lisasin konstruktoriin myos boolean onLiikkunut.*/
  /*JUHA: Nappulat asetatetaan laudalle Pelilaudan metodilla asetaNappula(Nappula, int, int).*/
 
- public void asetaPeliAsetuksilla(){
+ public void asetaPeliAsetuksilla(String pelimuoto){
   Pelilauta pelilauta = new Pelilauta();
   setSLauta(pelilauta);
   this.pelilauta = pelilauta;
@@ -119,13 +128,19 @@ public class Peli {
   pelilauta.asetaNappula(new Kuningatar(false, false), 7, 3);
   this.pelaajanVuoro = true;
   this.pelaaja1 = new Ihmispelaaja(true);
-  this.pelaaja2 = new Ihmispelaaja(false);
+  if (pelimuoto == "kaksinpeli"){
+    this.pelaaja2 = new Ihmispelaaja(false);
+  }
+  else {
+    this.pelaaja2 = new Tietokonepelaaja();
+  }
 
  }
 
 
  public void lataaPeliAsetuksilla() throws IOException{
   Pelilauta pelilauta = new Pelilauta();
+  setSLauta(pelilauta);
   this.pelilauta = pelilauta;
   BufferedReader br = new BufferedReader(new FileReader("tallennettuPeli.txt"));
   ArrayList<String> riveja = new ArrayList<String>();
@@ -138,11 +153,9 @@ public class Peli {
   String[] rivit = riveja.toArray(new String[riveja.size()]);
   this.pelaajanVuoro = Boolean.parseBoolean(rivit[0]);
   this.pelaaja1 = new Ihmispelaaja(true);
-  if (Boolean.parseBoolean(rivit[1])){
-   pelilauta.asetaShakki(true);
-  }
+  
   String pelaaja2Nimi = rivit[2];
-  if (pelaaja2Nimi == "ihmispelaaja"){
+  if (pelaaja2Nimi.equals("ihmispelaaja")){
    this.pelaaja2 = new Ihmispelaaja(false);
   }
   else {
@@ -150,23 +163,22 @@ public class Peli {
   }
   for (int i = 3; i < rivit.length; i++){
    String[] tiedot = rivit[i].split(",");
-   ArrayList<Nappula> nappulat = new ArrayList<Nappula>();
-   if (tiedot[2] == "sotilas"){
+   if (tiedot[2].equals("sotilas")){
     pelilauta.asetaNappula(new Sotilas(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
    }
-   if (tiedot[2] == "torni"){
+   if (tiedot[2].equals("torni")){
     pelilauta.asetaNappula(new Torni(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
    }
-   if (tiedot[2] == "hevonen"){
+   if (tiedot[2].equals("ratsu")){
     pelilauta.asetaNappula(new Ratsu(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
    }
-   if (tiedot[2] == "lahetti"){
+   if (tiedot[2].equals("lahetti")){
     pelilauta.asetaNappula(new Lahetti(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
    }
-   if (tiedot[2] == "kuningatar"){
+   if (tiedot[2].equals("kuningatar")){
     pelilauta.asetaNappula(new Kuningatar(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
    }
-   if (tiedot[2] == "kuningas"){
+   if (tiedot[2].equals("kuningas")){
     pelilauta.asetaNappula(new Kuningas(Boolean.parseBoolean(tiedot[3]), Boolean.parseBoolean(tiedot[4])), Integer.parseInt(tiedot[0]), Integer.parseInt(tiedot[1]));
    }
   }
@@ -179,11 +191,10 @@ public class Peli {
   out.println(this.pelaajanVuoro);
   out.println(pelilauta.annaShakki());
   out.println(this.pelaaja2.annaNimi());
-  for (int i = 0; i < 7; i++){
-   for (int j = 0; j < 7; j++){
+  for (int i = 0; i < 8; i++){
+   for (int j = 0; j < 8; j++){
     Nappula nappula = this.pelilauta.annaNappula(i, j);
     if (nappula != null){
-     /*JUHA: muokkasin nappula.annaLiikkunut.*/
       String s = Integer.toString(i) + ","+ Integer.toString(j)+ ","+ nappula.annaNimi()+ ","+ Boolean.toString(nappula.annaVari())+ ","+ Boolean.toString(nappula.annaLiikkunut());
      out.println(s);
     }
@@ -234,13 +245,13 @@ public class Peli {
  }
   else {
     pelilauta.asetaShakkimatti();
-	if (this.pelaajanVuoro){
-		Pelilauta.tulosta("Tuomari: Valkoinen pelaaja voittaa!");
-	}
-	else{
-		Pelilauta.tulosta("Tuomari: Musta pelaaja voittaa!");
-	}
-	Pelilauta.tulosta("Tuomari: congratulations!");
+ if (this.pelaajanVuoro){
+  Pelilauta.tulosta("Tuomari: Valkoinen pelaaja voittaa!");
+ }
+ else{
+  Pelilauta.tulosta("Tuomari: Musta pelaaja voittaa!");
+ }
+ Pelilauta.tulosta("Tuomari: congratulations!");
   }
  }
 

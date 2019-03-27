@@ -21,35 +21,7 @@ class Main{
   });
   Peli peli = new Peli();
   TPeli = peli;
-  boolean tallennettuPeli;
-  try {
-    tallennettuPeli = peli.tallennettuToimivaPeli();
-  }
-  catch (IOException e){
-    tallennettuPeli = false;
-  }
-  if (args.length < 2 || args.length > 2){
-    System.out.println("Aseta haluamasi asetukset.");
-    System.exit(0);
-  }
-  else if (!tallennettuPeli || args[1].equals("uusipeli")){
-    if (args[0] == "tietokonepeli"){
-      peli.asetaPeliAsetuksilla("yksinpeli");
-    }
-    else{
-      peli.asetaPeliAsetuksilla("kaksinpeli");
-    }
-  }
-  else if (tallennettuPeli && args[1].equals("tallennettupeli")){
-    try {
-      System.out.println("mit‰ nyt taas");
-      peli.lataaPeliAsetuksilla();
-    }
-    catch (IOException e){}
-  }
-  else {
-    peli.asetaPeliAsetuksilla("kaksinpeli");
-  }
+  peli.asetaPeliAsetuksilla();
   peli.pelaa();
   try {
     Thread.sleep(5000);
@@ -58,6 +30,7 @@ class Main{
     System.out.println("got interrupted!");
   }
 
+  //java.lang.System.exit(0);  //tarvitaanko me sulkeutumista, jos GUI hallitsee sit√§? //Ei tarvita
  }
 
  public static Peli getTPeli(){
