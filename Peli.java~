@@ -231,19 +231,19 @@ public class Peli {
   if (!onShakkimatti()){
     
     if (this.pelaajanVuoro){
-      this.pelaajanVuoro = false;
       Tuomari.asetaVaihe(0);
       pelaaja1.liikuttaa(pelilauta);
+      this.pelaajanVuoro = false;
     }
     else {
       if (pelaaja2.annaNimi().equals("ihmispelaaja")){
-        this.pelaajanVuoro = true;
         Tuomari.asetaVaihe(0);
         pelaaja2.liikuttaa(pelilauta);
+        this.pelaajanVuoro = true;
       }
       else{
-        this.pelaajanVuoro = true;
         pelaaja2.liikuttaa(pelilauta);
+        this.pelaajanVuoro = true;
       }
     }
   }
