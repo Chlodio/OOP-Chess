@@ -1,15 +1,22 @@
 import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.UIManager;
+
 
 /*En keksi parempaa tapaa saada id:n GUI:sta, niin annan joka ruudun GUI:ille iiden joka vastaa sen hashmap keyta*/
 
 public class Ruutu extends JButton{
 	private int id;
 	public static Ruutu valittu;
-	public static Ruutu ekaValinta;
+	public static Ruutu ekaValinta = null;
 	private int yk;
 	private int xk;
 	private boolean sallittu;
-
+	private final static Color sVari = new Color(0.5f, 0f, 0.5f, .5f);
+	private final static Border eBorder = new LineBorder(Color.BLACK, 3);
+//	private final static Color eVari = new Color(0.25f, 0.25f, 0.25f, .5f);
 	public Ruutu(int id, int y, int x){
 		super();
 	//	super(Integer.toString(y)+" "+Integer.toString(x));
@@ -17,12 +24,13 @@ public class Ruutu extends JButton{
 		this.yk = y;
 		this.xk = x;
 		this.sallittu = false;
+		this.setBackground(sVari);
+		//this.setBorder(nBorder);
 	}
 
 	public int getId(){
 		return this.id;
 	}
-
 
 	public int haeX(){
 		return this.xk;
@@ -47,10 +55,13 @@ public class Ruutu extends JButton{
 	}
 
 	public void ekavalikoi(){
+	//	if(ekaValinta != null){ resetEkavalittu(); }
 		ekaValinta = this;
+		this.setBorder(eBorder);
 	}
 
 	public static void resetEkavalittu(){
+		ekaValinta.setBorder(UIManager.getBorder("Button.border"));
 		ekaValinta = null;
 	}
 

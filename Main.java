@@ -45,7 +45,7 @@ class Main{
   else if (tallennettuPeli && args[1].equals("tallennettupeli")){
     try {
       peli.lataaPeliAsetuksilla();
-      Pelilauta.tulosta("Tallennettua peliä jatketaan...");
+      Pelilauta.tulosta("Tallennettua peliï¿½ jatketaan...");
     }
     catch (IOException e){}
   }
