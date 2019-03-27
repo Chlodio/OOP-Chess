@@ -153,7 +153,7 @@ public class Peli {
   String[] rivit = riveja.toArray(new String[riveja.size()]);
   this.pelaajanVuoro = Boolean.parseBoolean(rivit[0]);
   this.pelaaja1 = new Ihmispelaaja(true);
-  
+  pelilauta.asetaShakki(Boolean.parseBoolean(rivit[1]));
   String pelaaja2Nimi = rivit[2];
   if (pelaaja2Nimi.equals("ihmispelaaja")){
    this.pelaaja2 = new Ihmispelaaja(false);
@@ -229,20 +229,24 @@ public class Peli {
 
  public void pelaa(){
   if (!onShakkimatti()){
-    if (Tuomari.onkoVaihe(-1)){
-      Tuomari.asetaVaihe(0);    //Nyt saa valikoida nappulan
-    }
+    
     if (this.pelaajanVuoro){
-      this.pelaajanVuoro = false;
+      Tuomari.asetaVaihe(0);
       pelaaja1.liikuttaa(pelilauta);
-
+      this.pelaajanVuoro = false;
     }
     else {
-      this.pelaajanVuoro = true;
-      pelaaja2.liikuttaa(pelilauta);
-
+      if (pelaaja2.annaNimi().equals("ihmispelaaja")){
+        Tuomari.asetaVaihe(0);
+        pelaaja2.liikuttaa(pelilauta);
+        this.pelaajanVuoro = true;
+      }
+      else{
+        pelaaja2.liikuttaa(pelilauta);
+        this.pelaajanVuoro = true;
+      }
     }
- }
+  }
   else {
     pelilauta.asetaShakkimatti();
  if (this.pelaajanVuoro){
@@ -253,6 +257,8 @@ public class Peli {
  }
  Pelilauta.tulosta("Tuomari: congratulations!");
   }
+  
+  
  }
 
 

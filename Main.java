@@ -33,21 +33,24 @@ class Main{
     System.exit(0);
   }
   else if (!tallennettuPeli || args[1].equals("uusipeli")){
-    if (args[0] == "tietokonepeli"){
+    if (args[0].equals("yksinpeli")){
       peli.asetaPeliAsetuksilla("yksinpeli");
+      Pelilauta.tulosta("Uusi yksinpeli aloitettu.");
     }
     else{
       peli.asetaPeliAsetuksilla("kaksinpeli");
+      Pelilauta.tulosta("Uusi kaksinpeli aloitettu.");
     }
   }
   else if (tallennettuPeli && args[1].equals("tallennettupeli")){
     try {
-      System.out.println("mitä nyt taas");
       peli.lataaPeliAsetuksilla();
+      Pelilauta.tulosta("Tallennettua peliä jatketaan...");
     }
     catch (IOException e){}
   }
   else {
+    Pelilauta.tulosta("Uusi kaksinpeli aloitettu.");
     peli.asetaPeliAsetuksilla("kaksinpeli");
   }
   peli.pelaa();
