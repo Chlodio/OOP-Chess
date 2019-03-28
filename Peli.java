@@ -188,12 +188,7 @@ public class Peli {
 
  public void tallennaPeli() throws FileNotFoundException{
   PrintWriter out = new PrintWriter("tallennettuPeli.txt");
-  if (this.pelaaja2.annaNimi().equals("tietokonepelaaja")){
-    out.println("true");
-  }
-  else {
-    out.println(!this.pelaajanVuoro);
-  }
+  out.println(!this.pelaajanVuoro);
   out.println(pelilauta.annaShakki());
   out.println(this.pelaaja2.annaNimi());
   for (int i = 0; i < 8; i++){
