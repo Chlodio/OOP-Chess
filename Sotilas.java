@@ -1,7 +1,7 @@
 class Sotilas extends Nappula{
 
   public Sotilas(boolean vari, boolean liikkunut){
-	super(vari);
+ super(vari);
     this.vari = vari;
     this.arvo = 1;
     this.liikkunut = liikkunut;
@@ -9,24 +9,24 @@ class Sotilas extends Nappula{
 }
 
   public String getSymbooli(){
-	  if (this.annaVari()){
-		 return "\u2659";
-	  } else {
-		return "\u265F";
-	  }
+   if (this.annaVari()){
+   return "\u2659";
+   } else {
+  return "\u265F";
+   }
   }
 
 
   public String annaNimi(){
-		return "sotilas";
-	}
+  return "sotilas";
+ }
 
 
   public void asetaElossa(boolean elossa){
     this.elossa = elossa;
-	if (!elossa){
-		this.poistaLaudalta();
-	}
+ if (!elossa){
+  this.poistaLaudalta();
+ }
   }
 
   public boolean annaElossa(){
@@ -52,28 +52,35 @@ class Sotilas extends Nappula{
     
     if(this.vari){                                             // valkoisen siirrot
    
-      if (sNo < 7 && lauta.annaNappula(sNo+1,sAbc)==null){       // voi mennä ylös && edessä ei nappulaa
-      siirrot[sNo+1][sAbc]=1;                                   // ota askel ylös
-      if (this.liikkunut == false && lauta.annaNappula(sNo+2,sAbc)==null){  // ei liikkunut ja edessä 2 vapaata
-        siirrot[sNo+2][sAbc] = 1;                                // ota kaksi askelta ylös
+      if (sNo < 7 && lauta.annaNappula(sNo+1,sAbc)==null){       // voi mennÃ¤ ylÃ¶s && edessÃ¤ ei nappulaa
+      siirrot[sNo+1][sAbc]=1;                                   // ota askel ylÃ¶s
+      if (this.liikkunut == false && lauta.annaNappula(sNo+2,sAbc)==null){  // ei liikkunut ja edessÃ¤ 2 vapaata
+        siirrot[sNo+2][sAbc] = 1;                                // ota kaksi askelta ylÃ¶s
       }
     }
       if(sAbc > 0){                                               // ei vasemmassa reunassa
         Nappula n1 = lauta.annaNappula(sNo+1,sAbc-1);
-        if (n1 != null){                                         // vasemmassa yläviistossa nappula
-          if (this.vari != n1.annaVari()){                          // nappulan väri eri
-            siirrot[sNo+1][sAbc-1] = 1;                        // liiku vasenylä
+        if (n1 != null){                                         // vasemmassa ylÃ¤viistossa nappula
+          if (this.vari != n1.annaVari()){                          // nappulan vÃ¤ri eri
+            siirrot[sNo+1][sAbc-1] = 1;                        // liiku vasenylÃ¤
           }
+        }
+        if(lauta.annaNappula(sNo,sAbc-1) == lauta.annaKohde() && lauta.annaOhestaLyonti()){
+          siirrot[sNo+1][sAbc-1] = 1;
         }
       }
       if(sAbc < 7){                                               // ei oikeassa reunassa
         Nappula n2 = lauta.annaNappula(sNo+1,sAbc+1);             
-        if (n2 != null){                                           // oikea ylä on nappula
-          if (this.vari != n2.annaVari()){                           // nappulan väri on eri
-            siirrot[sNo+1][sAbc+1] = 1;                             // askel oikea ylä
+        if (n2 != null){                                           // oikea ylÃ¤ on nappula
+          if (this.vari != n2.annaVari()){                           // nappulan vÃ¤ri on eri
+            siirrot[sNo+1][sAbc+1] = 1;                             // askel oikea ylÃ¤
           }
         }
+        if(lauta.annaNappula(sNo,sAbc+1) == lauta.annaKohde() && lauta.annaOhestaLyonti()){
+          siirrot[sNo+1][sAbc+1] = 1;
+        }
       }
+      
     }
     
     if(!this.vari){
@@ -90,6 +97,9 @@ class Sotilas extends Nappula{
             siirrot[sNo-1][sAbc-1] = 1;
           }
         }
+       if(lauta.annaNappula(sNo,sAbc-1) == lauta.annaKohde() && lauta.annaOhestaLyonti()){
+          siirrot[sNo-1][sAbc-1] = 1;
+        }  
       }
       if(sAbc < 7){
         Nappula n2 = lauta.annaNappula(sNo-1,sAbc+1);
@@ -97,6 +107,9 @@ class Sotilas extends Nappula{
           if (this.vari != n2.annaVari()){
             siirrot[sNo-1][sAbc+1] = 1;
           }
+        }
+      if(lauta.annaNappula(sNo,sAbc+1) == lauta.annaKohde() && lauta.annaOhestaLyonti()){
+          siirrot[sNo-1][sAbc+1] = 1;
         }
       }
     }
