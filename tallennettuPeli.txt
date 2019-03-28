@@ -6,6 +6,7 @@ ihmispelaaja
 0,2,ratsu,true,false
 0,3,kuningatar,true,false
 0,4,kuningas,true,false
+0,5,ratsu,true,false
 0,6,lahetti,true,false
 0,7,torni,true,false
 1,0,sotilas,true,false
@@ -15,12 +16,9 @@ ihmispelaaja
 1,5,sotilas,true,false
 1,6,sotilas,true,false
 1,7,sotilas,true,false
-2,6,ratsu,true,true
-3,3,sotilas,true,true
-4,2,ratsu,false,true
+4,1,sotilas,false,true
+5,2,sotilas,true,true
 6,0,sotilas,false,false
-6,1,sotilas,false,false
-6,2,sotilas,false,false
 6,3,sotilas,false,false
 6,4,sotilas,false,false
 6,5,sotilas,false,false
@@ -31,5 +29,6 @@ ihmispelaaja
 7,2,ratsu,false,false
 7,3,kuningatar,false,false
 7,4,kuningas,false,false
+7,5,ratsu,false,false
 7,6,lahetti,false,false
 7,7,torni,false,false
