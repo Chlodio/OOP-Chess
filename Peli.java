@@ -250,10 +250,10 @@ public class Peli {
   else {
     pelilauta.asetaShakkimatti();
  if (this.pelaajanVuoro){
-  Pelilauta.tulosta("Tuomari: Valkoinen pelaaja voittaa!");
+  Pelilauta.tulosta("Tuomari: Musta pelaaja voittaa!");
  }
  else{
-  Pelilauta.tulosta("Tuomari: Musta pelaaja voittaa!");
+  Pelilauta.tulosta("Tuomari: Valkoinen pelaaja voittaa!");
  }
  Pelilauta.tulosta("Tuomari: congratulations!");
   }
