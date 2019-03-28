@@ -542,6 +542,8 @@ class Pelilauta{
   JButton multiButton = new JButton("Moninpeli");
   JButton singleButton = new JButton("Yksinpeli");
   JButton loadButton= new JButton("Lataa");
+  JButton saveButton = new JButton("Tallenna");
+  saveButton.setEnabled(false);
 
 
 
@@ -564,6 +566,7 @@ class Pelilauta{
        multiButton.setEnabled(false);
        singleButton.setEnabled(false);
        loadButton.setEnabled(false);
+       saveButton.setEnabled(true);
      }
          Main.getTPeli().asetaPeliAsetuksilla("yksinpeli");
          Pelilauta.tulosta("Uusi yksinpeli aloitettu.");
@@ -582,6 +585,7 @@ class Pelilauta{
        multiButton.setEnabled(false);
        singleButton.setEnabled(false);
        loadButton.setEnabled(false);
+       saveButton.setEnabled(true);
      }
     Main.getTPeli().asetaPeliAsetuksilla("kaksinpeli");
     Pelilauta.tulosta("Uusi kaksinpeli aloitettu.");
@@ -601,6 +605,7 @@ class Pelilauta{
        multiButton.setEnabled(false);
        singleButton.setEnabled(false);
        loadButton.setEnabled(false);
+       saveButton.setEnabled(true);
      }
     try {
          Main.getTPeli().lataaPeliAsetuksilla();
@@ -616,7 +621,6 @@ class Pelilauta{
   loadButton.setBounds(1075,25,100,40);
   mainPanel.add(loadButton);
 
-  JButton saveButton = new JButton("Tallenna");
   ActionListener tallenna = new ActionListener() {
       @Override
    public void actionPerformed(ActionEvent e) {
