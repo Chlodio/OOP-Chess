@@ -12,12 +12,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.util.Random;
 
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 public class MainPanel extends JPanel{
 
-	public MainPanel() {}
+	public MainPanel() {
+
+	}
 
 	public Dimension getPreferredSize(){ return new Dimension(1280, 720); }
-
+	private static BufferedImage taustakuva;
 	private static final String[][] boardCol = {{"#990033", "#BFC1C2"}, {"#43596e", "#b9dec0"}, {"#61462a", "#dedbb9"}, {"#e3c934", "#e8e6d7"}, {"#242259", "#f02d2d"}};
 	private static String[] boardColors;
 	private static String[] styleNames = {"Burgundian Field", "Underwater", "Traditional", "Kingin", "Plantagenet"};
@@ -28,8 +36,13 @@ public class MainPanel extends JPanel{
 
 		/*Rakentaa valkoisen taustan GUI:ille;
 		vaikka ilmanan tätäkin pärjää, swing haluaa ohjeet miltä laudan pitäisi näyttää*/
-		g.setColor(Color.white);
-		g.fillRect(0, 0, 1280, 720);
+		//g.setColor(Color.white);
+		g.drawImage(taustakuva, 0, 0, this);
+
+
+		g.setColor(Color.BLACK);
+		g.drawRect(79, 39, 641, 641);
+		//g.fillRect(0, 0, 1280, 720);
 
 		/*Rakentaa shakki ruudut*/
 		int xc; int yc;
@@ -75,6 +88,11 @@ public class MainPanel extends JPanel{
 		boardColors[1] = boardCol[rbc][1];
 		boardColors[2] = boardCol[rbc][0];
 		styleName = styleNames[rbc];
+		try {
+           taustakuva = ImageIO.read(new File("taustat/tausta"+Integer.toString(1+rbc)+".png"));
+        } catch (IOException ex) {
+             // handle exception...
+        }
 	}
 
 	public static String getStyleName(){
