@@ -37,7 +37,7 @@ abstract class Nappula{
 		else{
 			this.getIkoni().setLocation(
 				749+(63*(musSuodut.size()%8)),
-				165+((musSuodut.size()/8)*75)
+				160+((musSuodut.size()/8)*75)
 			);
 			musSuodut.add(this);
 		}

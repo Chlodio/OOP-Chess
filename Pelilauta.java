@@ -36,16 +36,17 @@ import java.io.IOException;
 class Pelilauta{
 
   /*NÃ¤kymÃ¶tÃ¶n kerros nappuloita joiden avulla siirrot toimivat*/
-  public static Map<Integer, JButton> ruutuValikko = new HashMap<>();
+ 	public static Map<Integer, JButton> ruutuValikko = new HashMap<>();
   /*Merkki labellit sivuille*/
-  public static Map<Integer, JLabel> ruutuMerkki = new HashMap<>();
+	public static Map<Integer, JLabel> ruutuMerkki = new HashMap<>();
  /*Tulevan JFramen pÃ¤Ã¤lle*/
-  public static MainPanel mainPanel;
+ 	public static MainPanel mainPanel;
 
- public static ArrayList<JButton> valitutRuudut = new ArrayList();
+ 	public static ArrayList<JButton> valitutRuudut = new ArrayList();
 
- public static JTextArea textBox = new JTextArea();
- public static JScrollPane scrollPanel = new JScrollPane(textBox);
+ 	public static JTextArea textBox = new JTextArea();
+ 	public static JScrollPane scrollPanel = new JScrollPane(textBox);
+	public static char[] ruutuK = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};                  //ruudun kirjain
 
   /*
    * Pelilaudan attribuutit alla
@@ -121,19 +122,19 @@ class Pelilauta{
 
  //  nappula.getIkoni().setLocation(105+(sAbc*100), 45+(sNo*100));
   }
-  
+
   public void asetaOhestaLyonti(boolean totuus){
     this.ohestaLyonti = totuus;
   }
-  
+
   public void asetaKohde(Nappula nappula){
     this.kohde = nappula;
   }
-  
+
   public Nappula annaKohde(){
     return this.kohde;
   }
-  
+
   public boolean annaOhestaLyonti(){
     return this.ohestaLyonti;
   }
@@ -205,13 +206,14 @@ class Pelilauta{
 
     public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc){
 
+	tulosta("Siirto: "+nappula.annaNimi()+" siirtyi "+ruutuK[sijaintiAbc]+Integer.toString(sijaintiNo));
     int vanhaNo = annaSijaintiNo(nappula);
     int vanhaAbc = annaSijaintiAbc(nappula);
 
     if(vanhaNo == sijaintiNo && vanhaAbc == sijaintiAbc){
       return;
     }
-    
+
         /* testataan onko siirto ohestalyonti ja toteutetaan jos on*/
     if (nappula instanceof Sotilas && Math.abs(vanhaNo - sijaintiNo)==1 && Math.abs(vanhaAbc - sijaintiAbc)==1){
       if(lauta[sijaintiNo][sijaintiAbc] == null){
@@ -220,6 +222,7 @@ class Pelilauta{
       lauta[kohdeNo][kohdeAbc]= null;
       kohde.asetaElossa(false);
     }
+
     }
 
     if(lauta[sijaintiNo][sijaintiAbc] != null){
@@ -250,15 +253,15 @@ class Pelilauta{
         liiku(lauta[7][7], 7,5);
       }
       }
-    
+
     /* jos sotilas siirtyy 2 askelta, asetataan ohestalyonti mahdolliseksi. Jos ei, niin poistetaan mahd.*/
-    
+
     if (nappula instanceof Sotilas && Math.abs(vanhaNo - sijaintiNo)>1){
       asetaOhestaLyonti(true);
       asetaKohde(nappula);
     } else { asetaOhestaLyonti(false);
     }
-    
+
   }
 
      /*
@@ -716,6 +719,7 @@ class Pelilauta{
        if( nap != null){
        Nappula.setValittu(nap);
        Tuomari.asetaVaihe(1);
+	   tulosta("Valittu: "+nap.annaNimi());
        Ihmispelaaja.getTPelaaja().liikuttaa(Ihmispelaaja.getTLauta());
       } else{ Tuomari.julistaLaittomaksi(); }
     } else{ Tuomari.julistaLaittomaksi(); }
@@ -771,7 +775,6 @@ class Pelilauta{
     id++;
    }
   }
-  tulosta("Mahdollisten siirtojen lukumÃ¤Ã¤rÃ¤:"+" "+Integer.toString(xd));
  }
 
 
@@ -804,7 +807,6 @@ class Pelilauta{
 
  /*Rakentaa sivu merkit*/
  public static void buildSideLabels(MainPanel mp){
-  char[] ruutuK = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};                  //ruudun kirjain
   Dimension sizexc;
   for (int x = 1; x <= 8; x++){
    ruutuMerkki.put(x, new JLabel(Character.toString(ruutuK[x-1])));
@@ -824,7 +826,7 @@ class Pelilauta{
 
 
 public static void tulosta(String s){
- textBox.append(s+"\n");
+ textBox.append(" "+s+"\n");
 
 }
 
@@ -836,7 +838,7 @@ public void liikuItsari(Nappula nappula, int sijaintiNo, int sijaintiAbc){
 
     int vanhaNo = annaSijaintiNo(nappula);
     int vanhaAbc = annaSijaintiAbc(nappula);
-    
+
     if (nappula instanceof Sotilas && Math.abs(vanhaNo - sijaintiNo)==1 && Math.abs(vanhaAbc - sijaintiAbc)==1){
       if(lauta[sijaintiNo][sijaintiAbc] == null){
       int kohdeAbc = annaSijaintiAbc(kohde);
@@ -844,7 +846,7 @@ public void liikuItsari(Nappula nappula, int sijaintiNo, int sijaintiAbc){
       lauta[kohdeNo][kohdeAbc]= null;
       }
     }
-    
+
     lauta[sijaintiNo][sijaintiAbc] = nappula;  /* asettaa nappulan uudelle paikalleen*/
     lauta[vanhaNo][vanhaAbc] = null; /* poistaa nappulan alkuperÃƒÂ¤iseltÃƒÂ¤ paikaltaan*/
 

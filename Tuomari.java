@@ -16,8 +16,6 @@ public class Tuomari{
 	}
 
 	public static void asetaVaihe(int v){
-		Pelilauta.tulosta("Tuomari: Vaihe ", v);
-	//	if (vaihe == v){ System.exit(0);}
 		vaihe = v;
 	}
 

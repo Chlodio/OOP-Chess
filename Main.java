@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
-
 class Main{
  private static Peli TPeli;
  public static boolean tallennettuPeli;
