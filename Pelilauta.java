@@ -539,7 +539,7 @@ class Pelilauta{
   frame.add(mainPanel);
   mainPanel.setLayout(null);
   frame.setSize(1280, 720);
-  JButton multiButton = new JButton("Moninpeli");
+  JButton multiButton = new JButton("Kaksinpeli");
   JButton singleButton = new JButton("Yksinpeli");
   JButton loadButton= new JButton("Lataa");
   JButton saveButton = new JButton("Tallenna");
