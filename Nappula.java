@@ -29,15 +29,15 @@ abstract class Nappula{
 	public void poistaLaudalta(){
 		if(this.annaVari()){
 			this.getIkoni().setLocation(
-				736+(30*valSuodut.size()),
-				400
+				749+(63*(valSuodut.size()%8)),
+				325+((valSuodut.size()/8)*75)
 			);
 			valSuodut.add(this);
 		}
 		else{
 			this.getIkoni().setLocation(
-				736+(30*musSuodut.size()),
-				325
+				749+(63*(musSuodut.size()%8)),
+				165+((musSuodut.size()/8)*75)
 			);
 			musSuodut.add(this);
 		}

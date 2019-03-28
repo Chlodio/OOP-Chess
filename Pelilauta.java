@@ -40,7 +40,7 @@ class Pelilauta{
   /*Merkki labellit sivuille*/
   public static Map<Integer, JLabel> ruutuMerkki = new HashMap<>();
  /*Tulevan JFramen päälle*/
-  public static MainPanel mainPanel = new MainPanel();
+  public static MainPanel mainPanel;
 
  public static ArrayList<JButton> valitutRuudut = new ArrayList();
 
@@ -536,6 +536,8 @@ class Pelilauta{
   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   Container panel = frame.getContentPane();
   frame.setResizable(false);
+  MainPanel.randomizeSquares();
+  mainPanel = new MainPanel();
   frame.add(mainPanel);
   mainPanel.setLayout(null);
   frame.setSize(1280, 720);
@@ -618,7 +620,7 @@ class Pelilauta{
   };
 
   loadButton.addActionListener(lataaPeli);
-  loadButton.setBounds(1075,25,100,40);
+  loadButton.setBounds(1065,25,100,40);
   mainPanel.add(loadButton);
 
   ActionListener tallenna = new ActionListener() {
@@ -635,13 +637,20 @@ class Pelilauta{
 
 
   saveButton.addActionListener(tallenna);
-    saveButton.setBounds(1180,25,95,40);
+    saveButton.setBounds(1170,25,95,40);
      mainPanel.add(saveButton);
 
   textBox.setEditable(false);
   scrollPanel.setBounds(740, 500, 532,200);
   DefaultCaret caret = (DefaultCaret)textBox.getCaret();
   caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+
+  JLabel styleB = new JLabel("Tyyli: "+MainPanel.getStyleName());
+    styleB.setBounds(350, 8, 200,20);
+
+  mainPanel.add(styleB);
+
+
   mainPanel.add(scrollPanel);
 
   buildSelectors(mainPanel);
