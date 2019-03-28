@@ -7,14 +7,6 @@ public class Tuomari{
 	//1 	= ruudun valinta
 	//2 	= ruutu johon uusi nappula siirrettän
 
-	public static void nostaVaihe(){
-		vaihe = 1;
-	}
-
-	public static void laskeVaihe(){
-		vaihe = 0;
-	}
-
 	public static void asetaVaihe(int v){
 		vaihe = v;
 	}
