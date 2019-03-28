@@ -539,6 +539,9 @@ class Pelilauta{
   frame.add(mainPanel);
   mainPanel.setLayout(null);
   frame.setSize(1280, 720);
+  JButton multiButton = new JButton("Moninpeli");
+  JButton singleButton = new JButton("Yksinpeli");
+  JButton loadButton= new JButton("Lataa");
 
 
 
@@ -554,51 +557,55 @@ class Pelilauta{
   exitButton.setBounds(10,10,45,40);
   mainPanel.add(exitButton);
 
-  JButton singleButton = new JButton("Yksinpeli");
   ActionListener yksinpeli = new ActionListener() {
-  	@Override
+   @Override
    public void actionPerformed(ActionEvent e) {
+     if (Main.getTPeli() != null){
+       multiButton.setEnabled(false);
+       singleButton.setEnabled(false);
+       loadButton.setEnabled(false);
+     }
          Main.getTPeli().asetaPeliAsetuksilla("yksinpeli");
          Pelilauta.tulosta("Uusi yksinpeli aloitettu.");
-  	}
+         Main.getTPeli().pelaa();
+   }
   };
 
   singleButton.addActionListener(yksinpeli);
   singleButton.setBounds(740,25,100,40);
   mainPanel.add(singleButton);
 
-  JButton multiButton = new JButton("Moninepeli");
   ActionListener moninpeli = new ActionListener() {
-  	@Override
+   @Override
    public void actionPerformed(ActionEvent e) {
-	   Main.getTPeli().asetaPeliAsetuksilla("kaksinpeli");
-       Pelilauta.tulosta("Uusi kaksinpeli aloitettu.");
-  	}
+     if (Main.getTPeli() != null){
+       multiButton.setEnabled(false);
+       singleButton.setEnabled(false);
+       loadButton.setEnabled(false);
+     }
+    Main.getTPeli().asetaPeliAsetuksilla("kaksinpeli");
+    Pelilauta.tulosta("Uusi kaksinpeli aloitettu.");
+    Main.getTPeli().pelaa();
+   }
   };
 
   multiButton.addActionListener(moninpeli);
   multiButton.setBounds(845,25,120,40);
   mainPanel.add(multiButton);
 
-  JButton newGameButton = new JButton("Uusi peli");
-  ActionListener uusPeliB = new ActionListener() {
-  	@Override
-   public void actionPerformed(ActionEvent e) {
-	    Main.getTPeli().pelaa();
-  	}
-  };
 
-  newGameButton.addActionListener(uusPeliB);
-  newGameButton.setBounds(970,25,100,40);
-  mainPanel.add(newGameButton);
-
-  JButton loadButton = new JButton("Lataa");
   ActionListener lataaPeli = new ActionListener() {
    @Override
    public void actionPerformed(ActionEvent e) {
-	   try {
+     if (Main.getTPeli() != null){
+       multiButton.setEnabled(false);
+       singleButton.setEnabled(false);
+       loadButton.setEnabled(false);
+     }
+    try {
          Main.getTPeli().lataaPeliAsetuksilla();
          Pelilauta.tulosta("Tallennettua peli� jatketaan...");
+         Main.getTPeli().pelaa();
        }
        catch (IOException er){}
 
