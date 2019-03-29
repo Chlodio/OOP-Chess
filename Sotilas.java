@@ -52,19 +52,21 @@ class Sotilas extends Nappula{
     
     if(this.vari){                                             // valkoisen siirrot
    
-      if (sNo < 7 && lauta.annaNappula(sNo+1,sAbc)==null){       // voi mennÃ¤ ylÃ¶s && edessÃ¤ ei nappulaa
-      siirrot[sNo+1][sAbc]=1;                                   // ota askel ylÃ¶s
-      if (this.liikkunut == false && lauta.annaNappula(sNo+2,sAbc)==null){  // ei liikkunut ja edessÃ¤ 2 vapaata
-        siirrot[sNo+2][sAbc] = 1;                                // ota kaksi askelta ylÃ¶s
+      if (sNo < 7 && lauta.annaNappula(sNo+1,sAbc)==null){       // voi mennä ylös && edessä ei nappulaa
+      siirrot[sNo+1][sAbc]=1;                                   // ota askel ylös
+      if (this.liikkunut == false && lauta.annaNappula(sNo+2,sAbc)==null){  // ei liikkunut ja edessä 2 vapaata
+        siirrot[sNo+2][sAbc] = 1;                                // ota kaksi askelta ylös
       }
     }
       if(sAbc > 0){                                               // ei vasemmassa reunassa
         Nappula n1 = lauta.annaNappula(sNo+1,sAbc-1);
-        if (n1 != null){                                         // vasemmassa ylÃ¤viistossa nappula
-          if (this.vari != n1.annaVari()){                          // nappulan vÃ¤ri eri
-            siirrot[sNo+1][sAbc-1] = 1;                        // liiku vasenylÃ¤
+        if (n1 != null){                                         // vasemmassa yläviistossa nappula
+          if (this.vari != n1.annaVari()){                          // nappulan väri eri
+            siirrot[sNo+1][sAbc-1] = 1;                        // liiku vasenylä
           }
         }
+        
+        // testataan onko ohestalöynti mahdollinen vasemmalle
         if(lauta.annaNappula(sNo,sAbc-1) == lauta.annaKohde() && lauta.annaOhestaLyonti()){
           siirrot[sNo+1][sAbc-1] = 1;
         }
@@ -76,6 +78,7 @@ class Sotilas extends Nappula{
             siirrot[sNo+1][sAbc+1] = 1;                             // askel oikea ylÃ¤
           }
         }
+        // testataan onko ohestalöynti mahdollinen oikealle
         if(lauta.annaNappula(sNo,sAbc+1) == lauta.annaKohde() && lauta.annaOhestaLyonti()){
           siirrot[sNo+1][sAbc+1] = 1;
         }
@@ -83,7 +86,7 @@ class Sotilas extends Nappula{
       
     }
     
-    if(!this.vari){
+    if(!this.vari){                                     // mustan siirrot, sama logiikka
       if (sNo > 0 && lauta.annaNappula(sNo-1,sAbc)==null){
       siirrot[sNo-1][sAbc]=1;
       if (this.liikkunut == false && lauta.annaNappula(sNo-2,sAbc)==null){
@@ -118,6 +121,7 @@ class Sotilas extends Nappula{
     return siirrot;
   }
 
+  // muuttuu kuningattareksi, jos pääsee laudan reunalle
   public void muutu(Pelilauta lauta){
     int sNo = lauta.annaSijaintiNo(this);
     int sAbc = lauta.annaSijaintiAbc(this);
