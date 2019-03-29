@@ -31,6 +31,8 @@ public class MainPanel extends JPanel{
 	private static String[] styleNames = {"Burgundian Field", "Underwater", "Traditional", "Kingin", "Plantagenet"};
 
 	private static String styleName = "d";
+
+	/* rakentaa laudan ruudut ja asettaa taustan värin*/
 	public void paintComponent(Graphics g){
 
 
@@ -67,10 +69,13 @@ public class MainPanel extends JPanel{
 		buildBox(g, 327, Color.DARK_GRAY);
 	}
 
+	/* lisää parametrin olioon*/
 	public void addInto(JLabel l){
 		this.add(l);
 	}
 
+	/* luo tietyn kokosen laatikon
+	toinen parametrii määrää sen x-koordinaatin ja kolmas väri*/
 	public void buildBox(Graphics g, int y, Color c){
 		/*Luo laatikon syödyille nappuloille*/
 		g.setColor(Color.GRAY);
@@ -79,10 +84,10 @@ public class MainPanel extends JPanel{
 	    g.fillRect(740, y+1, 530, 150);
 	}
 
+	/* valitsee satunnaisen värin ja teeman taustalle*/
 	public static void randomizeSquares(){
 		Random randy = new Random();
 		int rbc = randy.nextInt(5); //random board square color
-	 	//boardColors = {boardCol[rbc][0], boardCol[rbc][1], boardCol[rbc][0]};
 		boardColors = new String[3];
 		boardColors[0] = boardCol[rbc][0];
 		boardColors[1] = boardCol[rbc][1];
@@ -95,6 +100,7 @@ public class MainPanel extends JPanel{
         }
 	}
 
+ 	/* hakee staattisen styleName-metodin*/
 	public static String getStyleName(){
 		return styleName;
 	}

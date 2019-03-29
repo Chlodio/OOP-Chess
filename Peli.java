@@ -17,10 +17,12 @@ public class Peli {
 
  public Peli(){}
 
+/* asettaa staattisen SLauta-muuttujan parametriksi*/
  public static void setSLauta(Pelilauta p){
   SLauta = p;
  }
 
+/* palauttaa staattisen  SLauta-muuttu*/
  public static Pelilauta getSLauta(){
   return SLauta;
  }
@@ -41,7 +43,7 @@ public class Peli {
   }
   if ((!rivit[0].equals("true") && !rivit[0].equals("false")) || (!rivit[1].equals("true") && !rivit[1].equals("false")) || (!rivit[2].equals("tietokonepelaaja") && !rivit[2].equals("ihmispelaaja"))){
     System.out.println("checkpoint2");
-    System.out.println(rivit[0]);    
+    System.out.println(rivit[0]);
     System.out.println(rivit[1]);
     System.out.println(rivit[2]);
    return false;
@@ -229,7 +231,7 @@ public class Peli {
 
  public void pelaa(){
   if (!onShakkimatti()){
-    
+
     if (this.pelaajanVuoro){
       this.pelaajanVuoro = false;
       Tuomari.asetaVaihe(0);
@@ -250,15 +252,15 @@ public class Peli {
   else {
     pelilauta.asetaShakkimatti();
  if (this.pelaajanVuoro){
-  Pelilauta.tulosta("Tuomari: Musta pelaaja voittaa!");
+  	Pelilauta.tulosta(" Tuomari: Musta pelaaja voittaa!");
  }
  else{
-  Pelilauta.tulosta("Tuomari: Valkoinen pelaaja voittaa!");
+  	Pelilauta.tulosta(" Tuomari: Valkoinen pelaaja voittaa!");
  }
- Pelilauta.tulosta("Tuomari: congratulations!");
+ 	Pelilauta.tulosta(" Tuomari: congratulations!");
   }
-  
-  
+
+
  }
 
 

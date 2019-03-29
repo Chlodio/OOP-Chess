@@ -7,14 +7,17 @@ public class Tuomari{
 	//1 	= ruudun valinta
 	//2 	= ruutu johon uusi nappula siirrettän
 
+/* asettaa vaiheen parametriin*/
 	public static void asetaVaihe(int v){
 		vaihe = v;
 	}
 
+/* palauttaa staattise muuttujan, vaiheen arvo*/
 	public static boolean onkoVaihe(int v){
 		return vaihe == v;
 	}
 
+/* kutsuu  Pelilauta.tulost, argumentilla "Tuomari: Laiton siirto !"*/
 	public static void julistaLaittomaksi(){
 		Pelilauta.tulosta("Tuomari: Laiton siirto !");
 	}

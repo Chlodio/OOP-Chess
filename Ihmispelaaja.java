@@ -5,27 +5,33 @@ class Ihmispelaaja implements Pelaaja {
  private static Pelilauta TLauta;
  private static Ihmispelaaja TPelaaja;
 
+
+ /* asetta parametrin matriisin OmanVarNap-staattiseksi muuttujaksi*/
  public static void setOmanVarNap(int[][] i){
   omanVarNap = i;
-
  }
 
+ /* palauttaa staattisen OmanVarNap-muuttujan*/
  public static int[][] getOmanVarNap(){
   return omanVarNap;
  }
 
+ /* asettaa parametrin staattiseksi TLauta-muuttujaksi*/
  public static void setTLauta(Pelilauta pl){
   TLauta = pl;
  }
 
+ /* palauttaa staaattisen TLauta-muuttujan*/
  public static Pelilauta getTLauta(){
   return TLauta;
  }
 
+ /* asettaa parametrin staattisen TPelaaja:ksi)*/
  public static void setTPelaaja(Ihmispelaaja pl){
   TPelaaja = pl;
  }
 
+/* palauttaa staattisen TPelaaja-muuttujan */
  public static Ihmispelaaja getTPelaaja(){
   return TPelaaja;
  }

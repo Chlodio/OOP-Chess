@@ -23,9 +23,9 @@ abstract class Nappula{
       id++;
 	  this.vari = b;
 	  Nappula.luoNappulaGui(this);
-///      lista[id] = this;
-	//  Nappula.luoNappulaGui(this);
   }
+
+  /* siirtaa Nappulan ikonin laudan sivuun*/
 	public void poistaLaudalta(){
 		if(this.annaVari()){
 			this.getIkoni().setLocation(
@@ -37,33 +37,38 @@ abstract class Nappula{
 		else{
 			this.getIkoni().setLocation(
 				749+(63*(musSuodut.size()%8)),
-				160+((musSuodut.size()/8)*75)
+				150+((musSuodut.size()/8)*75)
 			);
 			musSuodut.add(this);
 		}
 	}
 
-  /*Linkitetään nappula sen graafiseen esitykseen*/
+  /* linkitetään nappula sen graafiseen esitykseen*/
   public void asetaGUI(JLabel label){
       this.ikoni = label;
   }
 
+  /* paluttaa Nappulan ikonin*/
   public JLabel getIkoni(){
     return this.ikoni;
   }
 
+  /* palauttaa symboolin joka esittää nappulaa laudalla*/
   public String getSymbooli(){
     return this.symbooli;
   }
 
+  /* palauttaa staattisen valittu-muuttujan */
   public static Nappula getValittu(){
     return valittu;
   }
 
+  /* asettaa parametrin staattiseksi valittu-muuttujaksi*/
   public static void setValittu(Nappula n){
     valittu = n;
   }
 
+ /* rakentaa Nappula-oliolle GUI-esityksen*/
   public static void luoNappulaGui(Nappula n){
     Dimension koko;
 	JLabel label = new JLabel(n.getSymbooli());

@@ -78,9 +78,11 @@ class Pelilauta{
    * asetus ja tarkastus-metodit
    */
 
+/* palauttaa mainPaneelin*/
  public static MainPanel getMainPanel(){
   return mainPanel;
  }
+
 
   public void asetaShakki(boolean shakki){
     this.shakki = shakki;
@@ -214,14 +216,14 @@ class Pelilauta{
     }
         /* Testaa onko paikalla nappula ja poistaa jos on */
     if(lauta[sijaintiNo][sijaintiAbc] != null){
-      lauta[sijaintiNo][sijaintiAbc].asetaElossa(false); 
+      lauta[sijaintiNo][sijaintiAbc].asetaElossa(false);
     }
     asetaNappula(nappula, sijaintiNo, sijaintiAbc); ; /* asettaa nappulan uudelle paikalleen*/
     nappula.asetaLiikkunut(); /* päivittää nappulan liikkunut -parametrin*/
     if (vanhaNo < 8 && vanhaAbc < 8){
      lauta[vanhaNo][vanhaAbc]= null; /* poistaa nappulan alkuperäiseltä paikaltaan*/
     }
-	    /* testataan onko sotilas päässyt laudan päätyyn ja muutetaan kuningattareksi jos on*/    
+	    /* testataan onko sotilas päässyt laudan päätyyn ja muutetaan kuningattareksi jos on*/
     boolean onkoSotilas = nappula instanceof Sotilas;
     if (onkoSotilas && (sijaintiNo == 0 || sijaintiNo == 7)){
       nappula.muutu(this);
@@ -489,7 +491,7 @@ class Pelilauta{
 
                 /*
    * testaaShakki-metodi. Parametrina testattava vari (kuninkaan vari jota mahdollisesti uhataan).
-   * 
+   *
    */
 
   public void testaaShakki(boolean vari){
@@ -561,7 +563,11 @@ class Pelilauta{
      return 9;
   }
 
- /*aloittaaa GUIN:n rakentamisen*/
+ /*aloittaaa GUIN:n rakentamisen
+ luo framen, johon se lisää jo ennestää luodun mainPaneelin
+ mainpaneelin lisätään jo ennestää luotu textBox
+ luo sulkemis, lataus ja talletus napin ja lisää mainPaneeliin
+ kutsuu buildSelectors ja buildSideLabels*/
  public static void createGUI(){
   JFrame frame = new JFrame("Shakki");
   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -690,7 +696,7 @@ class Pelilauta{
   frame.setVisible(true);
  }
 
- /*rakentaa 64 nÃ¤kymÃ¤tÃ¶ntÃ¤ nappia ruutujen pÃ¤Ã¤lle jotkat hallisevat siirtoja*/
+ /*rakentaa 64 nakumatonta nappia ruutujen paalle jotkat hallisevat siirtoja*/
  public static void buildSelectors(MainPanel mp){
   int xc; int yc;
   int id = -1;
@@ -748,6 +754,7 @@ class Pelilauta{
 
  }
 
+/* kutsuu colorizeRuutu(JButton) loopissa*/
  public static void varitaRuudut(int[][] ruudut){
   int xd = 0;
   int id = 0;
@@ -774,7 +781,7 @@ class Pelilauta{
   return false;
  }
 
-
+/* kutsuu normalizeRuutu(JButton) loopissa*/
  public static void normaalisoiRuudut(){
   for(JButton x: valitutRuudut){
    normalizeRuutu(x);
@@ -783,10 +790,12 @@ class Pelilauta{
   Ruutu.resetEkavalittu();
  }
 
+/* näyttää täytön parametrina annettuu Jbutton-olioon*/
  public static void colorizeRuutu(JButton b){
   b.setContentAreaFilled(true);
  }
 
+/*/* piilottaa täytön täytön parametrina annettut JButton-olioon*/
  public static void normalizeRuutu(JButton b){
   b.setContentAreaFilled(false);
   ((Ruutu) b).asetaSallitu(false);
@@ -811,19 +820,20 @@ class Pelilauta{
   }
  }
 
-
+/* lisää textBoxiin viestin*/
 public static void tulosta(String s){
  textBox.append(" "+s+"\n");
 
 }
 
+/*/* lisää textBoxiin viestin*/
 public static void tulosta(String s, int n){
  textBox.append(s+Integer.toString(n)+"\n");
 }
 
 	// Metodi, joka simuloi siirron kopiopelilaudalla. itsemurhan testausta varten. Logiikka on sama kuin liiku-metodissa
 	// nappuloiden arvoja ja elossa parametria ei päivitetä, jotta GUI ei sekoa
-	
+
 public void liikuItsari(Nappula nappula, int sijaintiNo, int sijaintiAbc){
 
     int vanhaNo = annaSijaintiNo(nappula);
@@ -861,9 +871,9 @@ public void liikuItsari(Nappula nappula, int sijaintiNo, int sijaintiAbc){
       }
       }
   }
-	
+
 	// Metodi, testaa tuliko simuloidusta siirrosta vastustajalle shakki
-	
+
  public void testaaShakkiItsari(boolean vari){
  /* hakee kuninkaan paikan laudalta */
     int sNoK =0;
@@ -902,7 +912,7 @@ public void liikuItsari(Nappula nappula, int sijaintiNo, int sijaintiAbc){
   }
 	// Metodi, joka simuloi mahdolliset siirrot itsemurhan simulointia varten. Logiikka sama kuin varsinaisessa
 	// testaaSiirrot-metodissa
-	
+
 public int[][] testaaSiirrotItsari(int[][] siirrot, Nappula nappula){
     boolean onkoRatsu = nappula instanceof Ratsu; /* Ratsule tarvitaan vain testi 1 */
     int sijaintiNo = annaSijaintiNo(nappula); /* kutsutaan apumetodia (alla) */
