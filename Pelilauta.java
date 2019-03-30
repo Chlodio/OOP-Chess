@@ -195,8 +195,14 @@ class Pelilauta{
    */
 
     public void liiku(Nappula nappula, int sijaintiNo, int sijaintiAbc){
-
-	tulosta("Siirto: "+nappula.annaNimi()+" siirtyi "+ruutuK[sijaintiAbc]+Integer.toString(sijaintiNo));
+	String v;
+	if(nappula.annaVari()){
+		v = "Valkoinen";
+	}
+	else{
+		v = "Musta";
+	}
+	tulosta("Siirto: "+v+" "+nappula.annaNimi()+" siirtyi "+ruutuK[sijaintiAbc]+Integer.toString(sijaintiNo));
     int vanhaNo = annaSijaintiNo(nappula);
     int vanhaAbc = annaSijaintiAbc(nappula);
 

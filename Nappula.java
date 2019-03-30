@@ -27,6 +27,14 @@ abstract class Nappula{
 
   /* siirtaa Nappulan ikonin laudan sivuun*/
 	public void poistaLaudalta(){
+		String v;
+		if(this.annaVari()){
+			v = "Valkoinen";
+		}
+		else{
+			v = "Musta";
+		}
+		Pelilauta.tulosta("Tuomari: "+v+" "+this.annaNimi()+" poistettiin laudalta");
 		if(this.annaVari()){
 			this.getIkoni().setLocation(
 				749+(63*(valSuodut.size()%8)),
@@ -37,7 +45,7 @@ abstract class Nappula{
 		else{
 			this.getIkoni().setLocation(
 				749+(63*(musSuodut.size()%8)),
-				150+((musSuodut.size()/8)*75)
+				153+((musSuodut.size()/8)*75)
 			);
 			musSuodut.add(this);
 		}
