@@ -24,17 +24,17 @@ import java.io.IOException;
 class Pelilauta{
 
   /*NÃ¤kymÃ¶tÃ¶n kerros nappuloita joiden avulla siirrot toimivat*/
- 	public static Map<Integer, JButton> ruutuValikko = new HashMap<>();
+ 	private static Map<Integer, JButton> ruutuValikko = new HashMap<>();
   /*Merkki labellit sivuille*/
-	public static Map<Integer, JLabel> ruutuMerkki = new HashMap<>();
+	private static Map<Integer, JLabel> ruutuMerkki = new HashMap<>();
  /*Tulevan JFramen pÃ¤Ã¤lle*/
- 	public static MainPanel mainPanel;
+ 	private static MainPanel mainPanel;
 
- 	public static ArrayList<JButton> valitutRuudut = new ArrayList();
+ 	private static ArrayList<JButton> valitutRuudut = new ArrayList();
 
- 	public static JTextArea textBox = new JTextArea();
- 	public static JScrollPane scrollPanel = new JScrollPane(textBox);
-	public static char[] ruutuK = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};                  //ruudun kirjain
+ 	private static JTextArea textBox = new JTextArea();
+ 	private static JScrollPane scrollPanel = new JScrollPane(textBox);
+	private static char[] ruutuK = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};                  //ruudun kirjain
 
   /*
    * Pelilaudan attribuutit alla
